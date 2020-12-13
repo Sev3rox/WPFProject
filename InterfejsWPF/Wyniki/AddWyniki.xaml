@@ -1,0 +1,30 @@
+﻿<Window x:Class="ProjektWPF.Wyniki.AddWyniki"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjektWPF.Wyniki"
+        mc:Ignorable="d"
+        Title="AddWyniki" Height="160" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Margin="5" FontSize="18" Content="Mecz:"></Label>
+        <ComboBox Margin="5" FontSize="18" Grid.Column="1" SelectedIndex="0">
+            <ComboBoxItem Content="Infinity Białystok vs Regional Triangles"></ComboBoxItem>
+        </ComboBox>
+        <Label Margin="5" FontSize="18" Content="Wynik" Grid.Row="1"></Label>
+        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="5"></TextBox>
+        <StackPanel HorizontalAlignment="Center" Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="2">
+            <Button FontSize="18"  Margin="10,0,60,0" Padding="20,6">Dodaj</Button>
+            <Button FontSize="18"  Margin="0" Padding="20,6" >Anuluj</Button>
+        </StackPanel>
+    </Grid>
+</Window>

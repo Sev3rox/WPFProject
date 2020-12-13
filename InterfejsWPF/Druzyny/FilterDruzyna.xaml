@@ -1,0 +1,35 @@
+﻿<Window x:Class="ProjektWPF.Druzyny.FilterDruzyna"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjektWPF.Druzyny"
+        mc:Ignorable="d"
+        Title="FilterDruzyna" Height="210" Width="340" FontSize="16">
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition  Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Margin="5">Kraj:</Label>
+
+        <Label Grid.Row="1" Margin="5">Sukcesy:</Label>
+        <Label Grid.Row="2" Margin="5,5,30,5">Siedziba:</Label>
+
+        <TextBox Grid.Column="1" Grid.Row="0" Margin="5" />
+        <TextBox Grid.Column="1" Grid.Row="1" Margin="5"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Margin="5" />
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  Grid.Row="8" Grid.ColumnSpan="2">
+            <Button Click="Filtr" Margin="10,10,40,10" Padding="20,6">Zastosuj Filtr</Button>
+            <Button Click="Reset" Margin="10" Padding="20,6">Zresetuj Filtr</Button>
+        </StackPanel>
+    </Grid>
+</Window>

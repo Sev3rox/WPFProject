@@ -1,0 +1,86 @@
+﻿<Window x:Class="ProjektWPF.Zawodnicy.EditZawodnik"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjektWPF.Zawodnicy"
+        mc:Ignorable="d"
+        Title="EditZawodnik" Height="670" Width="600"  FontSize="16">
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition  Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Label Margin="5">Imie:</Label>
+
+            <Label Grid.Row="1"  Margin="5">Nazwisko:</Label>
+        <Label  Grid.Row="2" Margin="5">Wiek:</Label>
+        <Label Grid.Row="3" Margin="5,5,100,5">Adres:</Label>
+        <Label Grid.Row="4" Margin="5">Pozycja:</Label>
+        <Label Grid.Row="5" Margin="5,5,5,5"  VerticalAlignment="Top">Numer:</Label>
+        <StackPanel HorizontalAlignment="Center" Margin="20" Orientation="Horizontal" Grid.Row="6" Grid.ColumnSpan="2">
+            <CheckBox  Margin="5,5,200,5">Lewonożny</CheckBox>
+            <CheckBox  Margin="5">Prawonożny</CheckBox>
+        </StackPanel >
+        <StackPanel Grid.ColumnSpan="2" HorizontalAlignment="Center"  Orientation="Horizontal" Grid.Row="7">
+            <Label  Margin="5">Liczba spotkań:</Label>
+            <TextBox VerticalContentAlignment="Center" MinWidth="25"  Margin="5,5,100,5"></TextBox>
+            <Label  Margin="5">Gole:</Label>
+            <TextBox VerticalContentAlignment="Center" MinWidth="25"   Margin="5,5,100,5"></TextBox>
+            <Label  Margin="5">Asysty:</Label>
+            <TextBox VerticalContentAlignment="Center"  MinWidth="25" Margin="5"></TextBox>
+        </StackPanel >
+
+        <StackPanel Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Label  Margin="5,5,2,5">Minuty gry:</Label>
+            <TextBox VerticalContentAlignment="Center" MinWidth="40"  Margin="5,5,80,5"></TextBox>
+            <Label  Margin="5,5,2,5">Strzały</Label>
+            <TextBox VerticalContentAlignment="Center" MinWidth="25"  Margin="5,5,80,5"></TextBox>
+            <Label  Margin="5">Strzały na bramke</Label>
+            <TextBox  VerticalContentAlignment="Center" MinWidth="25" Margin="5,5,5,5"></TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Image Width="50" Height="auto" Margin="5" Source="../Files/redcard.png"></Image>
+            <TextBox VerticalContentAlignment="Center" MinWidth="25" Margin="5,5,250,5"></TextBox>
+            <Image Width="28" Height="auto" Margin="5,5,15,5" Source="../Files/yellowcard.jpg"></Image>
+            <TextBox VerticalContentAlignment="Center" MinWidth="25" Margin="5"></TextBox>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" Margin="0" Orientation="Horizontal" Grid.Row="10" Grid.ColumnSpan="2">
+            <ComboBox  Margin="50" SelectedIndex="0">
+                <ComboBoxItem >FC Bayern Munchen</ComboBoxItem>
+            </ComboBox>
+            <Image  Source="../Files/logo.png"></Image>
+
+
+        </StackPanel>
+
+        <TextBox VerticalContentAlignment="Center"  Grid.Column="1" Margin="5"    />
+        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="5"  />
+        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="5" />
+        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="5"/>
+        <ComboBox Grid.Column="1" Grid.Row="4" Margin="5" SelectedIndex="0">
+            <ComboBoxItem >Napastnik</ComboBoxItem>
+        </ComboBox>
+        <TextBox  VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="5" ></TextBox>
+
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  Grid.Row="11" Grid.ColumnSpan="2">
+            <Button Click="Filtr" Margin="10,10,140,10" Padding="20,6">Edytuj</Button>
+            <Button Click="Reset" Margin="10" Padding="20,6">Anuluj</Button>
+        </StackPanel>
+    </Grid>
+</Window>
