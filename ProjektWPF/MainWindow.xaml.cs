@@ -17,6 +17,7 @@ using ProjektWPF.Zawodnicy;
 using ProjektWPF.Rozgrywki;
 using ProjektWPF.Druzyny;
 using ProjektWPF.Data;
+using System.Collections.ObjectModel;
 
 namespace ProjektWPF
 {
@@ -25,7 +26,8 @@ namespace ProjektWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        public Collection<Zawodnik> Zawodnicy { get; } = new ObservableCollection<Zawodnik>();
+        public Collection<Rozgrywka> Rozgrywki { get; } = new ObservableCollection<Rozgrywka>();
         ZawodnikDbContext context;
 
         public MainWindow(ZawodnikDbContext context)
@@ -33,10 +35,20 @@ namespace ProjektWPF
             this.context = context;
             InitializeComponent();
             GetZawodnicy();
+            GetRozgrywki();
 
         }
 
-     
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            var binding = new Binding();
+           ZawodnicyList.ItemsSource = Zawodnicy;
+            RozgrywkiList.ItemsSource = Rozgrywki;
+
+        }
+
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -103,22 +115,26 @@ namespace ProjektWPF
 
         private void GetZawodnicy()
         {
-            var x = context.Zawodnicy.ToList();
-            var xxdd = 211;
+          var Zawodnicydb = context.Zawodnicy.ToList();
+            Zawodnicy.Clear();
+            foreach(Zawodnik x in Zawodnicydb)
+            {
+                Zawodnicy.Add(x);
+            }
+
 
         }
         private void AddZawodnik(object sender, RoutedEventArgs e)
         {
-            Zawodnik Zawodnikk = new Zawodnik();
-            Zawodnikk.Name = "Maciek";
-            Zawodnikk.Surname="Jaro";
-                context.Zawodnicy.Add(Zawodnikk);
-                context.SaveChanges();
-                GetZawodnicy();
+          
+               
               
             
-            AddZawodnik add = new AddZawodnik();
-            add.Show();
+            AddZawodnik add = new AddZawodnik(context);
+            if (add.ShowDialog() == true)
+            {
+                GetZawodnicy();
+            }
         }
 
         private void DetailsZawodnik(object sender, RoutedEventArgs e)
@@ -141,9 +157,9 @@ namespace ProjektWPF
 
         private void EditZawodnik(object sender, RoutedEventArgs e)
         {
-            var z = context.Zawodnicy.First(a => a.Id == 1);
-            z.Name = "Maciekedit";
-            context.Update(z);
+            var pom = context.Zawodnicy.First();
+            pom.Name = "Maciekedit";
+            context.Update(pom);
             context.SaveChanges();
             GetZawodnicy();
             EditZawodnik edit = new EditZawodnik();
@@ -155,7 +171,15 @@ namespace ProjektWPF
             FilterZawodnik filtr = new FilterZawodnik();
             filtr.Show();
         }
-
+       public void GetRozgrywki()
+        {
+            var Rozgrywkidb = context.Rozgrywki.ToList();
+            Rozgrywki.Clear();
+            foreach (Rozgrywka x in Rozgrywkidb)
+            {
+                Rozgrywki.Add(x);
+            }
+        }
         private void DeatailsRozgrywka(object sender, RoutedEventArgs e)
         {
             DetailsRozgrywka addroz = new DetailsRozgrywka();
@@ -164,18 +188,36 @@ namespace ProjektWPF
 
         private void AddRozgrywka(object sender, RoutedEventArgs e)
         {
-            AddRozgrywka addroz = new AddRozgrywka();
-            addroz.Show();
+            AddZawodnik add = new AddZawodnik(context);
+     
+            AddRozgrywka addroz = new AddRozgrywka(context);
+            if (addroz.ShowDialog() == true)
+            {
+                GetRozgrywki();
+            }
         }
 
         private void EditRozgrywka(object sender, RoutedEventArgs e)
         {
+            var pom = context.Rozgrywki.First();
+            pom.Place = "Edit";
+            context.Update(pom);
+            context.SaveChanges();
+            GetRozgrywki();
+
             EditRozgrywka editroz = new EditRozgrywka();
             editroz.Show();
         }
 
         private void DelRozgrywka(object sender, RoutedEventArgs e)
         {
+
+            //   var productToDelete = (sender as FrameworkElement).DataContext as Zawodnik;
+            var z = context.Rozgrywki.First(a => a.Id == 1);
+            context.Rozgrywki.Remove(z);
+            context.SaveChanges();
+            GetRozgrywki();
+
             DeleteRozgrywka delroz = new DeleteRozgrywka();
             delroz.Show();
         }

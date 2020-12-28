@@ -53,7 +53,7 @@ namespace ProjektWPF.Wyniki {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ProjektWPF;V1.0.0.0;component/wyniki/addwyniki.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ProjektWPF;component/wyniki/addwyniki.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Wyniki\AddWyniki.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

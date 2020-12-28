@@ -8,6 +8,7 @@ namespace ProjektWPF.Data
    public class ZawodnikDbContext : DbContext
     {
         public DbSet<Zawodnik> Zawodnicy { get; set; }
+        public DbSet<Rozgrywka> Rozgrywki { get; set; }
 
         public ZawodnikDbContext(DbContextOptions<ZawodnikDbContext> options) : base(options)
             {
@@ -19,7 +20,8 @@ namespace ProjektWPF.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
                 modelBuilder.Entity<Zawodnik>();
-                base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Rozgrywka>();
+            base.OnModelCreating(modelBuilder);
             }
            
         }

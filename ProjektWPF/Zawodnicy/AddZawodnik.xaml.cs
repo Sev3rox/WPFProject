@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjektWPF.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,13 +20,23 @@ namespace ProjektWPF.Zawodnicy
     /// </summary>
     public partial class AddZawodnik : Window
     {
-        public AddZawodnik()
+        public Zawodnik addzaw;
+        ZawodnikDbContext context;
+        public AddZawodnik(ZawodnikDbContext context)
         {
+            this.context = context;
             InitializeComponent();
+            addzaw = new Zawodnik();
+            AddGrid.DataContext = addzaw;
+
         }
 
         private void Add(object sender, RoutedEventArgs e)
         {
+         
+            context.Zawodnicy.Add(addzaw);
+            context.SaveChanges();
+            DialogResult = true;
             this.Close();
         }
 

@@ -53,7 +53,7 @@ namespace ProjektWPF.Druzyny {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ProjektWPF;V1.0.0.0;component/druzyny/deletedruzyna.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ProjektWPF;component/druzyny/deletedruzyna.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Druzyny\DeleteDruzyna.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

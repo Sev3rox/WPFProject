@@ -53,7 +53,7 @@ namespace ProjektWPF.Druzyny {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ProjektWPF;V1.0.0.0;component/druzyny/filterdruzyna.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ProjektWPF;component/druzyny/filterdruzyna.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Druzyny\FilterDruzyna.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

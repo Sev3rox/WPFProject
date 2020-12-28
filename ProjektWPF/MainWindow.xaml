@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektWPF"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
         
  Title="MainWindow" Height="720" Width="1000" FontSize="20">
     <TabControl>
@@ -45,18 +46,18 @@
 
 
                             <TextBox Name="Szukaj" Grid.Row="1" Margin="5" >Szukaj...</TextBox>
-                            <ListBox Grid.Row="2" Margin="5" Name="lista1" DisplayMemberPath="NameAndPrice"  >
-                                <ListBoxItem>Robert Lewandowski 9 FCBM</ListBoxItem>
+                            <ListBox Grid.Row="2" Margin="5" Name="ZawodnicyList" DisplayMemberPath="Dane"   >
+                              
                             </ListBox>
                             <StackPanel Grid.Row="3"  Orientation="Horizontal" HorizontalAlignment="Center">
 
-                                <Button Click="DelZawodnik" Margin="5,5,50,5" Padding="20,6" >Usuń</Button>
-                                <Button Click="EditZawodnik"  Margin="5" Padding="20,6">Edytuj</Button>
+                                <Button IsEnabled="{Binding ElementName=ZawodnicyList, Path=SelectedItems.Count}" Click="DelZawodnik" Margin="5,5,50,5" Padding="20,6" >Usuń</Button>
+                                <Button IsEnabled="{Binding ElementName=ZawodnicyList, Path=SelectedItems.Count}" Click="EditZawodnik"  Margin="5" Padding="20,6">Edytuj</Button>
                             </StackPanel>
                         </Grid>
 
                         <GridSplitter IsEnabled="False" Grid.RowSpan="4"   Grid.Column="1"  Width="15" HorizontalAlignment="Center"/>
-                        <Grid Grid.Row="1" Grid.Column="2">
+                        <Grid Grid.Row="1" Grid.Column="2" DataContext="{Binding ElementName=ZawodnicyList, Path=SelectedItem}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition/>
@@ -77,8 +78,8 @@
                             <Label Grid.Row="3" Margin="5">Pozycja:</Label>
                             <Label Grid.Row="4" Margin="5">Numer:</Label>
                             <StackPanel Margin="20" Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="2">
-                                <CheckBox IsChecked="True" IsEnabled="False" Margin="75,5,200,5">Lewonożny</CheckBox>
-                                <CheckBox IsEnabled="False" Margin="5">Prawonożny</CheckBox>
+                                <CheckBox IsChecked="{Binding Path=Leftleg}" IsEnabled="False" Margin="75,5,200,5">Lewonożny</CheckBox>
+                                <CheckBox IsChecked="{Binding Path=Rightleg}" IsEnabled="False" Margin="5">Prawonożny</CheckBox>
                             </StackPanel>
                             <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="6" Grid.RowSpan="1" Grid.ColumnSpan="2">
                                 <StackPanel VerticalAlignment="Center" Margin="100,20,100,20">
@@ -89,13 +90,13 @@
                                 <Image  Margin="10" Source="Files/logo.png"></Image>
                             </StackPanel>
 
-                            <Label  Grid.Column="1" Margin="5"  Content="Robert" />
-                            <Label Grid.Column="1" Grid.Row="1" Margin="5" Content="Lewandowski" />
-                            <Label Grid.Column="1" Grid.Row="2" Margin="5" Content="Bayern St. Pete 99"/>
-                            <Label Grid.Column="1" Grid.Row="3" Margin="5" Content="Napastnik"></Label>
-                            <Label Grid.Column="1" Grid.Row="4" Margin="5" Content="9"></Label>
+                            <Label  Grid.Column="1" Margin="5"  Content="{Binding Path=Name,UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Grid.Column="1" Grid.Row="1" Margin="5" Content="{Binding Path=Surname,UpdateSourceTrigger=PropertyChanged}"/>
+                            <Label Grid.Column="1" Grid.Row="2" Margin="5" Content="{Binding Path=Adres}"/>
+                            <Label Grid.Column="1" Grid.Row="3" Margin="5" Content="{Binding Path=Position}"></Label>
+                            <Label Grid.Column="1" Grid.Row="4" Margin="5" Content="{Binding Path=Number,UpdateSourceTrigger=PropertyChanged}"></Label>
 
-                            <Button Click="DetailsZawodnik" Margin="10" Padding="20,6"  HorizontalAlignment="Right" Grid.Column="1" Grid.Row="7">Szczegóły</Button>
+                            <Button IsEnabled="{Binding ElementName=ZawodnicyList, Path=SelectedItems.Count}" Click="DetailsZawodnik" Margin="10" Padding="20,6"  HorizontalAlignment="Right" Grid.Column="1" Grid.Row="7">Szczegóły</Button>
                         </Grid>
                     </Grid>
                 </DockPanel>
@@ -143,18 +144,18 @@
 
 
                             <TextBox  Grid.Row="1" Margin="5" >Szukaj...</TextBox>
-                            <ListBox Grid.Row="2" Margin="5" DisplayMemberPath="NameAndPrice">
-                                <ListBoxItem>IFBI vs RGTR 22.12.2020</ListBoxItem>
+                            <ListBox Name="RozgrywkiList" Grid.Row="2" Margin="5" DisplayMemberPath="DaneRoz">
+                          
                             </ListBox>
                             <StackPanel Grid.Row="3"  Orientation="Horizontal" HorizontalAlignment="Center">
 
-                                <Button Click="DelRozgrywka" Margin="5,5,50,5" Padding="20,6" >Usuń</Button>
-                                <Button  Click="EditRozgrywka" Margin="5" Padding="20,6">Edytuj</Button>
+                                <Button IsEnabled="{Binding ElementName=RozgrywkiList, Path=SelectedItems.Count}" Click="DelRozgrywka" Margin="5,5,50,5" Padding="20,6" >Usuń</Button>
+                                <Button IsEnabled="{Binding ElementName=RozgrywkiList, Path=SelectedItems.Count}"  Click="EditRozgrywka" Margin="5" Padding="20,6">Edytuj</Button>
                             </StackPanel>
                         </Grid>
 
                         <GridSplitter Grid.Row="1" IsEnabled="False"  Grid.Column="4" Width="15" HorizontalAlignment="Center"/>
-                        <Grid Grid.Row="1" Grid.Column="5" >
+                        <Grid Grid.Row="1" Grid.Column="5" DataContext="{Binding ElementName=RozgrywkiList, Path=SelectedItem}" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition/>
@@ -188,12 +189,12 @@
 
                             <Label  Grid.Column="1" Margin="5,15,5,5"  Content="Infinity Białystok" />
                             <Label Grid.Column="1" Grid.Row="1" Margin="5" Content="Regional Triangles" />
-                            <Label Grid.Column="1" Grid.Row="2" Margin="5" Content="22.12.2020"/>
-                            <Label Grid.Column="1" Grid.Row="3" Margin="5" Content="Stadion miejski w Białymstoku"></Label>
+                            <Label Grid.Column="1" Grid.Row="2" Margin="5" Content="{Binding Path=Date}"/>
+                            <Label Grid.Column="1" Grid.Row="3" Margin="5" Content="{Binding Path=Place}"></Label>
 
                             <StackPanel Orientation="Horizontal"  Grid.Column="1" Grid.Row="7" HorizontalAlignment="Right">
-                                <Button Click="DrużynyRozgrywka" Margin="10" Padding="20,6"  HorizontalAlignment="Right" Grid.Column="1" Grid.Row="7">Drużyny</Button>
-                                <Button Click="DeatailsRozgrywka" Margin="10" Padding="20,6"  HorizontalAlignment="Right" Grid.Column="1" Grid.Row="7">Szczegóły</Button>
+                                <Button IsEnabled="{Binding ElementName=RozgrywkiList, Path=SelectedItems.Count}" Click="DrużynyRozgrywka" Margin="10" Padding="20,6"  HorizontalAlignment="Right" Grid.Column="1" Grid.Row="7">Drużyny</Button>
+                                <Button IsEnabled="{Binding ElementName=RozgrywkiList, Path=SelectedItems.Count}" Click="DeatailsRozgrywka" Margin="10" Padding="20,6"  HorizontalAlignment="Right" Grid.Column="1" Grid.Row="7">Szczegóły</Button>
                             </StackPanel>
                         </Grid>
                     </Grid>

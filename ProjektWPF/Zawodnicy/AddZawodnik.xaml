@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProjektWPF.Zawodnicy"
         mc:Ignorable="d"
         Title="AddZawodnik" Height="510" Width="410" FontSize="16">
-    <Grid >
+    <Grid Name="AddGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
@@ -29,8 +29,8 @@
         <Label Grid.Row="4" Margin="5">Pozycja:</Label>
         <Label Grid.Row="5" Margin="5">Numer:</Label>
         <StackPanel HorizontalAlignment="Center" Margin="20" Orientation="Horizontal" Grid.Row="6" Grid.ColumnSpan="2">
-            <CheckBox  Margin="5,5,120,5">Lewonożny</CheckBox>
-            <CheckBox  Margin="5">Prawonożny</CheckBox>
+            <CheckBox IsChecked="{Binding Path=Leftleg}"  Margin="5,5,120,5">Lewonożny</CheckBox>
+            <CheckBox IsChecked="{Binding Path=Rightleg}"  Margin="5">Prawonożny</CheckBox>
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" Margin="0" Orientation="Horizontal" Grid.Row="7" Grid.ColumnSpan="2">
             <ComboBox  Margin="33" SelectedIndex="0">
@@ -42,14 +42,14 @@
         </StackPanel>
 
 
-        <TextBox VerticalContentAlignment="Center"  Grid.Column="1" Margin="5"   />
-        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="5" />
-        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="5" />
-        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="5"></TextBox>
-        <ComboBox Grid.Column="1" Grid.Row="4" Margin="5" SelectedIndex="0">
-            <ComboBoxItem >Napastnik</ComboBoxItem>
+        <TextBox VerticalContentAlignment="Center"  Grid.Column="1" Margin="5"  Text="{Binding Path=Name}" />
+        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="5" Text="{Binding Path=Surname}" />
+        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="5"  Text="{Binding Path=Age}"/>
+        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="5" Text="{Binding Path=Adres}"></TextBox>
+        <ComboBox Grid.Column="1" Grid.Row="4" Margin="5" SelectedIndex="0" Text="{Binding Path=Position}">
+            <ComboBoxItem Content="Napastnik" ></ComboBoxItem>
         </ComboBox>
-        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="5" />
+        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="5" Text="{Binding Path=Number}" />
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  Grid.Row="8" Grid.ColumnSpan="2">
             <Button Click="Add" Margin="10,10,60,10" Padding="20,6">Dodaj</Button>
             <Button Click="Cancel" Margin="10" Padding="20,6">Anuluj</Button>

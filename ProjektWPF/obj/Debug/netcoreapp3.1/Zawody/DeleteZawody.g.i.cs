@@ -53,7 +53,7 @@ namespace ProjektWPF.Zawody {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ProjektWPF;V1.0.0.0;component/zawody/deletezawody.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ProjektWPF;component/zawody/deletezawody.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Zawody\DeleteZawody.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

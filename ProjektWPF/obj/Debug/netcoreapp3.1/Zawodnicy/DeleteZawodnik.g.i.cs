@@ -53,7 +53,7 @@ namespace ProjektWPF.Zawodnicy {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ProjektWPF;V1.0.0.0;component/zawodnicy/deletezawodnik.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ProjektWPF;component/zawodnicy/deletezawodnik.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Zawodnicy\DeleteZawodnik.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

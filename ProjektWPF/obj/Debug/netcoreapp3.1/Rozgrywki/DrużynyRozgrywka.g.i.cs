@@ -53,7 +53,7 @@ namespace ProjektWPF.Rozgrywki {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ProjektWPF;V1.0.0.0;component/rozgrywki/dru%c5%bcynyrozgrywka.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ProjektWPF;component/rozgrywki/dru%c5%bcynyrozgrywka.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Rozgrywki\DrużynyRozgrywka.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

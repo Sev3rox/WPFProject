@@ -53,7 +53,7 @@ namespace ProjektWPF {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ProjektWPF;V1.0.0.0;component/zawody/drabinka.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ProjektWPF;component/zawody/drabinka.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Zawody\Drabinka.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

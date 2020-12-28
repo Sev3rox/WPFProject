@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjektWPF.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,19 +20,29 @@ namespace ProjektWPF.Rozgrywki
     /// </summary>
     public partial class AddRozgrywka : Window
     {
-        public AddRozgrywka()
+        public Rozgrywka addroz;
+        ZawodnikDbContext context;
+        public AddRozgrywka(ZawodnikDbContext context)
         {
+            this.context = context;
             InitializeComponent();
+            addroz = new Rozgrywka();
+            AddGrid.DataContext = addroz;
         }
+
+            private void Add(object sender, RoutedEventArgs e)
+            {
+            var x = addroz;
+            context.Rozgrywki.Add(addroz);
+            context.SaveChanges();
+            DialogResult = true;
+            this.Close();
+            }
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void Add(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
     }
 }
