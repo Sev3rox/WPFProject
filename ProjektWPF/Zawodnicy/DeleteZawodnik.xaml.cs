@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjektWPF.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,13 +20,20 @@ namespace ProjektWPF.Zawodnicy
     /// </summary>
     public partial class DeleteZawodnik : Window
     {
-        public DeleteZawodnik()
+        public int Id;
+        ZawodnikDbContext context;
+        public DeleteZawodnik(ZawodnikDbContext context)
         {
             InitializeComponent();
+            this.context = context;
         }
 
         private void Del(object sender, RoutedEventArgs e)
         {
+            var pom = context.Zawodnicy.First(a => a.Id == Id);
+            context.Zawodnicy.Remove(pom);
+            context.SaveChanges();
+            DialogResult = true;
             this.Close();
         }
 

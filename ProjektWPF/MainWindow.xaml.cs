@@ -18,6 +18,7 @@ using ProjektWPF.Rozgrywki;
 using ProjektWPF.Druzyny;
 using ProjektWPF.Data;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace ProjektWPF
 {
@@ -36,6 +37,8 @@ namespace ProjektWPF
             InitializeComponent();
             GetZawodnicy();
             GetRozgrywki();
+            ViewZaw.Filter = null;
+            ViewRoz.Filter = null;
 
         }
 
@@ -48,7 +51,21 @@ namespace ProjektWPF
 
         }
 
+        private ListCollectionView ViewZaw
+        {
+            get
+            {
+                return (ListCollectionView)CollectionViewSource.GetDefaultView(Zawodnicy);
+            }
+        }
 
+        private ListCollectionView ViewRoz
+        {
+            get
+            {
+                return (ListCollectionView)CollectionViewSource.GetDefaultView(Rozgrywki);
+            }
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -115,63 +132,163 @@ namespace ProjektWPF
 
         private void GetZawodnicy()
         {
+
           var Zawodnicydb = context.Zawodnicy.ToList();
             Zawodnicy.Clear();
             foreach(Zawodnik x in Zawodnicydb)
             {
                 Zawodnicy.Add(x);
+      
             }
 
 
         }
         private void AddZawodnik(object sender, RoutedEventArgs e)
         {
-          
-               
-              
-            
             AddZawodnik add = new AddZawodnik(context);
             if (add.ShowDialog() == true)
             {
-                GetZawodnicy();
+                
             }
+            GetZawodnicy();
         }
 
         private void DetailsZawodnik(object sender, RoutedEventArgs e)
         {
-            DetailsZawodnik det = new DetailsZawodnik();
-            det.Show();
+            DetailsZawodnik det = new DetailsZawodnik(((Zawodnik)ZawodnicyList.SelectedItem));
+            if (det.ShowDialog() == true)
+            {
+
+            }
+            GetZawodnicy();
         }
 
         private void DelZawodnik(object sender, RoutedEventArgs e)
         {
             //   var productToDelete = (sender as FrameworkElement).DataContext as Zawodnik;
-            var z = context.Zawodnicy.First(a => a.Id == 1);
-            context.Zawodnicy.Remove(z);
-            context.SaveChanges();
-            GetZawodnicy();
+          
+           
 
-            DeleteZawodnik del = new DeleteZawodnik();
-            del.Show();
+            DeleteZawodnik del = new DeleteZawodnik(context);
+            del.Id= ((Zawodnik)ZawodnicyList.SelectedItem).Id;
+
+            if (del.ShowDialog() == true)
+            {
+                
+            }
+            GetZawodnicy();
         }
 
         private void EditZawodnik(object sender, RoutedEventArgs e)
         {
-            var pom = context.Zawodnicy.First();
-            pom.Name = "Maciekedit";
-            context.Update(pom);
-            context.SaveChanges();
+      
+            EditZawodnik edit = new EditZawodnik(context, ((Zawodnik)ZawodnicyList.SelectedItem));
+
+            if (edit.ShowDialog() == true)
+            {
+
+            }
+           
             GetZawodnicy();
-            EditZawodnik edit = new EditZawodnik();
-            edit.Show();
         }
 
         private void FilterZawodnik(object sender, RoutedEventArgs e)
         {
-            FilterZawodnik filtr = new FilterZawodnik();
-            filtr.Show();
+            FilterZawodnik filtr = new FilterZawodnik(ViewZaw);
+            if (filtr.ShowDialog() == true)
+            {
+
+            }
+            GetZawodnicy();
         }
-       public void GetRozgrywki()
+
+        private void UnFilterZawodnik(object sender, RoutedEventArgs e)
+        {
+            ViewZaw.Filter = null;
+        }
+
+
+
+
+        private void SortZawNone(object sender, RoutedEventArgs e)
+        {
+            ViewZaw.SortDescriptions.Clear();
+            ViewZaw.CustomSort = null;
+        }
+        private void SortZawName(object sender, RoutedEventArgs e)
+        {
+            ViewZaw.SortDescriptions.Clear();
+            ViewZaw.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+        }
+        private void SortZawSurname(object sender, RoutedEventArgs e)
+        {
+            ViewZaw.SortDescriptions.Clear();
+            ViewZaw.SortDescriptions.Add(new SortDescription("Surname", ListSortDirection.Ascending));
+        }
+        private void SortZawNumber(object sender, RoutedEventArgs e)
+        {
+            ViewZaw.SortDescriptions.Clear();
+            ViewZaw.SortDescriptions.Add(new SortDescription("Number", ListSortDirection.Ascending));
+        }
+
+        private void GroupZawNone(object sender, RoutedEventArgs e)
+        {
+            ViewZaw.GroupDescriptions.Clear();
+        }
+        private void GroupZawPosition(object sender, RoutedEventArgs e)
+        {
+            ViewZaw.GroupDescriptions.Clear();
+            ViewZaw.GroupDescriptions.Add(new PropertyGroupDescription("Position"));
+        }
+
+        private void GroupZawAge(object sender, RoutedEventArgs e)
+        {
+            ViewZaw.GroupDescriptions.Clear();
+            ViewZaw.GroupDescriptions.Add(new PropertyGroupDescription("Age"));
+        }
+        private void GroupZawNumber(object sender, RoutedEventArgs e)
+        {
+            ViewZaw.GroupDescriptions.Clear();
+            ViewZaw.GroupDescriptions.Add(new PropertyGroupDescription("Number"));
+        }
+
+        private void SzukajZawChange(object sender, RoutedEventArgs e)
+        {
+            ViewZaw.Filter = delegate (object item)
+            {
+                Zawodnik searchzaw = item as Zawodnik;
+                if (searchzaw == null)
+                {
+                    return false;
+                }
+                if(!(searchzaw.Name.Contains(SzukajZawodnik.Text))&& !(searchzaw.Surname.Contains(SzukajZawodnik.Text))&&!((searchzaw.Name+" "+searchzaw.Surname).Contains(SzukajZawodnik.Text)) && !((searchzaw.Surname + " " + searchzaw.Name).Contains(SzukajZawodnik.Text)) && !((searchzaw.Name  + searchzaw.Surname).Contains(SzukajZawodnik.Text)))
+                {
+                    return false;
+                }
+
+
+                return true;
+            };
+
+        }
+
+        private void SzukajZaw(object sender, RoutedEventArgs e)
+        {
+            ViewZaw.Filter = null;
+            SzukajZawodnik.Text = "";
+            ViewZaw.Filter = null;
+        }
+
+        private void SzukajZawReset(object sender, RoutedEventArgs e)
+        {
+            ViewZaw.Filter = null;
+            SzukajZawodnik.Text = "Szukaj...";
+            ViewZaw.Filter = null;
+        }
+
+
+
+        public void GetRozgrywki()
         {
             var Rozgrywkidb = context.Rozgrywki.ToList();
             Rozgrywki.Clear();
@@ -182,13 +299,17 @@ namespace ProjektWPF
         }
         private void DeatailsRozgrywka(object sender, RoutedEventArgs e)
         {
-            DetailsRozgrywka addroz = new DetailsRozgrywka();
-            addroz.Show();
+            DetailsRozgrywka detroz = new DetailsRozgrywka(((Rozgrywka)RozgrywkiList.SelectedItem));
+            if (detroz.ShowDialog() == true)
+            {
+               
+            }
+            GetRozgrywki();
         }
 
         private void AddRozgrywka(object sender, RoutedEventArgs e)
         {
-            AddZawodnik add = new AddZawodnik(context);
+           
      
             AddRozgrywka addroz = new AddRozgrywka(context);
             if (addroz.ShowDialog() == true)
@@ -199,34 +320,104 @@ namespace ProjektWPF
 
         private void EditRozgrywka(object sender, RoutedEventArgs e)
         {
-            var pom = context.Rozgrywki.First();
-            pom.Place = "Edit";
-            context.Update(pom);
-            context.SaveChanges();
+            EditRozgrywka editroz = new EditRozgrywka(context, ((Rozgrywka)RozgrywkiList.SelectedItem));
+
+            if (editroz.ShowDialog() == true)
+            {
+
+            }
+
             GetRozgrywki();
 
-            EditRozgrywka editroz = new EditRozgrywka();
-            editroz.Show();
         }
 
         private void DelRozgrywka(object sender, RoutedEventArgs e)
         {
 
             //   var productToDelete = (sender as FrameworkElement).DataContext as Zawodnik;
-            var z = context.Rozgrywki.First(a => a.Id == 1);
-            context.Rozgrywki.Remove(z);
-            context.SaveChanges();
-            GetRozgrywki();
+            DeleteRozgrywka delroz = new DeleteRozgrywka(context);
+            delroz.Id = ((Rozgrywka)RozgrywkiList.SelectedItem).Id;
+     
+            if (delroz.ShowDialog() == true)
+            {
 
-            DeleteRozgrywka delroz = new DeleteRozgrywka();
-            delroz.Show();
+            }
+            GetRozgrywki();
         }
 
+   
+        private void UnFilterRozgrywka(object sender, RoutedEventArgs e)
+        {
+            ViewRoz.Filter = null;
+        }
         private void FilterRozgrywka(object sender, RoutedEventArgs e)
         {
-            FilterRozgrywka filtrroz = new FilterRozgrywka();
-            filtrroz.Show();
+            FilterRozgrywka filtrroz = new FilterRozgrywka(ViewRoz);
+            if (filtrroz.ShowDialog() == true)
+            {
+
+            }
+            GetRozgrywki();
         }
+
+
+        private void SortRozNone(object sender, RoutedEventArgs e)
+        {
+            ViewRoz.SortDescriptions.Clear();
+            ViewRoz.CustomSort = null;
+        }
+        private void SortRozDate(object sender, RoutedEventArgs e)
+        {
+            ViewRoz.SortDescriptions.Clear();
+            ViewRoz.SortDescriptions.Add(new SortDescription("Date", ListSortDirection.Ascending));
+        }
+        private void SortRozPlace(object sender, RoutedEventArgs e)
+        {
+            ViewRoz.SortDescriptions.Clear();
+            ViewRoz.SortDescriptions.Add(new SortDescription("Place", ListSortDirection.Ascending));
+        }
+
+
+        private void SzukajRozChange(object sender, RoutedEventArgs e)
+        {
+            ViewRoz.Filter = delegate (object item)
+            {
+                Rozgrywka searchroz = item as Rozgrywka;
+                if (searchroz == null)
+                {
+                    return false;
+                }
+                if (searchroz.Place == null)
+                {
+                    return false;
+                }
+                if (!(searchroz.Place.Contains(SzukajRozgrywka.Text))&& !(searchroz.Date.ToString().Substring(0,searchroz.Date.ToString().Length - 9).Contains(SzukajRozgrywka.Text))&& !((searchroz.Date.ToString().Substring(0,searchroz.Date.ToString().Length - 9)+" "+searchroz.Place).Contains(SzukajRozgrywka.Text)) && !((searchroz.Place+" "+searchroz.Date.ToString().Substring(0,searchroz.Date.ToString().Length - 9)).Contains(SzukajRozgrywka.Text)))
+                {
+                   
+                    return false;
+                }
+
+
+                return true;
+            };
+
+        }
+
+        private void SzukajRoz(object sender, RoutedEventArgs e)
+        {
+            ViewRoz.Filter = null;
+            SzukajRozgrywka.Text = "";
+            ViewRoz.Filter = null;
+        }
+
+        private void SzukajRozReset(object sender, RoutedEventArgs e)
+        {
+            ViewRoz.Filter = null;
+            SzukajRozgrywka.Text = "Szukaj...";
+            ViewRoz.Filter = null;
+        }
+
+
 
         private void DrużynyRozgrywka(object sender, RoutedEventArgs e)
         {
@@ -263,5 +454,12 @@ namespace ProjektWPF
             EditDruzyny editDruzyny = new EditDruzyny();
             editDruzyny.Show();
         }
+
+        private void SzukajZawodnik_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        
     }
 }

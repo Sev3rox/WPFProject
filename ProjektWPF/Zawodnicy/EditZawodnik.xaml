@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProjektWPF.Zawodnicy"
         mc:Ignorable="d"
         Title="EditZawodnik" Height="670" Width="600"  FontSize="16">
-    <Grid >
+    <Grid Name="EditGrid" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
@@ -33,32 +33,32 @@
         <Label Grid.Row="4" Margin="5">Pozycja:</Label>
         <Label Grid.Row="5" Margin="5,5,5,5"  VerticalAlignment="Top">Numer:</Label>
         <StackPanel HorizontalAlignment="Center" Margin="20" Orientation="Horizontal" Grid.Row="6" Grid.ColumnSpan="2">
-            <CheckBox  Margin="5,5,200,5">Lewonożny</CheckBox>
-            <CheckBox  Margin="5">Prawonożny</CheckBox>
+            <CheckBox IsChecked="{Binding Path=Leftleg}"  Margin="5,5,200,5">Lewonożny</CheckBox>
+            <CheckBox IsChecked="{Binding Path=Rightleg}"  Margin="5">Prawonożny</CheckBox>
         </StackPanel >
         <StackPanel Grid.ColumnSpan="2" HorizontalAlignment="Center"  Orientation="Horizontal" Grid.Row="7">
             <Label  Margin="5">Liczba spotkań:</Label>
-            <TextBox VerticalContentAlignment="Center" MinWidth="25"  Margin="5,5,100,5"></TextBox>
+            <TextBox VerticalContentAlignment="Center" MinWidth="25"  Margin="5,5,100,5"  Text="{Binding Path=Spotkania}"></TextBox>
             <Label  Margin="5">Gole:</Label>
-            <TextBox VerticalContentAlignment="Center" MinWidth="25"   Margin="5,5,100,5"></TextBox>
+            <TextBox VerticalContentAlignment="Center" MinWidth="25"   Margin="5,5,100,5"  Text="{Binding Path=Gole}"></TextBox>
             <Label  Margin="5">Asysty:</Label>
-            <TextBox VerticalContentAlignment="Center"  MinWidth="25" Margin="5"></TextBox>
+            <TextBox VerticalContentAlignment="Center"  MinWidth="25" Margin="5"  Text="{Binding Path=Asysty}"></TextBox>
         </StackPanel >
 
         <StackPanel Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Label  Margin="5,5,2,5">Minuty gry:</Label>
-            <TextBox VerticalContentAlignment="Center" MinWidth="40"  Margin="5,5,80,5"></TextBox>
+            <TextBox VerticalContentAlignment="Center" MinWidth="40"  Margin="5,5,80,5"  Text="{Binding Path=Minuty}"></TextBox>
             <Label  Margin="5,5,2,5">Strzały</Label>
-            <TextBox VerticalContentAlignment="Center" MinWidth="25"  Margin="5,5,80,5"></TextBox>
+            <TextBox VerticalContentAlignment="Center" MinWidth="25"  Margin="5,5,80,5"  Text="{Binding Path=Strzaly}"></TextBox>
             <Label  Margin="5">Strzały na bramke</Label>
-            <TextBox  VerticalContentAlignment="Center" MinWidth="25" Margin="5,5,5,5"></TextBox>
+            <TextBox  VerticalContentAlignment="Center" MinWidth="25" Margin="5,5,5,5"  Text="{Binding Path=Nabramke}"></TextBox>
         </StackPanel>
 
         <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Image Width="50" Height="auto" Margin="5" Source="../Files/redcard.png"></Image>
-            <TextBox VerticalContentAlignment="Center" MinWidth="25" Margin="5,5,250,5"></TextBox>
+            <TextBox VerticalContentAlignment="Center" MinWidth="25" Margin="5,5,250,5"  Text="{Binding Path=Redcard}"></TextBox>
             <Image Width="28" Height="auto" Margin="5,5,15,5" Source="../Files/yellowcard.jpg"></Image>
-            <TextBox VerticalContentAlignment="Center" MinWidth="25" Margin="5"></TextBox>
+            <TextBox VerticalContentAlignment="Center" MinWidth="25" Margin="5" Text="{Binding Path=Yellowcard}"></TextBox>
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" Margin="0" Orientation="Horizontal" Grid.Row="10" Grid.ColumnSpan="2">
             <ComboBox  Margin="50" SelectedIndex="0">
@@ -69,17 +69,20 @@
 
         </StackPanel>
 
-        <TextBox VerticalContentAlignment="Center"  Grid.Column="1" Margin="5"    />
-        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="5"  />
-        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="5" />
-        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="5"/>
-        <ComboBox Grid.Column="1" Grid.Row="4" Margin="5" SelectedIndex="0">
+        <TextBox VerticalContentAlignment="Center"  Grid.Column="1" Margin="5"  Text="{Binding Path=Name}"  />
+        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="5"  Text="{Binding Path=Surname}" />
+        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="5" Text="{Binding Path=Age}"/>
+        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="5" Text="{Binding Path=Adres}"/>
+        <ComboBox Grid.Column="1" Grid.Row="4" Margin="5" SelectedIndex="0" Text="{Binding Path=Position}">
             <ComboBoxItem >Napastnik</ComboBoxItem>
+            <ComboBoxItem >Pomocnik</ComboBoxItem>
+            <ComboBoxItem >Obrońca</ComboBoxItem>
+            <ComboBoxItem >Bramkarz</ComboBoxItem>
         </ComboBox>
-        <TextBox  VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="5" ></TextBox>
+        <TextBox  VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="5" Text="{Binding Path=Number}"></TextBox>
 
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  Grid.Row="11" Grid.ColumnSpan="2">
-            <Button Click="Filtr" Margin="10,10,140,10" Padding="20,6">Edytuj</Button>
+            <Button Click="Edit" Margin="10,10,140,10" Padding="20,6">Edytuj</Button>
             <Button Click="Reset" Margin="10" Padding="20,6">Anuluj</Button>
         </StackPanel>
     </Grid>

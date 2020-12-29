@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjektWPF.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,12 @@ namespace ProjektWPF.Rozgrywki
     /// </summary>
     public partial class DetailsRozgrywka : Window
     {
-        public DetailsRozgrywka()
+        Rozgrywka detroz;
+        public DetailsRozgrywka(Rozgrywka Rozgrywka)
         {
             InitializeComponent();
+            detroz = Rozgrywka;
+            DetailsGrid.DataContext = detroz;
         }
 
         private void Close(object sender, RoutedEventArgs e)

@@ -47,7 +47,10 @@
         <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="5"  Text="{Binding Path=Age}"/>
         <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="5" Text="{Binding Path=Adres}"></TextBox>
         <ComboBox Grid.Column="1" Grid.Row="4" Margin="5" SelectedIndex="0" Text="{Binding Path=Position}">
-            <ComboBoxItem Content="Napastnik" ></ComboBoxItem>
+            <ComboBoxItem >Napastnik</ComboBoxItem>
+            <ComboBoxItem >Pomocnik</ComboBoxItem>
+            <ComboBoxItem >Obrońca</ComboBoxItem>
+            <ComboBoxItem >Bramkarz</ComboBoxItem>
         </ComboBox>
         <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="5" Text="{Binding Path=Number}" />
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  Grid.Row="8" Grid.ColumnSpan="2">

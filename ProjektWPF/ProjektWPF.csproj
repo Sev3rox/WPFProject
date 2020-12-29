@@ -8,6 +8,9 @@
 
   <ItemGroup>
     <None Remove="Files\logo.png" />
+    <None Remove="Files\redcard.png" />
+    <None Remove="Files\vs.jpg" />
+    <None Remove="Files\yellowcard.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +20,9 @@
 
   <ItemGroup>
     <Resource Include="Files\logo.png" />
+    <Resource Include="Files\redcard.png" />
+    <Resource Include="Files\vs.jpg" />
+    <Resource Include="Files\yellowcard.jpg" />
   </ItemGroup>
 
 </Project>

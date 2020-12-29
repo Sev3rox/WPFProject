@@ -67,8 +67,15 @@
         <TextBox  VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="5" Text="{Binding Path=Hour}" />
         <ComboBox Grid.Column="1" Grid.Row="4" Margin="5" SelectedIndex="0" Text="{Binding Path=Place}">
             <ComboBoxItem>Stadion Miejski w Białymstoku</ComboBoxItem>
+            <ComboBoxItem>Drugi Stadion Miejski w Białymstoku</ComboBoxItem>
+            <ComboBoxItem>Stadion Miejski w Suwałkach</ComboBoxItem>
+            <ComboBoxItem>Stadion Miejski w Łomży</ComboBoxItem>
+            <ComboBoxItem>Stadion Miejski w Bielsku Podlaskim</ComboBoxItem>
+            <ComboBoxItem>Stadion Miejski w Zambrowie </ComboBoxItem>
+            <ComboBoxItem>Stadion Miejski w Wysokim Mazowieckiu</ComboBoxItem>
+            <ComboBoxItem>Stadion Miejski w Grajewie</ComboBoxItem>
         </ComboBox>
-        <ComboBox Grid.Column="1" Grid.Row="5" Margin="5" SelectedIndex="0" Text="{Binding Path=Tournament}">
+        <ComboBox Grid.Column="1" Grid.Row="5" Margin="5" SelectedIndex="0" >
             <ComboBoxItem>Turniej Prezydenta Białegostoku</ComboBoxItem>
         </ComboBox>
         <TextBox  VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="6" Margin="5" Text="{Binding Path=Opis}" />

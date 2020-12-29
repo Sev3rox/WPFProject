@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjektWPF.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,18 +20,29 @@ namespace ProjektWPF.Rozgrywki
     /// </summary>
     public partial class DeleteRozgrywka : Window
     {
-        public DeleteRozgrywka()
+        public int Id;
+        ZawodnikDbContext context;
+        public DeleteRozgrywka(ZawodnikDbContext context)
         {
             InitializeComponent();
-        }
-
-        private void Cancel(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+            this.context = context;
         }
 
         private void Del(object sender, RoutedEventArgs e)
         {
+
+            var pom = context.Rozgrywki.First(a => a.Id == Id);
+            context.Rozgrywki.Remove(pom);
+            context.SaveChanges();
+            DialogResult = true;
+            this.Close();
+   
+        }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+
+
             this.Close();
         }
     }

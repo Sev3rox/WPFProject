@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProjektWPF.Rozgrywki"
         mc:Ignorable="d"
         Title="FilterRozgrywka" Height="385" Width="360" FontSize="16">
-    <Grid >
+    <Grid Name="FiltrGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
@@ -55,10 +55,17 @@
         <ComboBox Grid.Column="1" Grid.Row="2" Margin="5" SelectedIndex="0">
             <ComboBoxItem>Turniej Prezydenta Białegostoku</ComboBoxItem>
         </ComboBox>
-        <ComboBox Grid.Column="1" Grid.Row="4" Margin="5" SelectedIndex="0">
+        <ComboBox Grid.Column="1" Grid.Row="4" Margin="5" SelectedIndex="0" Text="{Binding Path=Place}">
             <ComboBoxItem>Stadion Miejski w Białymstoku</ComboBoxItem>
+            <ComboBoxItem>Drugi Stadion Miejski w Białymstoku</ComboBoxItem>
+            <ComboBoxItem>Stadion Miejski w Suwałkach</ComboBoxItem>
+            <ComboBoxItem>Stadion Miejski w Łomży</ComboBoxItem>
+            <ComboBoxItem>Stadion Miejski w Bielsku Podlaskim</ComboBoxItem>
+            <ComboBoxItem>Stadion Miejski w Zambrowie</ComboBoxItem>
+            <ComboBoxItem>Stadion Miejski w Wysokim Mazowieckiu</ComboBoxItem>
+            <ComboBoxItem>Stadion Miejski w Grajewie</ComboBoxItem>
         </ComboBox>
-        <TextBox Margin="5" Grid.Row="5" Grid.Column="1"></TextBox>
+        <TextBox Margin="5" Grid.Row="5" Grid.Column="1" Text="{Binding Path=Sedziaglowny}"></TextBox>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  Grid.Row="8" Grid.ColumnSpan="2">
             <Button Click="Filtr" Margin="10,10,40,10" Padding="20,6">Zastosuj Filtr</Button>
             <Button Click="Reset" Margin="10" Padding="20,6">Zresetuj Filtr</Button>

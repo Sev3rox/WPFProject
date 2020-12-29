@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProjektWPF.Rozgrywki"
         mc:Ignorable="d"
         Title="DetailsRozgrywka" Height="750" Width="600"  FontSize="16">
-    <Grid >
+    <Grid Name="DetailsGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
@@ -28,6 +28,7 @@
         <StackPanel Grid.Row="1">
             <Label  Margin="5">Drużyna 2:</Label>
             <Label  Margin="5">Data:</Label>
+            <Label  Margin="5">Godzina:</Label>
         </StackPanel>
         <Label Grid.Row="2" Margin="5,5,80,5">Miejsce:</Label>
         <Label Grid.Row="3" Margin="5,5,80,5">Turniej:</Label>
@@ -36,16 +37,16 @@
 
             <StackPanel VerticalAlignment="Center" Margin="5,5,50,5">
                 <Label HorizontalContentAlignment="Center" Margin="5" Content="Sędzia główny:"></Label>
-                <Label  HorizontalContentAlignment="Center" Margin="5" Content="Piotr Adamczyk"></Label>
+                <Label  HorizontalContentAlignment="Center" Margin="5" Content="{Binding Path=Sedziaglowny}"></Label>
             </StackPanel>
             <StackPanel Margin="5,5,50,5">
                 <Label HorizontalContentAlignment="Center" Margin="5" Content="Sędziowie pomocniczy:"></Label>
-                <Label HorizontalContentAlignment="Center" Margin="5" Content="Tomasz Duda"></Label>
-                <Label  HorizontalContentAlignment="Center" Margin="5" Content="Michał Nowak"></Label>
+                <Label HorizontalContentAlignment="Center" Margin="5" Content="{Binding Path=Sedziapom1}"></Label>
+                <Label  HorizontalContentAlignment="Center" Margin="5" Content="{Binding Path=Sedziapom2}"></Label>
             </StackPanel>
             <StackPanel Margin="5,5,5,5" VerticalAlignment="Center">
                 <Label HorizontalContentAlignment="Center" Margin="5" Content="Sędzia techniczny:"></Label>
-                <Label HorizontalContentAlignment="Center" Margin="5" Content="Adam Kowal"></Label>
+                <Label HorizontalContentAlignment="Center" Margin="5" Content="{Binding Path=Sedziatechniczny}"></Label>
             </StackPanel >
            
         </StackPanel>
@@ -58,11 +59,12 @@
         <Label  Grid.Column="1" Margin="5"  Content="Infinity Białystok" />
         <StackPanel Grid.Column="1" Grid.Row="1">
             <Label Margin="5" Content="Regional Triangles" />
-            <Label Margin="5" Content="22.12.2020 14:00" />
+            <Label Margin="5" Content="{Binding Path=Date}"/>
+            <Label Margin="5" Content="{Binding Path=Hour}" />
         </StackPanel>
-        <Label Grid.Column="1" Grid.Row="2" Margin="5" Content="Stadion miejski w Białymstoku"/>
-        <Label Grid.Column="1" Grid.Row="3" Margin="5" Content="Turniej Prezydenta Białegostoku"/>
-        <Label Grid.Column="1" Grid.Row="4" Margin="5" Content="Mecz organizowany przez sztab Prezydenta.&#10;Dochody zostaną przekaze na Caritas"/>
+        <Label Grid.Column="1" Grid.Row="2" Margin="5" Content="{Binding Path=Place}"/>
+        <Label Grid.Column="1" Grid.Row="3" Margin="5" />
+        <Label Grid.Column="1" Grid.Row="4" Margin="5" Content="{Binding Path=Opis}"/>
         <Grid Grid.Row="9" Grid.RowSpan="1" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
