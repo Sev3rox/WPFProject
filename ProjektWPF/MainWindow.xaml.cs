@@ -67,6 +67,8 @@ namespace ProjektWPF
             }
         }
 
+     
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Drabinka d = new Drabinka();
@@ -257,7 +259,7 @@ namespace ProjektWPF
             ViewZaw.Filter = delegate (object item)
             {
                 Zawodnik searchzaw = item as Zawodnik;
-                if (searchzaw == null)
+                if (searchzaw == null||searchzaw.Name==null||searchzaw.Surname==null)
                 {
                     return false;
                 }

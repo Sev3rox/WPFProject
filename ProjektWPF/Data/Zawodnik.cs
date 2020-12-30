@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ProjektWPF.Data
 {
-    public class Zawodnik
+    public class Zawodnik : IDataErrorInfo
     {
         public int Id { get; set; }
         private string name;
@@ -77,6 +77,48 @@ namespace ProjektWPF.Data
                 PropertyChanged(this,
                 new PropertyChangedEventArgs(property));
         }
+
+        public string Error
+        {
+            get { return null; }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == "Number")
+                {
+                    if (Number <= 0)
+                        return "Numer musi być większy od 0";
+                    if (Number >= 100)
+                        return "Numer musi być mniejszy od 100";
+
+                }
+                if (columnName == "Age")
+                {
+                    if (Age < 12)
+                        return "Minimalny wiek to 12 lat";
+
+                }
+                if (columnName == "Name")
+                {
+                    if (Name==null)
+                        return "Imie musi być podane";
+
+                }
+                if (columnName == "Surname")
+                {
+                    if (Surname==null)
+                        return "Nazwisko musi być podane";
+
+                }
+
+
+                return null;
+            }
+        }
+
 
     }
 }
