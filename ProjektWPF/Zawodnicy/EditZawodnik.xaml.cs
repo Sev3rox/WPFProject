@@ -65,9 +65,20 @@ namespace ProjektWPF.Zawodnicy
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            context.Update(editzaw);
-            context.SaveChanges();
-            this.Close();
+
+            var valnum = Validation.GetErrors(NumberTextBox);
+            var valage = Validation.GetErrors(AgeTextBox);
+            var valnam = Validation.GetErrors(NameTextBox);
+            var valsur = Validation.GetErrors(SurnameTextBox);
+
+            if (valnum.Count == 0 && valage.Count == 0 && valnam.Count == 0 && valsur.Count == 0)
+            {
+
+
+                context.Update(editzaw);
+                context.SaveChanges();
+                this.Close();
+            }
 
         }
         
@@ -92,5 +103,81 @@ namespace ProjektWPF.Zawodnicy
            
             this.Close();
         }
+
+        private void NumberFocus(object sender, RoutedEventArgs e)
+        {
+
+
+            if (NumberTextBox.Text == "")
+                NumberTextBox.Text = "0";
+        }
+        private void AgeFocus(object sender, RoutedEventArgs e)
+        {
+
+
+            if (AgeTextBox.Text == "")
+                AgeTextBox.Text = "0";
+        }
+        private void NumberVali(object sender, RoutedEventArgs e)
+        {
+            NumberTextBox.Foreground = new SolidColorBrush(Colors.Black); ;
+            editzaw.Number = 0;
+            NumberTextBox.Text = null;
+        }
+
+        private void AgeVali(object sender, RoutedEventArgs e)
+        {
+            AgeTextBox.Foreground = new SolidColorBrush(Colors.Black); ;
+            editzaw.Age = 0;
+            AgeTextBox.Text = null;
+        }
+        private void NameVali(object sender, RoutedEventArgs e)
+        {
+            NameTextBox.Foreground = new SolidColorBrush(Colors.Black); ;
+            editzaw.Name = null;
+            NameTextBox.Text = null;
+        }
+        private void SurnameVali(object sender, RoutedEventArgs e)
+        {
+            SurnameTextBox.Foreground = new SolidColorBrush(Colors.Black); ;
+            editzaw.Surname = null;
+            SurnameTextBox.Text = null;
+        }
+        private void validationError(object sender, ValidationErrorEventArgs e)
+        {
+
+            if (e.Action == ValidationErrorEventAction.Added)
+            {
+                if (e.Error.ErrorContent.ToString() == "Numer musi być większy od 0")
+                {
+                    NumberTextBox.Foreground = new SolidColorBrush(Colors.Red);
+                    NumberTextBox.Text = e.Error.ErrorContent.ToString();
+                }
+
+                if (e.Error.ErrorContent.ToString() == "Numer musi być mniejszy od 100")
+                {
+                    NumberTextBox.Foreground = new SolidColorBrush(Colors.Red);
+                    NumberTextBox.Text = e.Error.ErrorContent.ToString();
+                }
+
+                if (e.Error.ErrorContent.ToString() == "Minimalny wiek to 12 lat")
+                {
+                    AgeTextBox.Foreground = new SolidColorBrush(Colors.Red);
+                    AgeTextBox.Text = e.Error.ErrorContent.ToString();
+                }
+                if (e.Error.ErrorContent.ToString() == "Imie musi być podane")
+                {
+                    NameTextBox.Foreground = new SolidColorBrush(Colors.Red);
+                    NameTextBox.Text = e.Error.ErrorContent.ToString();
+                }
+                if (e.Error.ErrorContent.ToString() == "Nazwisko musi być podane")
+                {
+                    SurnameTextBox.Foreground = new SolidColorBrush(Colors.Red);
+                    SurnameTextBox.Text = e.Error.ErrorContent.ToString();
+                }
+            }
+
+        }
+
     }
 }

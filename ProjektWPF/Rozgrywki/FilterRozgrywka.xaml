@@ -34,9 +34,25 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0"  Margin="10,10,10,10"  Source="../Files/logo.png"></Image>
-            <Image  Grid.Column="1"  Margin="10"  Source="../Files/vs.jpg" ></Image>
-            <Image  Grid.Column="2"  Margin="10"   Source="../Files/logo2.jpg"></Image>
+            <Image Grid.Column="0"  Margin="15,15,15,15"  Source="../Files/logo.png"></Image>
+            <Image  Grid.Column="1"  Margin="20"  Source="../Files/vs.jpg"  RenderTransformOrigin="0.5,0.5" >
+                <Image.RenderTransform>
+                    <RotateTransform x:Name="MyAnimatedTransform" Angle="0" />
+                </Image.RenderTransform>
+                <Image.Triggers>
+                    <EventTrigger RoutedEvent="Image.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                Storyboard.TargetName="MyAnimatedTransform"
+                Storyboard.TargetProperty="(RotateTransform.Angle)"
+                From="0.0" To="360" Duration="0:0:6" RepeatBehavior="Forever"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Image.Triggers>
+            </Image>
+            <Image  Grid.Column="2"  Margin="15,15,15,15"   Source="../Files/logo2.jpg"></Image>
         </Grid>
 
         <Label Margin="5">Drużyna 1:</Label>

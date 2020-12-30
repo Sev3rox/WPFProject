@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProjektWPF.Rozgrywki"
         mc:Ignorable="d"
         Title="AddRozgrywka" Height="800" Width="600"  FontSize="16">
-    <Grid Name="AddGrid">
+    <Grid Name="AddGrid" Validation.Error="validationError">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
@@ -37,7 +37,7 @@
 
             <StackPanel VerticalAlignment="Center" Margin="5,5,50,5">
                 <Label HorizontalContentAlignment="Center" Margin="5" Content="Sędzia główny:"></Label>
-                <TextBox  HorizontalContentAlignment="Center" Margin="5" Text="{Binding Path=Sedziaglowny}" ></TextBox>
+                <TextBox PreviewMouseDown="SedziaglownyVali"  Name="SedziaglownyTextBox"  HorizontalContentAlignment="Center" Margin="5" Text="{Binding Path=Sedziaglowny, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" ></TextBox>
             </StackPanel>
             <StackPanel Margin="5,5,50,5">
                 <Label HorizontalContentAlignment="Center" Margin="5" Content="Sędziowie pomocniczy:"></Label>
@@ -63,9 +63,9 @@
             <ComboBox Grid.Row="1"  Grid.Column="1" Margin="5" SelectedIndex="0">
                 <ComboBoxItem>Triangles</ComboBoxItem>
             </ComboBox>
-        <Calendar Grid.Column="1" Grid.Row="2" SelectedDate="{Binding Path=Date}"></Calendar>
-        <TextBox  VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="5" Text="{Binding Path=Hour}" />
-        <ComboBox Grid.Column="1" Grid.Row="4" Margin="5" SelectedIndex="0" Text="{Binding Path=Place}">
+        <Calendar Margin="5" Name="DateCalendar" Grid.Column="1" Grid.Row="2" SelectedDate="{Binding Path=Date, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"></Calendar>
+        <TextBox LostFocus="HourFocus" PreviewMouseDown="HourVali"  Name="HourTextBox"  VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="5" Text="{Binding Path=Hour, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+        <ComboBox PreviewMouseLeftButtonDown="PlaceVali"  Name="PlaceTextBox" Grid.Column="1" Grid.Row="4" Margin="5" SelectedIndex="0"  Text="{Binding Path=Place, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
             <ComboBoxItem>Stadion Miejski w Białymstoku</ComboBoxItem>
             <ComboBoxItem>Drugi Stadion Miejski w Białymstoku</ComboBoxItem>
             <ComboBoxItem>Stadion Miejski w Suwałkach</ComboBoxItem>
@@ -85,9 +85,25 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0"  Margin="10,10,10,10"  Source="../Files/logo.png"></Image>
-            <Image  Grid.Column="1"  Margin="10"  Source="../Files/vs.jpg" ></Image>
-            <Image  Grid.Column="2"  Margin="10"   Source="../Files/logo2.jpg"></Image>
+            <Image Grid.Column="0"  Margin="15,15,15,15"  Source="../Files/logo.png"></Image>
+            <Image  Grid.Column="1"  Margin="20"  Source="../Files/vs.jpg"  RenderTransformOrigin="0.5,0.5" >
+                <Image.RenderTransform>
+                    <RotateTransform x:Name="MyAnimatedTransform" Angle="0" />
+                </Image.RenderTransform>
+                <Image.Triggers>
+                    <EventTrigger RoutedEvent="Image.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                Storyboard.TargetName="MyAnimatedTransform"
+                Storyboard.TargetProperty="(RotateTransform.Angle)"
+                From="0.0" To="360" Duration="0:0:6" RepeatBehavior="Forever"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Image.Triggers>
+            </Image>
+            <Image  Grid.Column="2"  Margin="15,15,15,15"   Source="../Files/logo2.jpg"></Image>
         </Grid>
 
 

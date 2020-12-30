@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ProjektWPF.Data
 {
-    public class Rozgrywka
+    public class Rozgrywka : IDataErrorInfo
     {
         public int Id { get; set; }
         public string Place { get; set; }
@@ -120,6 +120,50 @@ namespace ProjektWPF.Data
             if (PropertyChanged != null)
                 PropertyChanged(this,
                 new PropertyChangedEventArgs(property));
+        }
+
+
+        public string Error
+        {
+            get { return null; }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == "Hour")
+                {
+                    if (Hour <= 0)
+                        return "Godzina musi być większa od 0";
+                    if (Hour >= 24)
+                        return "Godzina musi być mniejsza od 24";
+
+                }
+                if (columnName == "Date")
+                {
+                    if (Date == null||Date< DateTime.UtcNow)
+                        return "Data musi być podana";
+     
+                }
+                if (columnName == "Sedziaglowny")
+                {
+                    if (Sedziaglowny == null)
+                        return "Obowiązkowe";
+
+                }
+                if (columnName == "Place")
+                {
+                    if (Place == null)
+                        return "Miejsce musi być podane";
+
+                }
+
+
+
+
+                return null;
+            }
         }
 
 

@@ -8,7 +8,44 @@
         Loaded="Window_Loaded"
         
  Title="MainWindow" Height="720" Width="1000" FontSize="20">
+
     <Window.Resources>
+        <ControlTemplate x:Key="szablon" TargetType="{x:Type Button}">
+            <Border Name="Border" BorderBrush="DarkGreen" BorderThickness="3"
+                    CornerRadius="0 0 4 4" Background="YellowGreen"
+                    TextBlock.Foreground="Black">
+                <Grid >
+                    <Rectangle Name="FocusCue" Visibility =" Hidden"
+                               Stroke ="Black" StrokeThickness ="3"
+                               StrokeDashArray ="1 2" StrokeDashCap="Round"
+                               SnapsToDevicePixels ="True" />
+                    <ContentPresenter RecognizesAccessKey="True"
+                                      Margin="{TemplateBinding Padding}" />
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="Yellow" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="DarkGreen" />
+                    <Setter TargetName="Border" Property="BorderBrush"
+                            Value="YellowGreen" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                     <Setter TargetName="Border"
+                         Property="TextBlock.Foreground"
+                         Value="LightGray" />
+                     <Setter TargetName="Border" Property="Background"
+                         Value="SlateGray" />
+                </Trigger>
+            
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+
         <DataTemplate x:Key="GroupTemplate">
             <TextBlock Text="{Binding Path=Name}"
  FontWeight="Bold" Foreground="White"
@@ -33,7 +70,7 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="3">
-                            <Button Click="AddZawodnik" Grid.Row="0" Margin="5" Padding="128,3" >Dodaj</Button>
+                            <Button  Click="AddZawodnik" Grid.Row="0" Margin="5" Padding="128,3" Template="{StaticResource szablon}">Dodaj</Button>
                             <Button Click="FilterZawodnik" Margin="30,5,5,5" Padding="10,3">Filtruj</Button>
                             <Button Click="UnFilterZawodnik" Margin="30,5,5,5"  Padding="10,3">Usuń Filtr</Button>
                             <ComboBox Margin="30,5,5,5" SelectedIndex="0">
@@ -61,7 +98,7 @@
 
 
                             <TextBox LostFocus="SzukajZawReset" TextChanged="SzukajZawChange"  PreviewMouseDown="SzukajZaw" Name="SzukajZawodnik" Grid.Row="1" Margin="5" Text="Szukaj..." >
-                            
+
                             </TextBox>
                             <ListBox Grid.Row="2" Margin="5" Name="ZawodnicyList" DisplayMemberPath="Dane"   >
                                 <ListBox.GroupStyle>
@@ -70,8 +107,8 @@
                             </ListBox>
                             <StackPanel Grid.Row="3"  Orientation="Horizontal" HorizontalAlignment="Center">
 
-                                <Button IsEnabled="{Binding ElementName=ZawodnicyList, Path=SelectedItems.Count}" Click="DelZawodnik" Margin="5,5,50,5" Padding="20,6" >Usuń</Button>
-                                <Button IsEnabled="{Binding ElementName=ZawodnicyList, Path=SelectedItems.Count}" Click="EditZawodnik"  Margin="5" Padding="20,6">Edytuj</Button>
+                                <Button  IsEnabled="{Binding ElementName=ZawodnicyList, Path=SelectedItems.Count}" Click="DelZawodnik" Margin="5,5,50,5" Padding="20,6" Template="{StaticResource szablon}">Usuń</Button>
+                                <Button  IsEnabled="{Binding ElementName=ZawodnicyList, Path=SelectedItems.Count}" Click="EditZawodnik"  Margin="5" Padding="20,6" Template="{StaticResource szablon}">Edytuj</Button>
                             </StackPanel>
                         </Grid>
 
@@ -115,7 +152,7 @@
                             <Label Grid.Column="1" Grid.Row="3" Margin="5" Content="{Binding Path=Position}"></Label>
                             <Label Grid.Column="1" Grid.Row="4" Margin="5" Content="{Binding Path=Number,UpdateSourceTrigger=PropertyChanged}"></Label>
 
-                            <Button IsEnabled="{Binding ElementName=ZawodnicyList, Path=SelectedItems.Count}" Click="DetailsZawodnik" Margin="10" Padding="20,6"  HorizontalAlignment="Right" Grid.Column="1" Grid.Row="7">Szczegóły</Button>
+                            <Button Template="{StaticResource szablon}" IsEnabled="{Binding ElementName=ZawodnicyList, Path=SelectedItems.Count}" Click="DetailsZawodnik" Margin="5,5,5,5" Padding="20,6"  HorizontalAlignment="Right" Grid.Row="7" Grid.ColumnSpan="2">Szczegóły</Button>
                         </Grid>
                     </Grid>
                 </DockPanel>
@@ -143,7 +180,7 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="6">
-                            <Button Click="AddRozgrywka" Grid.Row="0" Margin="5" Padding="128,3" >Dodaj</Button>
+                            <Button Template="{StaticResource szablon}" Click="AddRozgrywka" Grid.Row="0" Margin="5" Padding="128,3" >Dodaj</Button>
                             <Button Click="FilterRozgrywka" Margin="75,5,5,5" Padding="10,3">Filtruj</Button>
                             <Button Click="UnFilterRozgrywka" Margin="75,5,5,5"  Padding="10,3">Usuń Filtr</Button>
                             <ComboBox Margin="75,5,5,5" SelectedIndex="0">
@@ -166,12 +203,12 @@
 
                             <TextBox LostFocus="SzukajRozReset" TextChanged="SzukajRozChange"  PreviewMouseDown="SzukajRoz" Name="SzukajRozgrywka" Grid.Row="1" Margin="5" Text="Szukaj..." ></TextBox>
                             <ListBox Name="RozgrywkiList" Grid.Row="2" Margin="5" DisplayMemberPath="DaneRoz">
-                          
+
                             </ListBox>
                             <StackPanel Grid.Row="3"  Orientation="Horizontal" HorizontalAlignment="Center">
 
-                                <Button IsEnabled="{Binding ElementName=RozgrywkiList, Path=SelectedItems.Count}" Click="DelRozgrywka" Margin="5,5,50,5" Padding="20,6" >Usuń</Button>
-                                <Button IsEnabled="{Binding ElementName=RozgrywkiList, Path=SelectedItems.Count}"  Click="EditRozgrywka" Margin="5" Padding="20,6">Edytuj</Button>
+                                <Button Template="{StaticResource szablon}" IsEnabled="{Binding ElementName=RozgrywkiList, Path=SelectedItems.Count}" Click="DelRozgrywka" Margin="5,5,50,5" Padding="20,6" >Usuń</Button>
+                                <Button Template="{StaticResource szablon}" IsEnabled="{Binding ElementName=RozgrywkiList, Path=SelectedItems.Count}"  Click="EditRozgrywka" Margin="5" Padding="20,6">Edytuj</Button>
                             </StackPanel>
                         </Grid>
 
@@ -203,9 +240,25 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <Image Grid.Column="0"  Margin="10,10,10,10"  Source="Files/logo.png"></Image>
-                                <Image  Grid.Column="1"  Margin="10"  Source="Files/vs.jpg" ></Image>
-                                <Image  Grid.Column="2"  Margin="10"   Source="Files/logo2.jpg"></Image>
+                                <Image Grid.Column="0"  Margin="15,15,15,15"  Source="Files/logo.png"></Image>
+                                <Image  Grid.Column="1"  Margin="20"  Source="Files/vs.jpg"  RenderTransformOrigin="0.5,0.5" >
+                                    <Image.RenderTransform>
+                                        <RotateTransform x:Name="MyAnimatedTransform" Angle="0" />
+                                    </Image.RenderTransform>
+                                    <Image.Triggers>
+                                        <EventTrigger RoutedEvent="Image.Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation
+                Storyboard.TargetName="MyAnimatedTransform"
+                Storyboard.TargetProperty="(RotateTransform.Angle)"
+                From="0.0" To="360" Duration="0:0:4" RepeatBehavior="Forever"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Image.Triggers>
+                                </Image>
+                                <Image  Grid.Column="2"  Margin="15,15,15,15"   Source="Files/logo2.jpg"></Image>
                             </Grid>
 
                             <Label  Grid.Column="1" Margin="5,15,5,5"  Content="Infinity Białystok" />
@@ -214,8 +267,8 @@
                             <Label Grid.Column="1" Grid.Row="3" Margin="5" Content="{Binding Path=Place}"></Label>
 
                             <StackPanel Orientation="Horizontal"  Grid.Column="1" Grid.Row="7" HorizontalAlignment="Right">
-                                <Button IsEnabled="{Binding ElementName=RozgrywkiList, Path=SelectedItems.Count}" Click="DrużynyRozgrywka" Margin="10" Padding="20,6"  HorizontalAlignment="Right" Grid.Column="1" Grid.Row="7">Drużyny</Button>
-                                <Button IsEnabled="{Binding ElementName=RozgrywkiList, Path=SelectedItems.Count}" Click="DeatailsRozgrywka" Margin="10" Padding="20,6"  HorizontalAlignment="Right" Grid.Column="1" Grid.Row="7">Szczegóły</Button>
+                                <Button Template="{StaticResource szablon}" IsEnabled="{Binding ElementName=RozgrywkiList, Path=SelectedItems.Count}" Click="DrużynyRozgrywka" Margin="10" Padding="20,6"  HorizontalAlignment="Right" Grid.Column="1" Grid.Row="7">Drużyny</Button>
+                                <Button Template="{StaticResource szablon}" IsEnabled="{Binding ElementName=RozgrywkiList, Path=SelectedItems.Count}" Click="DeatailsRozgrywka" Margin="10" Padding="20,6"  HorizontalAlignment="Right" Grid.Column="1" Grid.Row="7">Szczegóły</Button>
                             </StackPanel>
                         </Grid>
                     </Grid>

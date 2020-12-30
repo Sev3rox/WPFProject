@@ -51,9 +51,17 @@ namespace ProjektWPF.Rozgrywki
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            context.Update(editroz);
-            context.SaveChanges();
-            this.Close();
+            var valhou = Validation.GetErrors(HourTextBox);
+            var valdat = Validation.GetErrors(DateCalendar);
+            var valsed = Validation.GetErrors(SedziaglownyTextBox);
+            var valpla = Validation.GetErrors(PlaceTextBox);
+
+            if (valhou.Count == 0 && valdat.Count == 0 && valsed.Count == 0 && valpla.Count == 0)
+            {
+                context.Update(editroz);
+                context.SaveChanges();
+                this.Close();
+            }
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
@@ -68,5 +76,68 @@ namespace ProjektWPF.Rozgrywki
             editroz.Sedziatechniczny=Sedziatechniczny;
             this.Close();
         }
+        private void HourFocus(object sender, RoutedEventArgs e)
+        {
+
+
+            if (HourTextBox.Text == "")
+                HourTextBox.Text = "0";
+        }
+
+        private void HourVali(object sender, RoutedEventArgs e)
+        {
+            HourTextBox.Foreground = new SolidColorBrush(Colors.Black); ;
+            editroz.Hour = 0;
+            HourTextBox.Text = null;
+        }
+
+
+        private void PlaceVali(object sender, RoutedEventArgs e)
+        {
+            PlaceTextBox.Foreground = new SolidColorBrush(Colors.Black); ;
+            editroz.Place = null;
+            PlaceTextBox.Text = null;
+        }
+        private void SedziaglownyVali(object sender, RoutedEventArgs e)
+        {
+            SedziaglownyTextBox.Foreground = new SolidColorBrush(Colors.Black); ;
+            editroz.Sedziaglowny = null;
+            SedziaglownyTextBox.Text = null;
+        }
+        private void validationError(object sender, ValidationErrorEventArgs e)
+        {
+
+            if (e.Action == ValidationErrorEventAction.Added)
+            {
+                if (e.Error.ErrorContent.ToString() == "Godzina musi być większa od 0")
+                {
+                    HourTextBox.Foreground = new SolidColorBrush(Colors.Red);
+                    HourTextBox.Text = e.Error.ErrorContent.ToString();
+                }
+
+                if (e.Error.ErrorContent.ToString() == "Godzina musi być mniejsza od 24")
+                {
+                    HourTextBox.Foreground = new SolidColorBrush(Colors.Red);
+                    HourTextBox.Text = e.Error.ErrorContent.ToString();
+                }
+
+                if (e.Error.ErrorContent.ToString() == "Data musi być podana")
+                {
+
+                }
+                if (e.Error.ErrorContent.ToString() == "Miejsce musi być podane")
+                {
+
+
+                }
+                if (e.Error.ErrorContent.ToString() == "Obowiązkowe")
+                {
+                    SedziaglownyTextBox.Foreground = new SolidColorBrush(Colors.Red);
+                    SedziaglownyTextBox.Text = e.Error.ErrorContent.ToString();
+                }
+            }
+
+        }
+
     }
 }

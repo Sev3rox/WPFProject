@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProjektWPF.Zawodnicy"
         mc:Ignorable="d"
         Title="EditZawodnik" Height="670" Width="600"  FontSize="16">
-    <Grid Name="EditGrid" >
+    <Grid Name="EditGrid" Validation.Error="validationError">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
@@ -69,9 +69,9 @@
 
         </StackPanel>
 
-        <TextBox VerticalContentAlignment="Center"  Grid.Column="1" Margin="5"  Text="{Binding Path=Name}"  />
-        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="5"  Text="{Binding Path=Surname}" />
-        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="5" Text="{Binding Path=Age}"/>
+        <TextBox PreviewMouseDown="NameVali"  Name="NameTextBox" VerticalContentAlignment="Center"  Grid.Column="1" Margin="5"  Text="{Binding Path=Name, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"  />
+        <TextBox PreviewMouseDown="SurnameVali"  Name="SurnameTextBox" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="5"  Text="{Binding Path=Surname, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+        <TextBox LostFocus="AgeFocus" PreviewMouseDown="AgeVali"  Name="AgeTextBox" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="5" Text="{Binding Path=Age, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
         <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="5" Text="{Binding Path=Adres}"/>
         <ComboBox Grid.Column="1" Grid.Row="4" Margin="5" SelectedIndex="0" Text="{Binding Path=Position}">
             <ComboBoxItem >Napastnik</ComboBoxItem>
@@ -79,7 +79,7 @@
             <ComboBoxItem >Obrońca</ComboBoxItem>
             <ComboBoxItem >Bramkarz</ComboBoxItem>
         </ComboBox>
-        <TextBox  VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="5" Text="{Binding Path=Number}"></TextBox>
+        <TextBox LostFocus="NumberFocus" PreviewMouseDown="NumberVali"  Name="NumberTextBox"  VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="5" Text="{Binding Path=Number, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"></TextBox>
 
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  Grid.Row="11" Grid.ColumnSpan="2">
             <Button Click="Edit" Margin="10,10,140,10" Padding="20,6">Edytuj</Button>
