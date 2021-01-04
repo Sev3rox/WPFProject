@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektWPF.Druzyny"
         mc:Ignorable="d"
-        Title="AddDruzyna" Height="440" Width="350" FontSize="16">
-    <Grid >
+        Title="AddDruzyna" Height="440" Width="420"
+        FontSize="16" >
+    <Grid Name="AddDruzGrid" Validation.Error="validationError">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
@@ -20,23 +21,26 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Label Margin="5">Nazwa:</Label>
         <Label Grid.Row="1" Margin="5">Kraj pochodzenia:</Label>
         <Label Grid.Row="2" Margin="5">Sziedziba:</Label>
         <Label Grid.Row="3" Margin="5,5,75,5">Sukcesy:</Label>
         <Label Grid.Row="4" Margin="5">Logo:</Label>
-        <Label Grid.Row="5" Margin="5">Sponsorzy:</Label>
-        <Label Grid.Row="6" Margin="5">Właściciel:</Label>
+        <Button Grid.Row="5" Margin=" 5" Click="ImageFromFile" >Search</Button>
+        <Label Grid.Row="6" Margin="5">Sponsorzy:</Label>
+        <Label Grid.Row="7" Margin="5">Właściciel:</Label>
 
-        <TextBox VerticalContentAlignment="Center"  Grid.Column="1" Margin="5"   />
-        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="5" />
-        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="5" />
-        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="5"></TextBox>
-        <Image Grid.Column="1" Grid.Row="4" Source="InterfejsWPF/Files/logo.png"></Image>
-        <TextBox Grid.Row="5" Grid.Column="1" VerticalContentAlignment="Center" Margin="5"></TextBox>
-        <TextBox Grid.Row="6" Grid.Column="1" VerticalContentAlignment="Center" Margin="5"></TextBox>
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  Grid.Row="7" Grid.ColumnSpan="2">
+        <TextBox VerticalContentAlignment="Center" PreviewMouseDown="NazwaValid" Name="NazwaTextBox" Grid.Column="1" Margin="5" Text="{Binding Path=Name, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  />
+        <TextBox VerticalContentAlignment="Center" PreviewMouseDown="KrajValid" Name="KrajTextBox" Grid.Column="1" Grid.Row="1" Margin="5" Text="{Binding Path=Country, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+        <TextBox VerticalContentAlignment="Center" PreviewMouseDown="SiedzibaValid" Name="SiedzibaTextBox" Grid.Column="1" Grid.Row="2" Margin="5" Text="{Binding Path=City, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+        <TextBox VerticalContentAlignment="Center"  Name="SukcesyTextBox" Grid.Column="1" Grid.Row="3" Margin="5" Text="{Binding Path=Succes, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"></TextBox>
+        <Image Name="imgDynamic" Grid.Row="4" Grid.RowSpan="2" Grid.Column="1"
+               Margin="5" Stretch="Uniform" Source="{Binding Path=ImagePath}"></Image>
+        <TextBox Grid.Row="6" Grid.Column="1" PreviewMouseDown="SponsorzyValid" Name="SponsorzyTextBox" VerticalContentAlignment="Center" Margin="5" Text="{Binding Path=Sponsors, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="1" PreviewMouseDown="WlascicielValid" Name="WlasicielTextBox" VerticalContentAlignment="Center" Margin="5" Text="{Binding Path=Owner, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"></TextBox>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  Grid.Row="8" Grid.ColumnSpan="2">
             <Button Click="Add" Margin="10,10,60,10" Padding="20,6">Dodaj</Button>
             <Button Click="Cancel" Margin="10" Padding="20,6">Anuluj</Button>
         </StackPanel>

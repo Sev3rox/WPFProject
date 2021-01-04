@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         
- Title="MainWindow" Height="720" Width="1000" FontSize="20">
+ Title="MainWindow" Height="720" Width="1010" FontSize="20">
 
     <Window.Resources>
         <ControlTemplate x:Key="szablon" TargetType="{x:Type Button}">
@@ -43,7 +43,8 @@
                 </Trigger>
             
             </ControlTemplate.Triggers>
-        </ControlTemplate>
+        </ControlTemplate>
+
 
 
         <DataTemplate x:Key="GroupTemplate">
@@ -51,8 +52,7 @@
  FontWeight="Bold" Foreground="White"
  Background="Black" Margin="0,5,0,0"
  Padding="3"/>
-        </DataTemplate>
-
+        </DataTemplate>
     </Window.Resources>
     <TabControl>
         <TabItem Header="Zawodnicy">
@@ -103,7 +103,8 @@
                             <ListBox Grid.Row="2" Margin="5" Name="ZawodnicyList" DisplayMemberPath="Dane"   >
                                 <ListBox.GroupStyle>
                                     <GroupStyle HeaderTemplate="{StaticResource GroupTemplate}"/>
-                                </ListBox.GroupStyle>
+                                </ListBox.GroupStyle>
+
                             </ListBox>
                             <StackPanel Grid.Row="3"  Orientation="Horizontal" HorizontalAlignment="Center">
 
@@ -466,10 +467,12 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="3">
-                            <Button  Grid.Row="0" Margin="5" Padding="93,3" Click="DodajDruzyne" >Dodaj drużynę</Button>
-                            <Button Grid.Row="0" Margin="5" Padding="25,3" Click="DodajZawodnikaDoDruzyny">Dodaj zawodnika do drużyny</Button>
-                            <Button Margin="5" Padding="25,3" Click="FiltrujDruzyne">Filtruj drużyny</Button>
-                            <Button Margin="5"  Padding="25,3">Usuń Filtr</Button>
+                            <Button  Grid.Row="0" Margin="5" Padding="90,3" Click="DodajDruzyne" Template="{StaticResource szablon}">Dodaj drużynę</Button>
+                            <Button IsEnabled="{Binding ElementName=lista_druzyn, Path=SelectedItems.Count}" Template="{StaticResource szablon}" 
+                                Grid.Row="0" Margin="5" Padding="25,3" Click="DodajZawodnikaDoDruzyny">Dodaj zawodnika do drużyny</Button>
+                            <Button IsEnabled="{Binding ElementName=lista_druzyn, Path=SelectedItems.Count}" Template="{StaticResource szablon}"
+                                Margin="5" Padding="25,3" Click="FiltrujDruzyne">Filtruj drużyny</Button>
+                            <Button Margin="5"  Padding="25,3" Click="UsunFilterDruzyna" Template="{StaticResource szablon}">Usuń Filtr</Button>
 
                         </StackPanel>
                         <Grid Grid.Row="1">
@@ -481,12 +484,15 @@
                             </Grid.RowDefinitions>
 
 
-                            <TextBox Name="Szukaj_druzyny" Grid.Row="1" Margin="5" >Szukaj...</TextBox>
-                            <ListBox Grid.Row="2" Margin="5" Name="lista_druzyn" DisplayMemberPath="NameAndPrice"  />
+                            <TextBox LostFocus="SzukajDruzynyReset" TextChanged="SzukajDruzynyChange"  PreviewMouseDown="SzukajDruzyny" 
+                                Name="Szukaj_druzyny" Grid.Row="1" Margin="5" Text="Szukaj..."></TextBox>
+                            <ListBox Grid.Row="2" Margin="5" Name="lista_druzyn" DisplayMemberPath="DaneDruzyn"  />
                             <StackPanel Grid.Row="3"  Orientation="Horizontal" HorizontalAlignment="Center">
 
-                                <Button Margin="5,5,50,5" Padding="20,6" Click="UsunDruzyne">Usuń</Button>
-                                <Button   Margin="5" Padding="20,6" Click="EdytujDruzyne">Edytuj</Button>
+                                <Button Margin="5,5,50,5" Padding="20,6" Click="UsunDruzyne" Template="{StaticResource szablon}"
+                                        IsEnabled="{Binding ElementName=lista_druzyn, Path=SelectedItems.Count}">Usuń</Button>
+                                <Button Margin="5" Padding="20,6" Click="EdytujDruzyne" Template="{StaticResource szablon}"
+                                        IsEnabled="{Binding ElementName=lista_druzyn, Path=SelectedItems.Count}">Edytuj</Button>
                             </StackPanel>
                         </Grid>
 
@@ -511,16 +517,17 @@
                             <Label Grid.Row="3" Margin="5,5.2,5.2,5.8" Grid.ColumnSpan="2">Sukcesy:</Label>
 
 
-                            <Label  Grid.Column="1" Margin="4.8,5,4.6,5"  Content="Jagiellonia Bałystok" Grid.ColumnSpan="2" />
-                            <Label Grid.Column="1" Grid.Row="1" Margin="4.8,5,4.6,5" Content="Polska" Grid.ColumnSpan="2" />
-                            <Label Grid.Column="1" Grid.Row="2" Margin="4.8,5,4.6,4.8" Content="Białystok" Grid.ColumnSpan="2"/>
-                            <Label Grid.Column="1" Grid.Row="3" Margin="4.8,5.2,4.6,5.8" Content="jakieś tam jak puchar Polski" Grid.ColumnSpan="2"></Label>
+                            <Label  Grid.Column="1" Margin="4.8,5,4.6,5"  Content="{Binding Path=Name,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" />
+                            <Label Grid.Column="1" Grid.Row="1" Margin="4.8,5,4.6,5" Content="{Binding Path=Country,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" />
+                            <Label Grid.Column="1" Grid.Row="2" Margin="4.8,5,4.6,4.8" Content="{Binding Path=City,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"/>
+                            <Label Grid.Column="1" Grid.Row="3" Margin="4.8,5.2,4.6,5.8" Content="{Binding Path=Succes,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"></Label>
                             <Label Grid.Column="0" Grid.Row="4" Margin="4.8,5.2,4.6,5.8" Content="Sponsorzy" Grid.ColumnSpan="2"></Label>
-                            <Label Grid.Column="1" Grid.Row="4" Margin="4.8,5.2,4.6,5.8" Content="PGNiG"></Label>
+                            <Label Grid.Column="1" Grid.Row="4" Margin="4.8,5.2,4.6,5.8" Content="{Binding Path=Sponsors,UpdateSourceTrigger=PropertyChanged}"></Label>
                             <Label Grid.Column="0" Grid.Row="5" Margin="4" Content="Właściciel:"></Label>
-                            <Label Grid.Row="5" Grid.Column="1" Margin="4" Content="Adam Małysz"></Label>
-                            <ListBox Grid.Column="0" Grid.Row="6" Margin="5,4.2,5.2,5.6" >Lista zawodników:</ListBox>
-                            <Image Grid.Row="6" Grid.Column="2" Margin="9.8,11.4,9.6,11.4"  Source="Files/logo.png" Height="150" Grid.ColumnSpan="2" ></Image>
+                            <Label Grid.Row="5" Grid.Column="1" Margin="4" Content="{Binding Path=Owner,UpdateSourceTrigger=PropertyChanged}"></Label>
+                            <ListBox Name="lista_zawodnikow_druzyna" Grid.Column="0" Grid.Row="6" Margin="5,4.2,5.2,5.6" ItemsSource="{Binding Path=Zawodnicy}">Lista zawodników:</ListBox>
+                            <Image Grid.Row="6" Grid.Column="2" Margin="9.8,11.4,9.6,11.4"  Source="{Binding Path=ImagePath}"
+                                   Height="150" Grid.ColumnSpan="2" Stretch="Uniform"></Image>
                         </Grid>
                     </Grid>
                 </DockPanel>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ProjektWPF.Data;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,12 +20,19 @@ namespace ProjektWPF.Druzyny
     /// </summary>
     public partial class DeleteDruzyna : Window
     {
-        public DeleteDruzyna()
+        public int Id;
+        ZawodnikDbContext context;
+        public DeleteDruzyna(ZawodnikDbContext context)
         {
             InitializeComponent();
+            this.context = context;
         }
         private void Del(object sender, RoutedEventArgs e)
         {
+            //var temp = context.Druzyny.First(a => a.Id == Id);
+            //context.Druzyny.Remove(temp);
+            context.SaveChanges();
+            DialogResult = true;
             this.Close();
         }
         private void Cancel(object sender, RoutedEventArgs e)

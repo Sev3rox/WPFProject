@@ -158,10 +158,6 @@ namespace ProjektWPF.Data
                         return "Miejsce musi być podane";
 
                 }
-
-
-
-
                 return null;
             }
         }

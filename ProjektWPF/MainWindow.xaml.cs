@@ -29,6 +29,7 @@ namespace ProjektWPF
     {
         public Collection<Zawodnik> Zawodnicy { get; } = new ObservableCollection<Zawodnik>();
         public Collection<Rozgrywka> Rozgrywki { get; } = new ObservableCollection<Rozgrywka>();
+        public Collection<Druzyna> Druzyny { get; } = new ObservableCollection<Druzyna>();
         ZawodnikDbContext context;
 
         public MainWindow(ZawodnikDbContext context)
@@ -37,8 +38,10 @@ namespace ProjektWPF
             InitializeComponent();
             GetZawodnicy();
             GetRozgrywki();
+            //GetDruzyny();
             ViewZaw.Filter = null;
             ViewRoz.Filter = null;
+            ViewDruz.Filter = null;
 
         }
 
@@ -46,8 +49,9 @@ namespace ProjektWPF
         {
 
             var binding = new Binding();
-           ZawodnicyList.ItemsSource = Zawodnicy;
+            ZawodnicyList.ItemsSource = Zawodnicy;
             RozgrywkiList.ItemsSource = Rozgrywki;
+            lista_druzyn.ItemsSource = Druzyny;
 
         }
 
@@ -67,7 +71,15 @@ namespace ProjektWPF
             }
         }
 
-     
+        private ListCollectionView ViewDruz
+        {
+            get
+            {
+                return (ListCollectionView)CollectionViewSource.GetDefaultView(Druzyny);
+            }
+        }
+
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -427,34 +439,101 @@ namespace ProjektWPF
             druroz.Show();
         }
 
+        /*public void GetDruzyny()
+        {
+            var Druzynydb = context.Druzyny.ToList();
+            Druzyny.Clear();
+            foreach (Druzyna x in Druzynydb)
+            {
+                Druzyny.Add(x);
+            }
+        }*/
+
         private void DodajDruzyne(object sender, RoutedEventArgs e)
         {
-            AddDruzyna druzynadodaj = new AddDruzyna();
-            druzynadodaj.Show();
+            AddDruzyna druzynadodaj = new AddDruzyna(context);
+            if (druzynadodaj.ShowDialog() == true) 
+            { 
+                
+            }
+            //GetDruzyny();
         }
 
         private void DodajZawodnikaDoDruzyny(object sender, RoutedEventArgs e)
         {
-            AddZawodnikDoDruzyny addZawodnikDoDruzyny = new AddZawodnikDoDruzyny();
-            addZawodnikDoDruzyny.Show();
+            AddZawodnikDoDruzyny addZawodnikDoDruzyny = new AddZawodnikDoDruzyny(context);
+            if (addZawodnikDoDruzyny.ShowDialog() == true)
+            {
+
+            }
+            //GetDruzyny();
         }
 
         private void FiltrujDruzyne(object sender, RoutedEventArgs e)
         {
-            FilterDruzyna filterDruzyna = new FilterDruzyna();
-            filterDruzyna.Show();
+            FilterDruzyna filterDruzyna = new FilterDruzyna(ViewDruz);
+            if (filterDruzyna.ShowDialog() == true)
+            {
+                
+            }
+            //GetDruzyny();
+        }
+
+        private void UsunFilterDruzyna(object sender, RoutedEventArgs e)
+        {
+            ViewDruz.Filter = null;
         }
 
         private void UsunDruzyne(object sender, RoutedEventArgs e)
         {
-            DeleteDruzyna deleteDruzyna = new DeleteDruzyna();
-            deleteDruzyna.Show();
+            DeleteDruzyna deleteDruzyna = new DeleteDruzyna(context);
+            if(deleteDruzyna.ShowDialog() == true)
+            {
+                
+            }
+            //GetDruzyny();
         }
 
         private void EdytujDruzyne(object sender, RoutedEventArgs e)
         {
-            EditDruzyny editDruzyny = new EditDruzyny();
-            editDruzyny.Show();
+            EditDruzyny editDruzyny = new EditDruzyny(context,((Druzyna)lista_druzyn.SelectedItem));
+            if (editDruzyny.ShowDialog() == true)
+            {
+                
+            }
+            //GetDruzyny();
+        }
+
+        private void SzukajDruzynyChange(object sender, RoutedEventArgs e)
+        {
+            ViewDruz.Filter = delegate (object item)
+            {
+                Druzyna searchdruz = item as Druzyna;
+                if (searchdruz == null || searchdruz.Name == null )
+                {
+                    return false;
+                }
+                if (!(searchdruz.Name.Contains(Szukaj_druzyny.Text))) 
+                {
+                    return false;
+                }
+                return true;
+            };
+
+        }
+
+        private void SzukajDruzyny(object sender, RoutedEventArgs e)
+        {
+            ViewDruz.Filter = null;
+            Szukaj_druzyny.Text = "";
+            ViewDruz.Filter = null;
+        }
+
+        private void SzukajDruzynyReset(object sender, RoutedEventArgs e)
+        {
+            ViewDruz.Filter = null;
+            Szukaj_druzyny.Text = "Szukaj...";
+            ViewDruz.Filter = null;
         }
 
         private void SzukajZawodnik_TextChanged(object sender, TextChangedEventArgs e)
