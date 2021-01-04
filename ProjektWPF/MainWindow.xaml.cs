@@ -38,7 +38,7 @@ namespace ProjektWPF
             InitializeComponent();
             GetZawodnicy();
             GetRozgrywki();
-            //GetDruzyny();
+            GetDruzyny();
             ViewZaw.Filter = null;
             ViewRoz.Filter = null;
             ViewDruz.Filter = null;
@@ -439,7 +439,7 @@ namespace ProjektWPF
             druroz.Show();
         }
 
-        /*public void GetDruzyny()
+        public void GetDruzyny()
         {
             var Druzynydb = context.Druzyny.ToList();
             Druzyny.Clear();
@@ -447,7 +447,7 @@ namespace ProjektWPF
             {
                 Druzyny.Add(x);
             }
-        }*/
+        }
 
         private void DodajDruzyne(object sender, RoutedEventArgs e)
         {
@@ -456,17 +456,17 @@ namespace ProjektWPF
             { 
                 
             }
-            //GetDruzyny();
+            GetDruzyny();
         }
 
         private void DodajZawodnikaDoDruzyny(object sender, RoutedEventArgs e)
         {
-            AddZawodnikDoDruzyny addZawodnikDoDruzyny = new AddZawodnikDoDruzyny(context);
+            AddZawodnikDoDruzyny addZawodnikDoDruzyny = new AddZawodnikDoDruzyny(context, ((Druzyna)lista_druzyn.SelectedItem),Zawodnicy);
             if (addZawodnikDoDruzyny.ShowDialog() == true)
             {
 
             }
-            //GetDruzyny();
+            GetDruzyny();
         }
 
         private void FiltrujDruzyne(object sender, RoutedEventArgs e)
@@ -476,7 +476,7 @@ namespace ProjektWPF
             {
                 
             }
-            //GetDruzyny();
+            GetDruzyny();
         }
 
         private void UsunFilterDruzyna(object sender, RoutedEventArgs e)
@@ -487,11 +487,12 @@ namespace ProjektWPF
         private void UsunDruzyne(object sender, RoutedEventArgs e)
         {
             DeleteDruzyna deleteDruzyna = new DeleteDruzyna(context);
+            deleteDruzyna.Id = ((Druzyna)lista_druzyn.SelectedItem).Id;
             if(deleteDruzyna.ShowDialog() == true)
             {
                 
             }
-            //GetDruzyny();
+            GetDruzyny();
         }
 
         private void EdytujDruzyne(object sender, RoutedEventArgs e)
@@ -501,7 +502,7 @@ namespace ProjektWPF
             {
                 
             }
-            //GetDruzyny();
+            GetDruzyny();
         }
 
         private void SzukajDruzynyChange(object sender, RoutedEventArgs e)
@@ -509,11 +510,11 @@ namespace ProjektWPF
             ViewDruz.Filter = delegate (object item)
             {
                 Druzyna searchdruz = item as Druzyna;
-                if (searchdruz == null || searchdruz.Name == null )
+                if (searchdruz == null || searchdruz.Nazwa == null )
                 {
                     return false;
                 }
-                if (!(searchdruz.Name.Contains(Szukaj_druzyny.Text))) 
+                if (!(searchdruz.Nazwa.Contains(Szukaj_druzyny.Text))) 
                 {
                     return false;
                 }

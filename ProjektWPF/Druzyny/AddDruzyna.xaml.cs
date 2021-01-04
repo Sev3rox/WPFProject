@@ -2,6 +2,7 @@
 using ProjektWPF.Data;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,7 +45,7 @@ namespace ProjektWPF.Druzyny
             if(validname.Count == 0 && validcountry.Count == 0 &&
                 validcity.Count ==0 && validowner.Count == 0 && validsponsors.Count == 0)
             {
-                //context.Druzyny.Add(adddruzyna);
+                context.Druzyny.Add(adddruzyna);
                 context.SaveChanges();
                 DialogResult = true;
                 this.Close();
@@ -61,7 +62,7 @@ namespace ProjektWPF.Druzyny
         private void NazwaValid(object sender, RoutedEventArgs e)
         {
             NazwaTextBox.Foreground = new SolidColorBrush(Colors.Black);
-            adddruzyna.Name = null;
+            adddruzyna.Nazwa = null;
             NazwaTextBox.Text = null;
         }
         private void KrajValid(object sender, RoutedEventArgs e)
@@ -117,7 +118,7 @@ namespace ProjektWPF.Druzyny
                 }
             }
         }
-
+        public string ImageDirectory { get; set; }
         private void ImageFromFile(object sender, RoutedEventArgs e)
         {
             
@@ -129,7 +130,20 @@ namespace ProjektWPF.Druzyny
                 bt.UriSource = new Uri(openFileDialog.FileName);
                 bt.EndInit();
                 imgDynamic.Source = bt;
-                adddruzyna.imagePath = bt; //tego nie jestem pewien 
+                //string imagePath = System.IO.Path.Combine(ImageDirectory,
+                //(string)value);
+                /*string dir = null, imgdir;
+                do
+                {
+                    if (dir == null)
+                        dir = Directory.GetCurrentDirectory();
+                    else
+                        dir = Directory.GetParent(dir).ToString();
+                    imgdir = System.IO.Path.Combine(dir, "images");
+                } while (!Directory.Exists(imgdir));
+                ImageDirectory = imgdir;
+                string imagePath = System.IO.Path.Combine(ImageDirectory);
+                adddruzyna.ImagePath = imagePath;*/
             }
         }
     }

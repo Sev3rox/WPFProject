@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,23 +20,28 @@ namespace ProjektWPF.Druzyny
     /// Logika interakcji dla klasy AddZawodnikDoDruzyny.xaml
     /// </summary>
     public partial class AddZawodnikDoDruzyny : Window
-    { 
+    {
         public Druzyna druzyna;
         public Zawodnik zawodnik;
         ZawodnikDbContext context;
-        public AddZawodnikDoDruzyny(ZawodnikDbContext context)
+        public Collection<Zawodnik> zawodnicy { get; } = new ObservableCollection<Zawodnik>();
+        public AddZawodnikDoDruzyny(ZawodnikDbContext context, Druzyna Druzyna, 
+            Collection<Zawodnik> Zawodnicy)
         {
             this.context = context;
             InitializeComponent();
+            druzyna = Druzyna;
+            Zawdruz.DataContext = druzyna;
+            zawodnicy = Zawodnicy;
+            lista_zawodnikow.ItemsSource = zawodnicy;
         }
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            if (lista_zawodnikow.Items.Count != 0)
-            {
-                zawodnik = (Zawodnik)lista_zawodnikow.SelectedItem;
-                druzyna.AddZawodnikDoDruzyny(zawodnik);
-            }
+            zawodnik = (Zawodnik)lista_zawodnikow.SelectedItem;
+            druzyna.AddZawodnikDoDruzyny(zawodnik);
+            context.Update(druzyna);
+            context.SaveChanges();
             this.Close();
         }
         private void Cancel(object sender, RoutedEventArgs e)

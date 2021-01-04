@@ -29,8 +29,9 @@ namespace ProjektWPF.Druzyny
         }
         private void Del(object sender, RoutedEventArgs e)
         {
-            //var temp = context.Druzyny.First(a => a.Id == Id);
-            //context.Druzyny.Remove(temp);
+            var temp = context.Druzyny.First(a => a.Id == Id);
+            var pom = context.Druzyny.First(a => a.Id == Id);
+            context.Druzyny.Remove(pom);
             context.SaveChanges();
             DialogResult = true;
             this.Close();

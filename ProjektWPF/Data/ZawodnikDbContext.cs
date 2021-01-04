@@ -9,7 +9,7 @@ namespace ProjektWPF.Data
     {
         public DbSet<Zawodnik> Zawodnicy { get; set; }
         public DbSet<Rozgrywka> Rozgrywki { get; set; }
-        //public DbSet<Druzyna> Druzyny { get; set; }
+        public DbSet<Druzyna> Druzyny { get; set; }
 
         public ZawodnikDbContext(DbContextOptions<ZawodnikDbContext> options) : base(options)
             {
@@ -22,7 +22,7 @@ namespace ProjektWPF.Data
             {
                 modelBuilder.Entity<Zawodnik>();
             modelBuilder.Entity<Rozgrywka>();
-            //modelBuilder.Entity<Druzyna>();
+            modelBuilder.Entity<Druzyna>();
             base.OnModelCreating(modelBuilder);
             }
            

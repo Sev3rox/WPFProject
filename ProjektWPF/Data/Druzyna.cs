@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
 using System.Windows.Controls;
@@ -11,11 +12,11 @@ namespace ProjektWPF.Data
     public class Druzyna : IDataErrorInfo
     {
         public int Id { get; set; }
-        public string name;
-        public string Name
+        public string nazwa;
+        public string Nazwa
         {
-            get { return name; }
-            set { name = value; OnPropertyChanged("DaneDruzyny"); }
+            get { return nazwa; }
+            set { nazwa = value; OnPropertyChanged("DaneDruzyny"); }
         }
         public string country;
         public string Country
@@ -47,43 +48,37 @@ namespace ProjektWPF.Data
             get { return succes; }
             set { succes = value; OnPropertyChanged("DaneDruzyny"); }
         }
-        public List<Zawodnik> zawodnicy;
-        public List<Zawodnik> Zawodnicy
-        {
-            get { return zawodnicy; }
-            set { zawodnicy = value; OnPropertyChanged("DaneDruzyny"); }
-        }
+
+        public Collection<Zawodnik> lista_zawodnikow { get; } = new ObservableCollection<Zawodnik>();
         
         public Druzyna() { }
 
         public Druzyna(string name,string country,string city,
-                        string owner,string sponsors,string succes, List<Zawodnik> lista_zawodnikow)
+                        string owner,string sponsors,string succes)
         {
-            Name = name;
+            Nazwa = name;
             Country = country;
             City = city;
             Owner = owner;
             Sponsors = sponsors;
             Succes = succes;
-            lista_zawodnikow = null;
-            ImagePath = imagePath;
+            ImagePath = Nazwa;
         }
-        public BitmapImage imagePath;
-        public BitmapImage ImagePath { get; set; }   
+        public string ImagePath { get; set; }   
 
         public void AddZawodnikDoDruzyny(Zawodnik zawodnik)
         {
-            zawodnicy.Add(zawodnik);
+            lista_zawodnikow.Add(zawodnik);
         }
 
         public string DaneDruzyny
         {
-            get { return Name; }
+            get { return Nazwa; }
         }
 
         public override string ToString()
         {
-            return Name;
+            return Nazwa;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -103,9 +98,9 @@ namespace ProjektWPF.Data
         {
             get
             {
-                if(columnName == "Name")
+                if(columnName == "Nazwa")
                 {
-                    if (Name == null) { return "Nazwę klubu trzeba podać"; }
+                    if (Nazwa == null) { return "Nazwę klubu trzeba podać"; }
                 }
                 if(columnName == "Country")
                 {

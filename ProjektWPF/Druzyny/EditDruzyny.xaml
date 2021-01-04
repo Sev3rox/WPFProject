@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektWPF.Druzyny"
         mc:Ignorable="d"
-        Title="EditDruzyny" Height="330" Width="350" FontSize="16">
+        Title="EditDruzyny" Height="340" Width="350" FontSize="16">
     <Grid Name="EditDruz" Validation.Error="validationError">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -27,7 +27,7 @@
         <Label Grid.Row="4" Margin="5">Sponsorzy:</Label>
         <Label Grid.Row="5" Margin="5">Właściciel:</Label>
 
-        <TextBox Name="NazwaTextBox" PreviewMouseDown="NazwaValid" VerticalContentAlignment="Center"  Grid.Column="1" Margin="5"  Text="{Binding Path=Name, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+        <TextBox Name="NazwaTextBox" PreviewMouseDown="NazwaValid" VerticalContentAlignment="Center"  Grid.Column="1" Margin="5"  Text="{Binding Path=Nazwa, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
         <TextBox Name="KrajTextBox" PreviewMouseDown="KrajValid" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="5" Text="{Binding Path=Country, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
         <TextBox Name="SiedzibaTextBox" PreviewMouseDown="SiedzibaValid" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="5" Text="{Binding Path=City, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
         <TextBox Name="SukcesyTextBox" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="5" Text="{Binding Path=Succes}"></TextBox>

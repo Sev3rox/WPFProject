@@ -23,7 +23,7 @@ namespace ProjektWPF.Druzyny
         public Druzyna editdruzyna;
         public ZawodnikDbContext context;
 
-        public string Name;
+        public string Nazwa;
         public string Country;
         public string City;
         public string Succes;
@@ -35,7 +35,7 @@ namespace ProjektWPF.Druzyny
             InitializeComponent();
             editdruzyna = Druzyna;
             EditDruz.DataContext = editdruzyna;
-            Name = editdruzyna.Name;
+            Nazwa = editdruzyna.Nazwa;
             Country = editdruzyna.Country;
             City = editdruzyna.City;
             Succes = editdruzyna.Succes;
@@ -54,14 +54,14 @@ namespace ProjektWPF.Druzyny
             if (validname.Count == 0 && validcountry.Count == 0 && validsucces.Count == 0 &&
                 validcity.Count == 0 && validowner.Count == 0 && validsponsors.Count == 0)
             {
+                context.Update(editdruzyna);
                 context.SaveChanges();
-                DialogResult = true;
                 this.Close();
             }
         }
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            editdruzyna.Name = Name;
+            editdruzyna.Nazwa = Nazwa;
             editdruzyna.Country = Country;
             editdruzyna.City = City;
             editdruzyna.Sponsors = Sponsors;
@@ -73,7 +73,7 @@ namespace ProjektWPF.Druzyny
         private void NazwaValid(object sender, RoutedEventArgs e)
         {
             NazwaTextBox.Foreground = new SolidColorBrush(Colors.Black);
-            editdruzyna.Name = null;
+            editdruzyna.Nazwa = null;
             NazwaTextBox.Text = null;
         }
         private void KrajValid(object sender, RoutedEventArgs e)

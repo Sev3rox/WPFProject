@@ -45,10 +45,14 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
 
-
-
         <DataTemplate x:Key="GroupTemplate">
             <TextBlock Text="{Binding Path=Name}"
+ FontWeight="Bold" Foreground="White"
+ Background="Black" Margin="0,5,0,0"
+ Padding="3"/>
+        </DataTemplate>
+        <DataTemplate x:Key="GroupTemplate2">
+            <TextBlock Text="{Binding Path=Nazwa}"
  FontWeight="Bold" Foreground="White"
  Background="Black" Margin="0,5,0,0"
  Padding="3"/>
@@ -470,7 +474,7 @@
                             <Button  Grid.Row="0" Margin="5" Padding="90,3" Click="DodajDruzyne" Template="{StaticResource szablon}">Dodaj drużynę</Button>
                             <Button IsEnabled="{Binding ElementName=lista_druzyn, Path=SelectedItems.Count}" Template="{StaticResource szablon}" 
                                 Grid.Row="0" Margin="5" Padding="25,3" Click="DodajZawodnikaDoDruzyny">Dodaj zawodnika do drużyny</Button>
-                            <Button IsEnabled="{Binding ElementName=lista_druzyn, Path=SelectedItems.Count}" Template="{StaticResource szablon}"
+                            <Button Template="{StaticResource szablon}"
                                 Margin="5" Padding="25,3" Click="FiltrujDruzyne">Filtruj drużyny</Button>
                             <Button Margin="5"  Padding="25,3" Click="UsunFilterDruzyna" Template="{StaticResource szablon}">Usuń Filtr</Button>
 
@@ -486,7 +490,12 @@
 
                             <TextBox LostFocus="SzukajDruzynyReset" TextChanged="SzukajDruzynyChange"  PreviewMouseDown="SzukajDruzyny" 
                                 Name="Szukaj_druzyny" Grid.Row="1" Margin="5" Text="Szukaj..."></TextBox>
-                            <ListBox Grid.Row="2" Margin="5" Name="lista_druzyn" DisplayMemberPath="DaneDruzyn"  />
+                            <ListBox Grid.Row="2" Margin="5" Name="lista_druzyn" DisplayMemberPath="DaneDruzyny" 
+                                     ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                <ListBox.GroupStyle>
+                                    <GroupStyle HeaderTemplate="{StaticResource GroupTemplate2}"/>
+                                </ListBox.GroupStyle>
+                            </ListBox>
                             <StackPanel Grid.Row="3"  Orientation="Horizontal" HorizontalAlignment="Center">
 
                                 <Button Margin="5,5,50,5" Padding="20,6" Click="UsunDruzyne" Template="{StaticResource szablon}"
@@ -509,6 +518,7 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <Label Margin="5,5,5.2,5" Grid.ColumnSpan="2">Nazwa:</Label>
@@ -517,7 +527,7 @@
                             <Label Grid.Row="3" Margin="5,5.2,5.2,5.8" Grid.ColumnSpan="2">Sukcesy:</Label>
 
 
-                            <Label  Grid.Column="1" Margin="4.8,5,4.6,5"  Content="{Binding Path=Name,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" />
+                            <Label  Grid.Column="1" Margin="4.8,5,4.6,5"  Content="{Binding Path=Nazwa,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" />
                             <Label Grid.Column="1" Grid.Row="1" Margin="4.8,5,4.6,5" Content="{Binding Path=Country,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" />
                             <Label Grid.Column="1" Grid.Row="2" Margin="4.8,5,4.6,4.8" Content="{Binding Path=City,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"/>
                             <Label Grid.Column="1" Grid.Row="3" Margin="4.8,5.2,4.6,5.8" Content="{Binding Path=Succes,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"></Label>
@@ -525,9 +535,11 @@
                             <Label Grid.Column="1" Grid.Row="4" Margin="4.8,5.2,4.6,5.8" Content="{Binding Path=Sponsors,UpdateSourceTrigger=PropertyChanged}"></Label>
                             <Label Grid.Column="0" Grid.Row="5" Margin="4" Content="Właściciel:"></Label>
                             <Label Grid.Row="5" Grid.Column="1" Margin="4" Content="{Binding Path=Owner,UpdateSourceTrigger=PropertyChanged}"></Label>
-                            <ListBox Name="lista_zawodnikow_druzyna" Grid.Column="0" Grid.Row="6" Margin="5,4.2,5.2,5.6" ItemsSource="{Binding Path=Zawodnicy}">Lista zawodników:</ListBox>
-                            <Image Grid.Row="6" Grid.Column="2" Margin="9.8,11.4,9.6,11.4"  Source="{Binding Path=ImagePath}"
-                                   Height="150" Grid.ColumnSpan="2" Stretch="Uniform"></Image>
+                            <Label Grid.Row="6" Grid.Column="0" Margin="4" Content="Lista zawodnikow:"/>
+                            <ListBox Name="lista_zawodnikow_druzyna" Grid.Column="0" Grid.Row="7" Margin="5,4.2,5.2,5.6" ItemsSource="{Binding Path=lista_zawodnikow}"
+                                     ScrollViewer.VerticalScrollBarVisibility="Visible"></ListBox>
+                            <Image Grid.Row="7" Grid.Column="2" Margin="9.8,11.4,9.6,11.4"  Source="{Binding Path=ImagePath}"
+                                   Height="150" Grid.ColumnSpan="2" Grid.RowSpan="2" Stretch="Uniform"></Image>
                         </Grid>
                     </Grid>
                 </DockPanel>
