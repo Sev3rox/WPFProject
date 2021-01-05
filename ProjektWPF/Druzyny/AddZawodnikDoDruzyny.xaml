@@ -6,6 +6,43 @@
         xmlns:local="clr-namespace:ProjektWPF.Druzyny"
         mc:Ignorable="d"
         Title="AddZawodnikDoDruzyny" Height="400" Width="350" FontSize="16">
+    <Window.Resources>
+        <ControlTemplate x:Key="szablon" TargetType="{x:Type Button}">
+            <Border Name="Border" BorderBrush="DarkGreen" BorderThickness="3"
+                    CornerRadius="10 10 10 10" Background="YellowGreen"
+                    TextBlock.Foreground="Black" >
+                <Grid >
+                    <Rectangle Name="FocusCue" Visibility =" Hidden"
+                               Stroke ="Black" StrokeThickness ="3"
+                               StrokeDashArray ="1 2" StrokeDashCap="Round"
+                               SnapsToDevicePixels ="True" />
+                    <ContentPresenter RecognizesAccessKey="True" HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Margin="{TemplateBinding Padding}" />
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="Yellow" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="DarkGreen" />
+                    <Setter TargetName="Border" Property="BorderBrush"
+                            Value="YellowGreen" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="Border"
+                         Property="TextBlock.Foreground"
+                         Value="LightGray" />
+                    <Setter TargetName="Border" Property="Background"
+                         Value="SlateGray" />
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid Name="Zawdruz">
         <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"/>
@@ -22,7 +59,7 @@
     </Grid.RowDefinitions>
         <Label Content="Czy jesteś pewny aby dodać tego zawodnika" Grid.ColumnSpan="2" HorizontalAlignment="Center"></Label>
         <ListBox Name="lista_zawodnikow" Grid.RowSpan="3" Grid.Row="1" Grid.ColumnSpan="2" Margin="5"
-                DisplayMemberPath="Dane" 
+                DisplayMemberPath="Dane"
                 ScrollViewer.VerticalScrollBarVisibility="Visible"></ListBox>
 
     <Label Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.Row="4" Content="Do tej drużyny?"></Label>
@@ -31,7 +68,9 @@
         <Label Grid.Row="5" Grid.Column="1" Margin="5" Name="NazwaTextbox"
                  Content="{Binding Path=Nazwa}"></Label>
 
-    <Button Grid.Row="6" Grid.Column="0" Margin="5" Click="Add">Dodaj</Button>
-    <Button Grid.Row="6" Grid.Column="1" Margin="5" Click="Cancel">Anuluj</Button>
+    <Button Grid.Row="6" Grid.Column="0" Margin="5" Click="Add"
+            Template="{StaticResource szablon}">Dodaj</Button>
+    <Button Grid.Row="6" Grid.Column="1" Margin="5" Click="Cancel"
+            Template="{StaticResource szablon}">Anuluj</Button>
     </Grid>
 </Window>

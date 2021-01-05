@@ -62,7 +62,7 @@ namespace ProjektWPF.Data
             Owner = owner;
             Sponsors = sponsors;
             Succes = succes;
-            ImagePath = Nazwa;
+            ImagePath = Nazwa + "jpg";
         }
         public string ImagePath { get; set; }   
 

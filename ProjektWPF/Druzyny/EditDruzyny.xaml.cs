@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace ProjektWPF.Druzyny
 {
@@ -127,6 +128,20 @@ namespace ProjektWPF.Druzyny
                     WlasicielTextBox.Foreground = new SolidColorBrush(Colors.Red);
                     WlasicielTextBox.Text = e.Error.ErrorContent.ToString();
                 }
+            }
+        }
+        private void ImageFromFile(object sender, RoutedEventArgs e)
+        {
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                BitmapImage bt = new BitmapImage();
+                bt.BeginInit();
+                bt.UriSource = new Uri(openFileDialog.FileName);
+                bt.EndInit();
+                imgDynamic.Source = bt;
+                editdruzyna.ImagePath = ((BitmapImage)imgDynamic.Source).UriSource.AbsoluteUri;
             }
         }
     }

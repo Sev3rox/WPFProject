@@ -5,8 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektWPF.Druzyny"
         mc:Ignorable="d"
-        Title="AddDruzyna" Height="440" Width="420"
+        Title="AddDruzyna" Height="auto" Width="420"
         FontSize="16" >
+    <Window.Resources>
+        <ControlTemplate x:Key="szablon" TargetType="{x:Type Button}">
+            <Border Name="Border" BorderBrush="DarkGreen" BorderThickness="3"
+                    CornerRadius="10 10 10 10" Background="YellowGreen"
+                    TextBlock.Foreground="Black">
+                <Grid >
+                    <Rectangle Name="FocusCue" Visibility =" Hidden"
+                               Stroke ="Black" StrokeThickness ="3"
+                               StrokeDashArray ="1 2" StrokeDashCap="Round"
+                               SnapsToDevicePixels ="True" />
+                    <ContentPresenter RecognizesAccessKey="True" HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Margin="{TemplateBinding Padding}" />
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="Yellow" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="DarkGreen" />
+                    <Setter TargetName="Border" Property="BorderBrush"
+                            Value="YellowGreen" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="Border"
+                         Property="TextBlock.Foreground"
+                         Value="LightGray" />
+                    <Setter TargetName="Border" Property="Background"
+                         Value="SlateGray" />
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid Name="AddDruzGrid" Validation.Error="validationError">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -28,7 +65,8 @@
         <Label Grid.Row="2" Margin="5">Sziedziba:</Label>
         <Label Grid.Row="3" Margin="5,5,75,5">Sukcesy:</Label>
         <Label Grid.Row="4" Margin="5">Logo:</Label>
-        <Button Grid.Row="5" Margin=" 5" Click="ImageFromFile" >Search</Button>
+        <Button Grid.Row="5" Margin=" 5" Click="ImageFromFile" Padding="5"
+                Template="{StaticResource szablon}">Search</Button>
         <Label Grid.Row="6" Margin="5">Sponsorzy:</Label>
         <Label Grid.Row="7" Margin="5">Właściciel:</Label>
 
@@ -36,13 +74,15 @@
         <TextBox VerticalContentAlignment="Center" PreviewMouseDown="KrajValid" Name="KrajTextBox" Grid.Column="1" Grid.Row="1" Margin="5" Text="{Binding Path=Country, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
         <TextBox VerticalContentAlignment="Center" PreviewMouseDown="SiedzibaValid" Name="SiedzibaTextBox" Grid.Column="1" Grid.Row="2" Margin="5" Text="{Binding Path=City, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
         <TextBox VerticalContentAlignment="Center"  Name="SukcesyTextBox" Grid.Column="1" Grid.Row="3" Margin="5" Text="{Binding Path=Succes, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"></TextBox>
-        <Image Name="imgDynamic" Grid.Row="4" Grid.RowSpan="2" Grid.Column="1"
+        <Image Name="imgDynamic" Grid.Row="4" Grid.RowSpan="2" Grid.Column="1" 
                Margin="5" Stretch="Uniform" Source="{Binding Path=ImagePath}"></Image>
         <TextBox Grid.Row="6" Grid.Column="1" PreviewMouseDown="SponsorzyValid" Name="SponsorzyTextBox" VerticalContentAlignment="Center" Margin="5" Text="{Binding Path=Sponsors, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"></TextBox>
         <TextBox Grid.Row="7" Grid.Column="1" PreviewMouseDown="WlascicielValid" Name="WlasicielTextBox" VerticalContentAlignment="Center" Margin="5" Text="{Binding Path=Owner, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"></TextBox>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  Grid.Row="8" Grid.ColumnSpan="2">
-            <Button Click="Add" Margin="10,10,60,10" Padding="20,6">Dodaj</Button>
-            <Button Click="Cancel" Margin="10" Padding="20,6">Anuluj</Button>
+            <Button Click="Add" Margin="10,10,60,10" Padding="20,6"
+                    Template="{StaticResource szablon}">Dodaj</Button>
+            <Button Click="Cancel" Margin="10" Padding="20,6"
+                    Template="{StaticResource szablon}">Anuluj</Button>
         </StackPanel>
     </Grid>
 </Window>
