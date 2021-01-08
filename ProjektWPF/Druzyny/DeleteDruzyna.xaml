@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektWPF.Druzyny"
         mc:Ignorable="d"
-        Title="DeleteDruzyna" Height="130" Width="400">
+        Title="DeleteDruzyna" Height="135" Width="400">
     <Window.Resources>
         <ControlTemplate x:Key="szablon" TargetType="{x:Type Button}">
             <Border Name="Border" BorderBrush="DarkGreen" BorderThickness="3"
@@ -50,7 +50,7 @@
 
         <Label Margin="5" FontSize="18" >Czy na pewno chcesz usunąć tą drużynę?</Label>
         <StackPanel HorizontalAlignment="Center" Grid.Row="2" Orientation="Horizontal">
-            <Button FontSize="18" Click="Del" Margin="5,5,80,5" HorizontalContentAlignment="Center"
+            <Button  FontSize="18" Click="Del" Margin="5,5,80,5" HorizontalContentAlignment="Center"
                     Template="{StaticResource szablon}" VerticalContentAlignment="Center">Usuń</Button>
             <Button FontSize="18" Click="Cancel" Margin="5" HorizontalContentAlignment="Center"
                     Template="{StaticResource szablon}" VerticalContentAlignment="Center">Anuluj</Button>

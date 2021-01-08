@@ -10,6 +10,8 @@ namespace ProjektWPF.Data
         public DbSet<Zawodnik> Zawodnicy { get; set; }
         public DbSet<Rozgrywka> Rozgrywki { get; set; }
         public DbSet<Druzyna> Druzyny { get; set; }
+       public DbSet<Druzyna_Rozgrywka> Druzyna_Rozgrywka{ get; set; }
+
 
         public ZawodnikDbContext(DbContextOptions<ZawodnikDbContext> options) : base(options)
             {
@@ -23,6 +25,7 @@ namespace ProjektWPF.Data
                 modelBuilder.Entity<Zawodnik>();
             modelBuilder.Entity<Rozgrywka>();
             modelBuilder.Entity<Druzyna>();
+            modelBuilder.Entity<Druzyna_Rozgrywka>().HasKey(i => new { i.DruzynaId, i.RozgrywkaId });
             base.OnModelCreating(modelBuilder);
             }
            

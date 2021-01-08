@@ -6,6 +6,42 @@
         xmlns:local="clr-namespace:ProjektWPF.Rozgrywki"
         mc:Ignorable="d"
         Title="EditRozgrywka" Height="800" Width="600"  FontSize="16">
+    <Window.Resources>
+        <ControlTemplate x:Key="szablon" TargetType="{x:Type Button}">
+            <Border Name="Border" BorderBrush="DarkGreen" BorderThickness="3"
+                    CornerRadius="10 10 10 10" Background="YellowGreen"
+                    TextBlock.Foreground="Black">
+                <Grid >
+                    <Rectangle Name="FocusCue" Visibility =" Hidden"
+                               Stroke ="Black" StrokeThickness ="3"
+                               StrokeDashArray ="1 2" StrokeDashCap="Round"
+                               SnapsToDevicePixels ="True" />
+                    <ContentPresenter RecognizesAccessKey="True" HorizontalAlignment="Center"
+                                      Margin="{TemplateBinding Padding}" />
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="Yellow" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="DarkGreen" />
+                    <Setter TargetName="Border" Property="BorderBrush"
+                            Value="YellowGreen" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="Border"
+                         Property="TextBlock.Foreground"
+                         Value="LightGray" />
+                    <Setter TargetName="Border" Property="Background"
+                         Value="SlateGray" />
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid Name="EditGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -56,12 +92,12 @@
 
 
 
-        <ComboBox  Grid.Column="1" Margin="5" SelectedIndex="0">
-            <ComboBoxItem>Infinity</ComboBoxItem>
+        <ComboBox Name="Team1"  Grid.Column="1" Margin="5" SelectionChanged="Team1sel">
+            
         </ComboBox>
 
-        <ComboBox Grid.Row="1"  Grid.Column="1" Margin="5" SelectedIndex="0">
-            <ComboBoxItem>Triangles</ComboBoxItem>
+        <ComboBox Name="Team2" Grid.Row="1"  Grid.Column="1" Margin="5" SelectionChanged="Team2sel">
+            
         </ComboBox>
         <Calendar Margin="5" Name="DateCalendar" Grid.Column="1" Grid.Row="2" SelectedDate="{Binding Path=Date, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"></Calendar>
         <TextBox LostFocus="HourFocus" PreviewMouseDown="HourVali"  Name="HourTextBox" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="5" Text="{Binding Path=Hour, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
@@ -85,7 +121,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0"  Margin="15,15,15,15"  Source="../Files/logo.png"></Image>
+            <Image Grid.Column="0"  Margin="15,15,15,15"  Source="{Binding Path=SelectedItem.ImagePath, ElementName=Team1}"></Image>
             <Image  Grid.Column="1"  Margin="20"  Source="../Files/vs.jpg"  RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <RotateTransform x:Name="MyAnimatedTransform" Angle="0" />
@@ -103,14 +139,14 @@
                     </EventTrigger>
                 </Image.Triggers>
             </Image>
-            <Image  Grid.Column="2" Margin="15,15,15,15"   Source="../Files/logo2.jpg"></Image>
+            <Image  Grid.Column="2" Margin="15,15,15,15"   Source="{Binding Path=SelectedItem.ImagePath, ElementName=Team2}"></Image>
         </Grid>
 
 
 
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  Grid.Row="10" Grid.ColumnSpan="2">
-            <Button Click="Edit" Margin="10,10,60,10" Padding="20,6">Edytuj</Button>
-            <Button Click="Cancel" Margin="10" Padding="20,6">Anuluj</Button>
+            <Button Template="{StaticResource szablon}" Click="Edit" Margin="10,10,60,10" Padding="20,6">Edytuj</Button>
+            <Button Template="{StaticResource szablon}" Click="Cancel" Margin="10" Padding="20,6">Anuluj</Button>
         </StackPanel>
     </Grid>
 </Window>

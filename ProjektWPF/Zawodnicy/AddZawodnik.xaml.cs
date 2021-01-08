@@ -29,7 +29,8 @@ namespace ProjektWPF.Zawodnicy
             InitializeComponent();
             addzaw = new Zawodnik();
             AddGrid.DataContext = addzaw;
-         
+            
+
 
         }
 
@@ -42,6 +43,7 @@ namespace ProjektWPF.Zawodnicy
 
             if (valnum.Count == 0 && valage.Count == 0 && valnam.Count == 0 && valsur.Count == 0)
             {
+                addzaw.Druzyna = null;
                 context.Zawodnicy.Add(addzaw);
                 context.SaveChanges();
                 DialogResult = true;

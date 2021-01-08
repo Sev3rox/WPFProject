@@ -22,13 +22,17 @@ namespace ProjektWPF.Zawodnicy
     {
         ListCollectionView View;
         Zawodnik pomzaw;
-        public FilterZawodnik(ListCollectionView View)
+        ZawodnikDbContext context;
+        public FilterZawodnik(ListCollectionView View, ZawodnikDbContext context)
         {
             InitializeComponent();
             this.View = View;
             pomzaw = new Zawodnik();
             FiltrGrid.DataContext = pomzaw;
-            
+            this.context = context;
+            Teams.ItemsSource = context.Druzyny.ToList();
+            Teams.SelectedIndex = -1;
+
         }
 
         private void Filtr(object sender, RoutedEventArgs e)
@@ -49,7 +53,13 @@ namespace ProjektWPF.Zawodnicy
                             return false;
                         }
                     }
-
+                    if (Teams.SelectedItem != null)
+                    {
+                        if (Teams.SelectedItem != filzaw.Druzyna)
+                        {
+                            return false;
+                        }
+                    }
                     if (pomzaw.Position != null)
                     {
                         if (pomzaw.Position != filzaw.Position)

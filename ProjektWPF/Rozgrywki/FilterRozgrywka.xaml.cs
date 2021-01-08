@@ -22,12 +22,16 @@ namespace ProjektWPF.Rozgrywki
     {
         ListCollectionView View;
         Rozgrywka pomroz;
-        public FilterRozgrywka(ListCollectionView View)
+        ZawodnikDbContext context;
+        public FilterRozgrywka(ListCollectionView View, ZawodnikDbContext context)
         {
             InitializeComponent();
             this.View = View;
+            this.context = context;
             pomroz= new Rozgrywka();
             FiltrGrid.DataContext = pomroz;
+            Team1.ItemsSource = context.Druzyny.ToList();
+            Team1.SelectedIndex = -1;
 
         }
 
@@ -40,6 +44,30 @@ namespace ProjektWPF.Rozgrywki
                 if (filroz == null)
                 {
                     return false;
+                }
+                if (Team1.SelectedItem != null)
+                {
+                    var pom = context.Druzyna_Rozgrywka.Where(z => z.RozgrywkaId == filroz.Id).ToList();
+                    if (pom.Count >= 2)
+                    {
+                        if ((Druzyna)Team1.SelectedItem != pom[0].Druzyna && (Druzyna)Team1.SelectedItem != pom[1].Druzyna)
+                        {
+                            return false;
+                        }
+                    }
+                   else if (pom.Count == 1)
+                    {
+                        if ((Druzyna)Team1.SelectedItem != pom[0].Druzyna)
+                        {
+                            return false;
+                        }
+                    }
+                    else if (pom.Count <= 0)
+                    {
+                        
+                            return false;
+                        
+                    }
                 }
                 if (pomroz.Place != null)
                 {

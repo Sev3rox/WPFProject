@@ -5,7 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektWPF.Zawodnicy"
         mc:Ignorable="d"
-        Title="DeleteZawodnik" Height="135" Width="410">
+        Title="DeleteZawodnik" Height="130" Width="410">
+    <Window.Resources>
+        <ControlTemplate x:Key="szablon" TargetType="{x:Type Button}">
+            <Border Name="Border" BorderBrush="DarkGreen" BorderThickness="3"
+                    CornerRadius="10 10 10 10" Background="YellowGreen"
+                    TextBlock.Foreground="Black" >
+                <Grid >
+                    <Rectangle Name="FocusCue" Visibility =" Hidden"
+                               Stroke ="Black" StrokeThickness ="3"
+                               StrokeDashArray ="1 2" StrokeDashCap="Round"
+                               SnapsToDevicePixels ="True" />
+                    <ContentPresenter RecognizesAccessKey="True" HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Margin="{TemplateBinding Padding}" />
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="Yellow" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="DarkGreen" />
+                    <Setter TargetName="Border" Property="BorderBrush"
+                            Value="YellowGreen" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="Border"
+                         Property="TextBlock.Foreground"
+                         Value="LightGray" />
+                    <Setter TargetName="Border" Property="Background"
+                         Value="SlateGray" />
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -14,8 +51,8 @@
 
             <Label Margin="5" FontSize="18" >Czy na pewno chcesz usunąć tego zawodnika?</Label>
             <StackPanel HorizontalAlignment="Center" Grid.Row="2" Orientation="Horizontal">
-            <Button FontSize="18" Click="Del"  Padding="10,3" Margin="5,5,80,5">Usuń</Button>
-            <Button FontSize="18" Click="Cancel" Margin="5" Padding="10,3" >Anuluj</Button>
+            <Button Template="{StaticResource szablon}" FontSize="18" Click="Del"  Padding="10,3" Margin="5,5,80,5">Usuń</Button>
+            <Button Template="{StaticResource szablon}" FontSize="18" Click="Cancel" Margin="5" Padding="10,3" >Anuluj</Button>
 
         </StackPanel>
     </Grid>

@@ -48,9 +48,10 @@ namespace ProjektWPF.Data
             get { return succes; }
             set { succes = value; OnPropertyChanged("DaneDruzyny"); }
         }
-
+       
         public Collection<Zawodnik> lista_zawodnikow { get; } = new ObservableCollection<Zawodnik>();
-        
+  
+
         public Druzyna() { }
 
         public Druzyna(string name,string country,string city,
@@ -69,6 +70,8 @@ namespace ProjektWPF.Data
         public void AddZawodnikDoDruzyny(Zawodnik zawodnik)
         {
             lista_zawodnikow.Add(zawodnik);
+            zawodnik.DruzynaId = this.Id;
+            zawodnik.Druzyna = this;
         }
 
         public string DaneDruzyny

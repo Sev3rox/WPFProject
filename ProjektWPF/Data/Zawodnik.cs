@@ -44,6 +44,11 @@ namespace ProjektWPF.Data
         public int Strzaly { get; set; }
         public int Nabramke { get; set; }
 
+        public Druzyna? Druzyna { get; set; }
+        public int? DruzynaId { get; set; }
+
+
+
         // połączenie z drużyną
 
 

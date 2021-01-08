@@ -6,6 +6,43 @@
         xmlns:local="clr-namespace:ProjektWPF.Zawodnicy"
         mc:Ignorable="d"
         Title="FilterZawodnik" Height="385" Width="360" FontSize="16">
+    <Window.Resources>
+        <ControlTemplate x:Key="szablon" TargetType="{x:Type Button}">
+            <Border Name="Border" BorderBrush="DarkGreen" BorderThickness="3"
+                    CornerRadius="10 10 10 10" Background="YellowGreen"
+                    TextBlock.Foreground="Black" >
+                <Grid >
+                    <Rectangle Name="FocusCue" Visibility =" Hidden"
+                               Stroke ="Black" StrokeThickness ="3"
+                               StrokeDashArray ="1 2" StrokeDashCap="Round"
+                               SnapsToDevicePixels ="True" />
+                    <ContentPresenter RecognizesAccessKey="True" HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Margin="{TemplateBinding Padding}" />
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="Yellow" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="DarkGreen" />
+                    <Setter TargetName="Border" Property="BorderBrush"
+                            Value="YellowGreen" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="Border"
+                         Property="TextBlock.Foreground"
+                         Value="LightGray" />
+                    <Setter TargetName="Border" Property="Background"
+                         Value="SlateGray" />
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid Name="FiltrGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -32,24 +69,25 @@
             <CheckBox IsChecked="{Binding Path=Rightleg}"  Margin="5">Prawonożny</CheckBox>
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" Margin="0" Orientation="Horizontal" Grid.Row="7" Grid.ColumnSpan="2">
-            <ComboBox  Margin="33" SelectedIndex="0">
-                <ComboBoxItem >FC Bayern Munchen</ComboBoxItem>
-            </ComboBox>
-            <Image  Source="../Files/logo.png"></Image>
+        
+                <ComboBox Name="Teams" Margin="33" SelectedIndex="0">
+
+                </ComboBox>
+            <Image  Source="{Binding Path=SelectedItem.ImagePath, ElementName=Teams}"></Image>
 
 
-        </StackPanel>
+            </StackPanel>
 
 
 
-        <TextBox Grid.Column="1" Grid.Row="2" Margin="5" Text="{Binding Path=Age}"/>
+            <TextBox Grid.Column="1" Grid.Row="2" Margin="5" Text="{Binding Path=Age}"/>
         <ComboBox Grid.Column="1" Grid.Row="4" Margin="5" SelectedIndex="0" Text="{Binding Path=Position}">
             <ComboBoxItem >Napastnik</ComboBoxItem>
         </ComboBox>
         <TextBox Grid.Column="1" Grid.Row="5" Margin="5" Text="{Binding Path=Number}"/>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  Grid.Row="8" Grid.ColumnSpan="2">
-            <Button Click="Filtr" Margin="10,10,40,10" Padding="20,6">Zastosuj Filtr</Button>
-            <Button Click="Reset" Margin="10" Padding="20,6">Zresetuj Filtr</Button>
+            <Button Template="{StaticResource szablon}" Click="Filtr" Margin="10,10,40,10" Padding="20,6">Zastosuj Filtr</Button>
+            <Button Template="{StaticResource szablon}" Click="Reset" Margin="10" Padding="20,6">Zresetuj Filtr</Button>
         </StackPanel>
     </Grid>
 </Window>

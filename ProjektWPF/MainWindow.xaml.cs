@@ -19,6 +19,7 @@ using ProjektWPF.Druzyny;
 using ProjektWPF.Data;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System;
 
 namespace ProjektWPF
 {
@@ -208,7 +209,7 @@ namespace ProjektWPF
 
         private void FilterZawodnik(object sender, RoutedEventArgs e)
         {
-            FilterZawodnik filtr = new FilterZawodnik(ViewZaw);
+            FilterZawodnik filtr = new FilterZawodnik(ViewZaw,context);
             if (filtr.ShowDialog() == true)
             {
 
@@ -310,10 +311,11 @@ namespace ProjektWPF
             {
                 Rozgrywki.Add(x);
             }
+            ManytoManyCantBindreset();
         }
         private void DeatailsRozgrywka(object sender, RoutedEventArgs e)
         {
-            DetailsRozgrywka detroz = new DetailsRozgrywka(((Rozgrywka)RozgrywkiList.SelectedItem));
+            DetailsRozgrywka detroz = new DetailsRozgrywka(((Rozgrywka)RozgrywkiList.SelectedItem),context);
             if (detroz.ShowDialog() == true)
             {
                
@@ -328,8 +330,9 @@ namespace ProjektWPF
             AddRozgrywka addroz = new AddRozgrywka(context);
             if (addroz.ShowDialog() == true)
             {
-                GetRozgrywki();
+               
             }
+            GetRozgrywki();
         }
 
         private void EditRozgrywka(object sender, RoutedEventArgs e)
@@ -366,7 +369,7 @@ namespace ProjektWPF
         }
         private void FilterRozgrywka(object sender, RoutedEventArgs e)
         {
-            FilterRozgrywka filtrroz = new FilterRozgrywka(ViewRoz);
+            FilterRozgrywka filtrroz = new FilterRozgrywka(ViewRoz, context);
             if (filtrroz.ShowDialog() == true)
             {
 
@@ -435,8 +438,9 @@ namespace ProjektWPF
 
         private void DrużynyRozgrywka(object sender, RoutedEventArgs e)
         {
-            DrużynyRozgrywka druroz = new DrużynyRozgrywka();
+            DrużynyRozgrywka druroz = new DrużynyRozgrywka(((Rozgrywka)RozgrywkiList.SelectedItem), context);
             druroz.Show();
+            GetRozgrywki();
         }
 
         public void GetDruzyny()
@@ -537,11 +541,46 @@ namespace ProjektWPF
             ViewDruz.Filter = null;
         }
 
-        private void SzukajZawodnik_TextChanged(object sender, TextChangedEventArgs e)
+        private void ManytoManyCantBind(object sender, SelectionChangedEventArgs e)
         {
+            Rozgrywka roz = (Rozgrywka)RozgrywkiList.SelectedItem;
+            if (roz != null)
+            {
+                var pom = context.Druzyna_Rozgrywka.Where(z => z.RozgrywkaId == roz.Id).ToList();
+                if (pom.Count > 1)
+                {
+                    Team1.Content = pom[0].Druzyna.Nazwa;
+                    Team2.Content = pom[1].Druzyna.Nazwa;
+                    Image1.Source = new BitmapImage(new Uri(pom[0].Druzyna.ImagePath));
+                    Image2.Source = new BitmapImage(new Uri(pom[1].Druzyna.ImagePath));
+                }
+                else if (pom.Count == 1)
+                {
+                    Team1.Content = pom[0].Druzyna.Nazwa;
+                    Team2.Content = "";
+                    Image1.Source = new BitmapImage(new Uri(pom[0].Druzyna.ImagePath));
+                    Image2.Source = null;
 
+                }
+                else
+                {
+                    Team1.Content = "";
+                    Team2.Content = "";
+                    Image1.Source = null;
+                    Image2.Source = null;
+                }
+            }
         }
+        private void ManytoManyCantBindreset()
+        {
+            Rozgrywka roz = (Rozgrywka)RozgrywkiList.SelectedItem;
 
-        
+
+            Team1.Content = "";
+                Team2.Content = "";
+                Image1.Source = null;
+                Image2.Source = null;
+            
+        }
     }
 }

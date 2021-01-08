@@ -28,6 +28,10 @@ namespace ProjektWPF.Rozgrywki
             InitializeComponent();
             addroz = new Rozgrywka();
             AddGrid.DataContext = addroz;
+            Team1.ItemsSource = context.Druzyny.ToList();
+            Team1.SelectedIndex = -1;
+            Team2.ItemsSource = context.Druzyny.ToList();
+            Team2.SelectedIndex = -1;
         }
 
             private void Add(object sender, RoutedEventArgs e)
@@ -39,8 +43,41 @@ namespace ProjektWPF.Rozgrywki
 
             if (valhou.Count == 0 && valdat.Count == 0 && valsed.Count == 0 && valpla.Count == 0)
             {
+
                 context.Rozgrywki.Add(addroz);
                 context.SaveChanges();
+                if (((Druzyna)Team1.SelectedItem) != null)
+                {
+
+
+                    var pom1 = new Druzyna_Rozgrywka
+                    {
+                        DruzynaId = ((Druzyna)Team1.SelectedItem).Id,
+                        RozgrywkaId = addroz.Id
+                    };
+                    context.Druzyna_Rozgrywka.Add(pom1);
+                }
+                if (((Druzyna)Team2.SelectedItem) != null)
+                {
+                    var pom2 = new Druzyna_Rozgrywka
+                    {
+                        DruzynaId = ((Druzyna)Team2.SelectedItem).Id,
+                        RozgrywkaId = addroz.Id
+                    };
+                    context.Druzyna_Rozgrywka.Add(pom2);
+                }
+                context.SaveChanges();
+                /*
+                addroz.Druzyna1 = ((Druzyna)Team1.SelectedItem);
+               // addroz.Druzyna1Id = ((Druzyna)Team1.SelectedItem).Id;
+               addroz.Druzyna2 = ((Druzyna)Team2.SelectedItem);
+              //  addroz.Druzyna2Id = ((Druzyna)Team2.SelectedItem).Id;
+                var pom1 = ((Druzyna)Team1.SelectedItem);
+                var pom2 = ((Druzyna)Team2.SelectedItem);
+                pom1.Rozgrywki1.Add(addroz);
+                pom2.Rozgrywki2.Add(addroz);
+                */
+
                 DialogResult = true;
                 this.Close();
             }
@@ -114,6 +151,19 @@ namespace ProjektWPF.Rozgrywki
 
         }
 
-        
+        private void Team1sel(object sender, SelectionChangedEventArgs e)
+        {
+            var pom = context.Druzyny.ToList();
+            pom.Remove((Druzyna)Team1.SelectedItem);
+            Team2.ItemsSource = pom;
+        }
+        private void Team2sel(object sender, SelectionChangedEventArgs e)
+        {
+            
+            var pom= context.Druzyny.ToList();
+            pom.Remove((Druzyna)Team2.SelectedItem);
+            Team1.ItemsSource = pom;
+         
+        }
     }
 }

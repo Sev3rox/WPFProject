@@ -6,6 +6,43 @@
         xmlns:local="clr-namespace:ProjektWPF.Zawodnicy"
         mc:Ignorable="d"
         Title="DetailsZawodnik" Height="750" Width="600"  FontSize="16">
+    <Window.Resources>
+        <ControlTemplate x:Key="szablon" TargetType="{x:Type Button}">
+            <Border Name="Border" BorderBrush="DarkGreen" BorderThickness="3"
+                    CornerRadius="10 10 10 10" Background="YellowGreen"
+                    TextBlock.Foreground="Black" >
+                <Grid >
+                    <Rectangle Name="FocusCue" Visibility =" Hidden"
+                               Stroke ="Black" StrokeThickness ="3"
+                               StrokeDashArray ="1 2" StrokeDashCap="Round"
+                               SnapsToDevicePixels ="True" />
+                    <ContentPresenter RecognizesAccessKey="True" HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Margin="{TemplateBinding Padding}" />
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="Yellow" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="DarkGreen" />
+                    <Setter TargetName="Border" Property="BorderBrush"
+                            Value="YellowGreen" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="Border"
+                         Property="TextBlock.Foreground"
+                         Value="LightGray" />
+                    <Setter TargetName="Border" Property="Background"
+                         Value="SlateGray" />
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid Name="DetailsGrid" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -61,12 +98,10 @@
             <Label  Margin="5" Content="{Binding Path=Yellowcard}"></Label>
         </StackPanel>
         <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="9" Grid.RowSpan="1" Grid.ColumnSpan="2">
-            <StackPanel VerticalAlignment="Center" Margin="100,20,100,20">
-                <Label Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">FC</Label>
-                <Label Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">Bayern</Label>
-                <Label Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">Munchen</Label>
-            </StackPanel>
-            <Image  Margin="10" Source="../Files/logo.png"></Image>
+            <TextBlock TextWrapping="WrapWithOverflow"  Margin="100,20,100,20" VerticalAlignment="Center" MaxWidth="160" HorizontalAlignment="Center" Text="{Binding Path=Druzyna.Nazwa}" ></TextBlock>
+
+
+            <Image  Margin="15" Source="{Binding Path=Druzyna.ImagePath}"></Image>
         </StackPanel>
 
         <Label  Grid.Column="1" Margin="5"  Content="{Binding Path=Name}" />
@@ -78,6 +113,6 @@
         <Label Grid.Column="1" Grid.Row="3" Margin="5" Content="{Binding Path=Position}"></Label>
         <Label Grid.Column="1" Grid.Row="4" Margin="5" Content="{Binding Path=Number}"></Label>
 
-        <Button Margin="10" Padding="60,6" FontSize="18"  HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="10" Click="Close">Zamknij</Button>
+        <Button Margin="10" Padding="60,6" FontSize="18"  HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="10" Click="Close" Template="{StaticResource szablon}">Zamknij</Button>
     </Grid>
 </Window>

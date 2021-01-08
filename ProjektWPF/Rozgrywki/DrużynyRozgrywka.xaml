@@ -6,6 +6,42 @@
         xmlns:local="clr-namespace:ProjektWPF.Rozgrywki"
         mc:Ignorable="d"
         Title="DrużynyRozgrywka" Height="480" Width="400">
+    <Window.Resources>
+        <ControlTemplate x:Key="szablon" TargetType="{x:Type Button}">
+            <Border Name="Border" BorderBrush="DarkGreen" BorderThickness="3"
+                    CornerRadius="10 10 10 10" Background="YellowGreen"
+                    TextBlock.Foreground="Black">
+                <Grid >
+                    <Rectangle Name="FocusCue" Visibility =" Hidden"
+                               Stroke ="Black" StrokeThickness ="3"
+                               StrokeDashArray ="1 2" StrokeDashCap="Round"
+                               SnapsToDevicePixels ="True" />
+                    <ContentPresenter RecognizesAccessKey="True" HorizontalAlignment="Center"
+                                      Margin="{TemplateBinding Padding}" />
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="Yellow" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="DarkGreen" />
+                    <Setter TargetName="Border" Property="BorderBrush"
+                            Value="YellowGreen" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="Border"
+                         Property="TextBlock.Foreground"
+                         Value="LightGray" />
+                    <Setter TargetName="Border" Property="Background"
+                         Value="SlateGray" />
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -16,14 +52,12 @@
             <RowDefinition />
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Label Content="Infinity Białystok"></Label>
-        <Label Content="Regional Triangles" Grid.Column="1"></Label>
-        <ListBox Grid.Row="1" Margin="5"  DisplayMemberPath="NameAndPrice">
-            <ListBoxItem Content="Jakub Błaszczykowski"></ListBoxItem>
-        </ListBox>
-        <ListBox Grid.Row="1" Grid.Column="1" Margin="5"  DisplayMemberPath="NameAndPrice">
-            <ListBoxItem Content="Kamil Grosicki"></ListBoxItem>
-        </ListBox>
-        <Button Margin="10" Padding="10,6" FontSize="18"  HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="10">Zamknij</Button>
+        <Label Name="Team1"></Label>
+        <Label Name="Team2" Grid.Column="1"></Label>
+        <ListBox Name="lista1" Grid.Column="0" Grid.Row="1" Margin="5,4.2,5.2,5.6" ItemsSource="{Binding Path=lista_zawodnikow}"
+                                     ScrollViewer.VerticalScrollBarVisibility="Visible"></ListBox>
+        <ListBox Name="lista2" Grid.Column="1" Grid.Row="1" Margin="5,4.2,5.2,5.6" ItemsSource="{Binding Path=lista_zawodnikow}"
+                                     ScrollViewer.VerticalScrollBarVisibility="Visible"></ListBox>
+        <Button Template="{StaticResource szablon}" Margin="10" Padding="10,6" FontSize="18"  HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="10" Click="Close">Zamknij</Button>
     </Grid>
 </Window>

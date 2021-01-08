@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektWPF.Druzyny"
         mc:Ignorable="d"
-        Title="FilterDruzyna" Height="170" Width="370" FontSize="16">
+        Title="FilterDruzyna" Height="180" Width="370" FontSize="16">
     <Window.Resources>
         <ControlTemplate x:Key="szablon" TargetType="{x:Type Button}">
             <Border Name="Border" BorderBrush="DarkGreen" BorderThickness="3"

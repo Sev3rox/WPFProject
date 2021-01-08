@@ -32,12 +32,41 @@ namespace ProjektWPF.Rozgrywki
         public string Sedziapom1 { get; set; }
         public string Sedziapom2 { get; set; }
         public string Sedziatechniczny { get; set; }
+        public Druzyna_Rozgrywka dr1 { get; set; }
+        public Druzyna_Rozgrywka dr2 { get; set; }
 
         public EditRozgrywka(ZawodnikDbContext context, Rozgrywka Rozgrywka)
         {
             this.context = context;
             InitializeComponent();
+            Team2.ItemsSource = context.Druzyny.ToList();
+            Team1.ItemsSource = context.Druzyny.ToList();
             editroz = Rozgrywka;
+            var pom = context.Druzyna_Rozgrywka.Where(z => z.RozgrywkaId == editroz.Id).ToList();
+          
+            if (pom.Count > 0)
+            {
+                var pomm1 = context.Druzyny.ToList();
+                pomm1.Remove(pom[0].Druzyna);
+                Team2.ItemsSource = pomm1;
+                Team1.SelectedItem = (pom[0].Druzyna);
+            }
+            else
+                Team1.SelectedIndex = -1;
+           
+            if (pom.Count > 1)
+            {
+                var pomm2 = context.Druzyny.ToList();
+                pomm2.Remove(pom[1].Druzyna);
+                Team1.ItemsSource = pomm2;
+                Team2.SelectedItem = (pom[1].Druzyna);
+            }
+            else
+                Team2.SelectedIndex = -1;
+            if (pom.Count > 0)
+                dr1 = pom[0];
+            if (pom.Count > 1)
+                dr2 = pom[1];
             EditGrid.DataContext = editroz;
             Place = editroz.Place;
             Date = editroz.Date;
@@ -58,6 +87,47 @@ namespace ProjektWPF.Rozgrywki
 
             if (valhou.Count == 0 && valdat.Count == 0 && valsed.Count == 0 && valpla.Count == 0)
             {
+              
+               
+                if (((Druzyna)Team1.SelectedItem) != null)
+                {
+                    if (dr1 != null)
+                    {
+                        context.Druzyna_Rozgrywka.Remove(dr1);
+                        context.SaveChanges();
+                    }
+                  
+                }
+                if (((Druzyna)Team2.SelectedItem) != null)
+                {
+                    if (dr2 != null)
+                    {
+                        context.Druzyna_Rozgrywka.Remove(dr2);
+                        context.SaveChanges();
+                    }
+              
+                }
+                if (((Druzyna)Team1.SelectedItem) != null)
+                {
+                  
+                    var pom1 = new Druzyna_Rozgrywka
+                    {
+                        DruzynaId = ((Druzyna)Team1.SelectedItem).Id,
+                        RozgrywkaId = editroz.Id
+                    };
+                    context.Druzyna_Rozgrywka.Add(pom1);
+                }
+                if (((Druzyna)Team2.SelectedItem) != null)
+                {
+                 
+                    var pom2 = new Druzyna_Rozgrywka
+                    {
+                        DruzynaId = ((Druzyna)Team2.SelectedItem).Id,
+                        RozgrywkaId = editroz.Id
+                    };
+                    context.Druzyna_Rozgrywka.Add(pom2);
+                }
+                context.SaveChanges();
                 context.Update(editroz);
                 context.SaveChanges();
                 this.Close();
@@ -136,6 +206,20 @@ namespace ProjektWPF.Rozgrywki
                     SedziaglownyTextBox.Text = e.Error.ErrorContent.ToString();
                 }
             }
+
+        }
+        private void Team1sel(object sender, SelectionChangedEventArgs e)
+        {
+            var pom = context.Druzyny.ToList();
+            pom.Remove((Druzyna)Team1.SelectedItem);
+            Team2.ItemsSource = pom;
+        }
+        private void Team2sel(object sender, SelectionChangedEventArgs e)
+        {
+
+            var pom = context.Druzyny.ToList();
+            pom.Remove((Druzyna)Team2.SelectedItem);
+            Team1.ItemsSource = pom;
 
         }
 

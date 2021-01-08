@@ -5,7 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektWPF.Zawodnicy"
         mc:Ignorable="d"
-        Title="AddZawodnik" Height="510" Width="410" FontSize="16">
+        Title="AddZawodnik" Height="415" Width="410" FontSize="16">
+    <Window.Resources>
+        <ControlTemplate x:Key="szablon" TargetType="{x:Type Button}">
+            <Border Name="Border" BorderBrush="DarkGreen" BorderThickness="3"
+                    CornerRadius="10 10 10 10" Background="YellowGreen"
+                    TextBlock.Foreground="Black" >
+                <Grid >
+                    <Rectangle Name="FocusCue" Visibility =" Hidden"
+                               Stroke ="Black" StrokeThickness ="3"
+                               StrokeDashArray ="1 2" StrokeDashCap="Round"
+                               SnapsToDevicePixels ="True" />
+                    <ContentPresenter RecognizesAccessKey="True" HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Margin="{TemplateBinding Padding}" />
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="Yellow" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="DarkGreen" />
+                    <Setter TargetName="Border" Property="BorderBrush"
+                            Value="YellowGreen" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="Border"
+                         Property="TextBlock.Foreground"
+                         Value="LightGray" />
+                    <Setter TargetName="Border" Property="Background"
+                         Value="SlateGray" />
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid Name="AddGrid" Validation.Error="validationError">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -32,14 +69,6 @@
             <CheckBox IsChecked="{Binding Path=Leftleg}"  Margin="5,5,120,5">Lewonożny</CheckBox>
             <CheckBox IsChecked="{Binding Path=Rightleg}"  Margin="5">Prawonożny</CheckBox>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Center" Margin="0" Orientation="Horizontal" Grid.Row="7" Grid.ColumnSpan="2">
-            <ComboBox  Margin="33" SelectedIndex="0">
-                <ComboBoxItem >FC Bayern Munchen</ComboBoxItem>
-            </ComboBox>
-            <Image  Source="../Files/logo.png"></Image>
-         
-           
-        </StackPanel>
 
 
         <TextBox PreviewMouseDown="NameVali"  Name="NameTextBox" VerticalContentAlignment="Center"  Grid.Column="1" Margin="5"  Text="{Binding Path=Name, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
@@ -55,8 +84,8 @@
 
         <TextBox LostFocus="NumberFocus" PreviewMouseDown="NumberVali"  Name="NumberTextBox" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="5" Text="{Binding Path=Number, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  Grid.Row="8" Grid.ColumnSpan="2">
-            <Button Click="Add" Margin="10,10,60,10" Padding="20,6">Dodaj</Button>
-            <Button Click="Cancel" Margin="10" Padding="20,6">Anuluj</Button>
+            <Button Template="{StaticResource szablon}"  Click="Add" Margin="10,10,60,10" Padding="20,6">Dodaj</Button>
+            <Button Template="{StaticResource szablon}" Click="Cancel" Margin="10" Padding="20,6">Anuluj</Button>
         </StackPanel>
     </Grid>
 </Window>

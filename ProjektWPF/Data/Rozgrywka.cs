@@ -32,6 +32,7 @@ namespace ProjektWPF.Data
      public string Sedziatechniczny { get; set; }
 
 
+
         //tu drużyny
 
 

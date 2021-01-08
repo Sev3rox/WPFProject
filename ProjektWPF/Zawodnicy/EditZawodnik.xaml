@@ -5,7 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektWPF.Zawodnicy"
         mc:Ignorable="d"
-        Title="EditZawodnik" Height="670" Width="600"  FontSize="16">
+        Title="EditZawodnik" Height="540" Width="600"  FontSize="16">
+    <Window.Resources>
+        <ControlTemplate x:Key="szablon" TargetType="{x:Type Button}">
+            <Border Name="Border" BorderBrush="DarkGreen" BorderThickness="3"
+                    CornerRadius="10 10 10 10" Background="YellowGreen"
+                    TextBlock.Foreground="Black" >
+                <Grid >
+                    <Rectangle Name="FocusCue" Visibility =" Hidden"
+                               Stroke ="Black" StrokeThickness ="3"
+                               StrokeDashArray ="1 2" StrokeDashCap="Round"
+                               SnapsToDevicePixels ="True" />
+                    <ContentPresenter RecognizesAccessKey="True" HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Margin="{TemplateBinding Padding}" />
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="Yellow" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="DarkGreen" />
+                    <Setter TargetName="Border" Property="BorderBrush"
+                            Value="YellowGreen" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="Border"
+                         Property="TextBlock.Foreground"
+                         Value="LightGray" />
+                    <Setter TargetName="Border" Property="Background"
+                         Value="SlateGray" />
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid Name="EditGrid" Validation.Error="validationError">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -60,14 +97,7 @@
             <Image Width="28" Height="auto" Margin="5,5,15,5" Source="../Files/yellowcard.jpg"></Image>
             <TextBox VerticalContentAlignment="Center" MinWidth="25" Margin="5" Text="{Binding Path=Yellowcard}"></TextBox>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Center" Margin="0" Orientation="Horizontal" Grid.Row="10" Grid.ColumnSpan="2">
-            <ComboBox  Margin="50" SelectedIndex="0">
-                <ComboBoxItem >FC Bayern Munchen</ComboBoxItem>
-            </ComboBox>
-            <Image  Source="../Files/logo.png"></Image>
-
-
-        </StackPanel>
+       
 
         <TextBox PreviewMouseDown="NameVali"  Name="NameTextBox" VerticalContentAlignment="Center"  Grid.Column="1" Margin="5"  Text="{Binding Path=Name, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"  />
         <TextBox PreviewMouseDown="SurnameVali"  Name="SurnameTextBox" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="5"  Text="{Binding Path=Surname, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
@@ -82,8 +112,8 @@
         <TextBox LostFocus="NumberFocus" PreviewMouseDown="NumberVali"  Name="NumberTextBox"  VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="5" Text="{Binding Path=Number, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"></TextBox>
 
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  Grid.Row="11" Grid.ColumnSpan="2">
-            <Button Click="Edit" Margin="10,10,140,10" Padding="20,6">Edytuj</Button>
-            <Button Click="Reset" Margin="10" Padding="20,6">Anuluj</Button>
+            <Button Template="{StaticResource szablon}" Click="Edit" Margin="10,10,140,10" Padding="20,6">Edytuj</Button>
+            <Button Template="{StaticResource szablon}" Click="Reset" Margin="10" Padding="20,6">Anuluj</Button>
         </StackPanel>
     </Grid>
 </Window>

@@ -5,7 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektWPF.Rozgrywki"
         mc:Ignorable="d"
-        Title="FilterRozgrywka" Height="385" Width="360" FontSize="16">
+        Title="FilterRozgrywka" Height="355" Width="360" FontSize="16">
+    <Window.Resources>
+        <ControlTemplate x:Key="szablon" TargetType="{x:Type Button}">
+            <Border Name="Border" BorderBrush="DarkGreen" BorderThickness="3"
+                    CornerRadius="10 10 10 10" Background="YellowGreen"
+                    TextBlock.Foreground="Black">
+                <Grid >
+                    <Rectangle Name="FocusCue" Visibility =" Hidden"
+                               Stroke ="Black" StrokeThickness ="3"
+                               StrokeDashArray ="1 2" StrokeDashCap="Round"
+                               SnapsToDevicePixels ="True" />
+                    <ContentPresenter RecognizesAccessKey="True" HorizontalAlignment="Center"
+                                      Margin="{TemplateBinding Padding}" />
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="Yellow" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="DarkGreen" />
+                    <Setter TargetName="Border" Property="BorderBrush"
+                            Value="YellowGreen" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="Border"
+                         Property="TextBlock.Foreground"
+                         Value="LightGray" />
+                    <Setter TargetName="Border" Property="Background"
+                         Value="SlateGray" />
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid Name="FiltrGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -23,7 +59,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="2" Margin="5">Turniej:</Label>
+        
 
         <Label Grid.Row="4" Margin="5">Miejsce:</Label>
         <Label Grid.Row="5" Margin="5">Sędzia:</Label>
@@ -32,9 +68,9 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
+               
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0"  Margin="15,15,15,15"  Source="../Files/logo.png"></Image>
+            <Image Grid.Column="0"  Margin="15,15,15,15"  Source="{Binding Path=SelectedItem.ImagePath, ElementName=Team1}"></Image>
             <Image  Grid.Column="1"  Margin="20"  Source="../Files/vs.jpg"  RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <RotateTransform x:Name="MyAnimatedTransform" Angle="0" />
@@ -52,25 +88,19 @@
                     </EventTrigger>
                 </Image.Triggers>
             </Image>
-            <Image  Grid.Column="2"  Margin="15,15,15,15"   Source="../Files/logo2.jpg"></Image>
+            
         </Grid>
 
-        <Label Margin="5">Drużyna 1:</Label>
-
-        <Label  Grid.Row="1" Margin="5">Drużyna 2:</Label>
+        <Label Margin="5">Drużyna:</Label>
 
 
-        <ComboBox  Grid.Column="1" Margin="5" SelectedIndex="0">
-            <ComboBoxItem>Infinity</ComboBoxItem>
+        <ComboBox Name="Team1"  Grid.Column="1" Margin="5" SelectedIndex="0">
+           
         </ComboBox>
 
-        <ComboBox Grid.Row="1"  Grid.Column="1" Margin="5" SelectedIndex="0">
-            <ComboBoxItem>Triangles</ComboBoxItem>
-        </ComboBox>
+        
 
-        <ComboBox Grid.Column="1" Grid.Row="2" Margin="5" SelectedIndex="0">
-            <ComboBoxItem>Turniej Prezydenta Białegostoku</ComboBoxItem>
-        </ComboBox>
+        
         <ComboBox Grid.Column="1" Grid.Row="4" Margin="5" SelectedIndex="0" Text="{Binding Path=Place}">
             <ComboBoxItem>Stadion Miejski w Białymstoku</ComboBoxItem>
             <ComboBoxItem>Drugi Stadion Miejski w Białymstoku</ComboBoxItem>
@@ -83,8 +113,8 @@
         </ComboBox>
         <TextBox Margin="5" Grid.Row="5" Grid.Column="1" Text="{Binding Path=Sedziaglowny}"></TextBox>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  Grid.Row="8" Grid.ColumnSpan="2">
-            <Button Click="Filtr" Margin="10,10,40,10" Padding="20,6">Zastosuj Filtr</Button>
-            <Button Click="Reset" Margin="10" Padding="20,6">Zresetuj Filtr</Button>
+            <Button Template="{StaticResource szablon}" Click="Filtr" Margin="10,10,40,10" Padding="20,6">Zastosuj Filtr</Button>
+            <Button Template="{StaticResource szablon}" Click="Reset" Margin="10" Padding="20,6">Zresetuj Filtr</Button>
         </StackPanel>
     </Grid>
 </Window>
