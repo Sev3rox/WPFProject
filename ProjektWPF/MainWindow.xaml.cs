@@ -148,12 +148,12 @@ namespace ProjektWPF
         private void GetZawodnicy()
         {
 
-          var Zawodnicydb = context.Zawodnicy.ToList();
+            var Zawodnicydb = context.Zawodnicy.ToList();
             Zawodnicy.Clear();
-            foreach(Zawodnik x in Zawodnicydb)
+            foreach (Zawodnik x in Zawodnicydb)
             {
                 Zawodnicy.Add(x);
-      
+
             }
 
 
@@ -163,7 +163,7 @@ namespace ProjektWPF
             AddZawodnik add = new AddZawodnik(context);
             if (add.ShowDialog() == true)
             {
-                
+
             }
             GetZawodnicy();
         }
@@ -181,35 +181,35 @@ namespace ProjektWPF
         private void DelZawodnik(object sender, RoutedEventArgs e)
         {
             //   var productToDelete = (sender as FrameworkElement).DataContext as Zawodnik;
-          
-           
+
+
 
             DeleteZawodnik del = new DeleteZawodnik(context);
-            del.Id= ((Zawodnik)ZawodnicyList.SelectedItem).Id;
+            del.Id = ((Zawodnik)ZawodnicyList.SelectedItem).Id;
 
             if (del.ShowDialog() == true)
             {
-                
+
             }
             GetZawodnicy();
         }
 
         private void EditZawodnik(object sender, RoutedEventArgs e)
         {
-      
+
             EditZawodnik edit = new EditZawodnik(context, ((Zawodnik)ZawodnicyList.SelectedItem));
 
             if (edit.ShowDialog() == true)
             {
 
             }
-           
+
             GetZawodnicy();
         }
 
         private void FilterZawodnik(object sender, RoutedEventArgs e)
         {
-            FilterZawodnik filtr = new FilterZawodnik(ViewZaw,context);
+            FilterZawodnik filtr = new FilterZawodnik(ViewZaw, context);
             if (filtr.ShowDialog() == true)
             {
 
@@ -272,11 +272,11 @@ namespace ProjektWPF
             ViewZaw.Filter = delegate (object item)
             {
                 Zawodnik searchzaw = item as Zawodnik;
-                if (searchzaw == null||searchzaw.Name==null||searchzaw.Surname==null)
+                if (searchzaw == null || searchzaw.Name == null || searchzaw.Surname == null)
                 {
                     return false;
                 }
-                if(!(searchzaw.Name.Contains(SzukajZawodnik.Text))&& !(searchzaw.Surname.Contains(SzukajZawodnik.Text))&&!((searchzaw.Name+" "+searchzaw.Surname).Contains(SzukajZawodnik.Text)) && !((searchzaw.Surname + " " + searchzaw.Name).Contains(SzukajZawodnik.Text)) && !((searchzaw.Name  + searchzaw.Surname).Contains(SzukajZawodnik.Text)))
+                if (!(searchzaw.Name.Contains(SzukajZawodnik.Text)) && !(searchzaw.Surname.Contains(SzukajZawodnik.Text)) && !((searchzaw.Name + " " + searchzaw.Surname).Contains(SzukajZawodnik.Text)) && !((searchzaw.Surname + " " + searchzaw.Name).Contains(SzukajZawodnik.Text)) && !((searchzaw.Name + searchzaw.Surname).Contains(SzukajZawodnik.Text)))
                 {
                     return false;
                 }
@@ -315,22 +315,22 @@ namespace ProjektWPF
         }
         private void DeatailsRozgrywka(object sender, RoutedEventArgs e)
         {
-            DetailsRozgrywka detroz = new DetailsRozgrywka(((Rozgrywka)RozgrywkiList.SelectedItem),context);
+            DetailsRozgrywka detroz = new DetailsRozgrywka(((Rozgrywka)RozgrywkiList.SelectedItem), context);
             if (detroz.ShowDialog() == true)
             {
-               
+
             }
             GetRozgrywki();
         }
 
         private void AddRozgrywka(object sender, RoutedEventArgs e)
         {
-           
-     
+
+
             AddRozgrywka addroz = new AddRozgrywka(context);
             if (addroz.ShowDialog() == true)
             {
-               
+
             }
             GetRozgrywki();
         }
@@ -354,7 +354,7 @@ namespace ProjektWPF
             //   var productToDelete = (sender as FrameworkElement).DataContext as Zawodnik;
             DeleteRozgrywka delroz = new DeleteRozgrywka(context);
             delroz.Id = ((Rozgrywka)RozgrywkiList.SelectedItem).Id;
-     
+
             if (delroz.ShowDialog() == true)
             {
 
@@ -362,7 +362,7 @@ namespace ProjektWPF
             GetRozgrywki();
         }
 
-   
+
         private void UnFilterRozgrywka(object sender, RoutedEventArgs e)
         {
             ViewRoz.Filter = null;
@@ -408,9 +408,9 @@ namespace ProjektWPF
                 {
                     return false;
                 }
-                if (!(searchroz.Place.Contains(SzukajRozgrywka.Text))&& !(searchroz.Date.ToString().Substring(0,searchroz.Date.ToString().Length - 9).Contains(SzukajRozgrywka.Text))&& !((searchroz.Date.ToString().Substring(0,searchroz.Date.ToString().Length - 9)+" "+searchroz.Place).Contains(SzukajRozgrywka.Text)) && !((searchroz.Place+" "+searchroz.Date.ToString().Substring(0,searchroz.Date.ToString().Length - 9)).Contains(SzukajRozgrywka.Text)))
+                if (!(searchroz.Place.Contains(SzukajRozgrywka.Text)) && !(searchroz.Date.ToString().Substring(0, searchroz.Date.ToString().Length - 9).Contains(SzukajRozgrywka.Text)) && !((searchroz.Date.ToString().Substring(0, searchroz.Date.ToString().Length - 9) + " " + searchroz.Place).Contains(SzukajRozgrywka.Text)) && !((searchroz.Place + " " + searchroz.Date.ToString().Substring(0, searchroz.Date.ToString().Length - 9)).Contains(SzukajRozgrywka.Text)))
                 {
-                   
+
                     return false;
                 }
 
@@ -456,17 +456,27 @@ namespace ProjektWPF
         private void DodajDruzyne(object sender, RoutedEventArgs e)
         {
             AddDruzyna druzynadodaj = new AddDruzyna(context);
-            if (druzynadodaj.ShowDialog() == true) 
-            { 
-                
+            if (druzynadodaj.ShowDialog() == true)
+            {
+
             }
             GetDruzyny();
         }
 
         private void DodajZawodnikaDoDruzyny(object sender, RoutedEventArgs e)
         {
-            AddZawodnikDoDruzyny addZawodnikDoDruzyny = new AddZawodnikDoDruzyny(context, ((Druzyna)lista_druzyn.SelectedItem),Zawodnicy);
+            AddZawodnikDoDruzyny addZawodnikDoDruzyny = new AddZawodnikDoDruzyny(context, ((Druzyna)lista_druzyn.SelectedItem), Zawodnicy);
             if (addZawodnikDoDruzyny.ShowDialog() == true)
+            {
+
+            }
+            GetDruzyny();
+        }
+        private void UsunZawodnikaZDruzyny(object sender, RoutedEventArgs e)
+        {
+            DeleteZawodnikZDruzyny deleteZawodnikZDruzyny = new DeleteZawodnikZDruzyny(context, ((Druzyna)lista_druzyn.SelectedItem), Zawodnicy);
+            GetZawodnicy();
+            if (deleteZawodnikZDruzyny.ShowDialog() == true)
             {
 
             }
@@ -478,7 +488,7 @@ namespace ProjektWPF
             FilterDruzyna filterDruzyna = new FilterDruzyna(ViewDruz);
             if (filterDruzyna.ShowDialog() == true)
             {
-                
+
             }
             GetDruzyny();
         }
@@ -492,19 +502,19 @@ namespace ProjektWPF
         {
             DeleteDruzyna deleteDruzyna = new DeleteDruzyna(context);
             deleteDruzyna.Id = ((Druzyna)lista_druzyn.SelectedItem).Id;
-            if(deleteDruzyna.ShowDialog() == true)
+            if (deleteDruzyna.ShowDialog() == true)
             {
-                
+
             }
             GetDruzyny();
         }
 
         private void EdytujDruzyne(object sender, RoutedEventArgs e)
         {
-            EditDruzyny editDruzyny = new EditDruzyny(context,((Druzyna)lista_druzyn.SelectedItem));
+            EditDruzyny editDruzyny = new EditDruzyny(context, ((Druzyna)lista_druzyn.SelectedItem));
             if (editDruzyny.ShowDialog() == true)
             {
-                
+
             }
             GetDruzyny();
         }
@@ -514,11 +524,11 @@ namespace ProjektWPF
             ViewDruz.Filter = delegate (object item)
             {
                 Druzyna searchdruz = item as Druzyna;
-                if (searchdruz == null || searchdruz.Nazwa == null )
+                if (searchdruz == null || searchdruz.Nazwa == null)
                 {
                     return false;
                 }
-                if (!(searchdruz.Nazwa.Contains(Szukaj_druzyny.Text))) 
+                if (!(searchdruz.Nazwa.Contains(Szukaj_druzyny.Text)))
                 {
                     return false;
                 }

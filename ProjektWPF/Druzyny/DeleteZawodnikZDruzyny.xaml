@@ -1,0 +1,76 @@
+﻿<Window x:Class="ProjektWPF.Druzyny.DeleteZawodnikZDruzyny"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjektWPF.Druzyny"
+        mc:Ignorable="d"
+        Title="DeleteZawodnikZDruzyny" Height="400" Width="350" FontSize="16">
+    <Window.Resources>
+        <ControlTemplate x:Key="szablon" TargetType="{x:Type Button}">
+            <Border Name="Border" BorderBrush="DarkGreen" BorderThickness="3"
+                    CornerRadius="10 10 10 10" Background="YellowGreen"
+                    TextBlock.Foreground="Black" >
+                <Grid >
+                    <Rectangle Name="FocusCue" Visibility =" Hidden"
+                               Stroke ="Black" StrokeThickness ="3"
+                               StrokeDashArray ="1 2" StrokeDashCap="Round"
+                               SnapsToDevicePixels ="True" />
+                    <ContentPresenter RecognizesAccessKey="True" HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Margin="{TemplateBinding Padding}" />
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="Yellow" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="DarkGreen" />
+                    <Setter TargetName="Border" Property="BorderBrush"
+                            Value="YellowGreen" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="Border"
+                         Property="TextBlock.Foreground"
+                         Value="LightGray" />
+                    <Setter TargetName="Border" Property="Background"
+                         Value="SlateGray" />
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid Name="DeletZawdruz">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Czy jesteś pewny aby usunąć tego zawodnika" Grid.ColumnSpan="2" HorizontalAlignment="Center"></Label>
+        <ListBox Name="lista_zawodnikow" Grid.RowSpan="3" Grid.Row="1" Grid.ColumnSpan="2" Margin="5"
+                DisplayMemberPath="Dane"
+                ScrollViewer.VerticalScrollBarVisibility="Visible"></ListBox>
+
+        <Label Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.Row="4" Content="Z tej drużyny?"></Label>
+
+        <Label Grid.Row="5" Grid.Column="0" Margin="5" Content="Nazwa drużyny:"></Label>
+        <Label Grid.Row="5" Grid.Column="1" Margin="5" Name="NazwaTextbox"
+                 Content="{Binding Path=Nazwa}"></Label>
+
+        <Button Grid.Row="6" Grid.Column="0" Margin="5" Click="Delete"
+            Template="{StaticResource szablon}">Usuń</Button>
+        <Button Grid.Row="6" Grid.Column="1" Margin="5" Click="Cancel"
+            Template="{StaticResource szablon}">Anuluj</Button>
+    </Grid>
+</Window>

@@ -519,6 +519,7 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
                             <Label Margin="5,5,5.2,5" Grid.ColumnSpan="2">Nazwa:</Label>
                             <Label Grid.Row="1" Margin="5,5,5.2,5" Grid.ColumnSpan="2">Kraj:</Label>
@@ -539,6 +540,8 @@
                                      ScrollViewer.VerticalScrollBarVisibility="Visible"></ListBox>
                             <Image Grid.Row="7" Grid.Column="2" Margin="9.8,11.4,9.6,11.4"  Source="{Binding Path=ImagePath}"
                                    Height="150" Grid.ColumnSpan="2" Grid.RowSpan="2" Stretch="Uniform"></Image>
+                            <Button Name="usunZawodnikaZDruzyny" Grid.Column="0" Grid.Row="8" Margin="4" Padding="20,6" Click="UsunZawodnikaZDruzyny" HorizontalContentAlignment="Center"
+                                    Template="{StaticResource szablon}" IsEnabled="{Binding ElementName=lista_druzyn, Path=SelectedItems.Count}">Usuń zawodnika z drużyny</Button>
                         </Grid>
                     </Grid>
                 </DockPanel>

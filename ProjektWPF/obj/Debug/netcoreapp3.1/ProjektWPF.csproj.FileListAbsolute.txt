@@ -430,3 +430,5 @@ C:\Users\mjsty\OneDrive\Pulpit\Nowy folder\WPFProject\ProjektWPF\obj\Debug\netco
 C:\Users\mjsty\OneDrive\Pulpit\Nowy folder\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\ProjektWPF.csproj.CoreCompileInputs.cache
 C:\Users\mjsty\OneDrive\Pulpit\Nowy folder\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\ProjektWPF.csproj.CopyComplete
 C:\Users\mjsty\OneDrive\Pulpit\Nowy folder\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\ProjektWPF.genruntimeconfig.cache
+C:\Users\User\source\repos\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\Druzyny\DeleteZawodnikZDruzyny.g.cs
+C:\Users\User\source\repos\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\Druzyny\DeleteZawodnikZDruzyny.baml

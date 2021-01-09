@@ -7,6 +7,11 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Druzyny\DeleteZawodnikZDruzyny.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Druzyny\AddDruzyna.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -14,6 +19,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Druzyny\DeleteDruzyna.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Druzyny\DeleteZawodnikZDruzyny.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Druzyny\EditDruzyny.xaml">

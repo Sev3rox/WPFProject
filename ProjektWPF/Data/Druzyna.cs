@@ -74,6 +74,13 @@ namespace ProjektWPF.Data
             zawodnik.Druzyna = this;
         }
 
+        public void DeleteZawodnikZDruzyny(Zawodnik zawodnik)
+        {
+            lista_zawodnikow.Remove(zawodnik);
+            zawodnik.DruzynaId = null;
+            zawodnik.Druzyna = null;
+        }
+
         public string DaneDruzyny
         {
             get { return Nazwa; }
