@@ -31,6 +31,7 @@ namespace ProjektWPF
         public Collection<Zawodnik> Zawodnicy { get; } = new ObservableCollection<Zawodnik>();
         public Collection<Rozgrywka> Rozgrywki { get; } = new ObservableCollection<Rozgrywka>();
         public Collection<Druzyna> Druzyny { get; } = new ObservableCollection<Druzyna>();
+        public Collection<Wynik> Wyniki { get; } = new ObservableCollection<Wynik>();
         ZawodnikDbContext context;
 
         public MainWindow(ZawodnikDbContext context)
@@ -40,9 +41,11 @@ namespace ProjektWPF
             GetZawodnicy();
             GetRozgrywki();
             GetDruzyny();
+            GetWyniki();
             ViewZaw.Filter = null;
             ViewRoz.Filter = null;
             ViewDruz.Filter = null;
+            ViewWyn.Filter = null;
 
         }
 
@@ -53,6 +56,7 @@ namespace ProjektWPF
             ZawodnicyList.ItemsSource = Zawodnicy;
             RozgrywkiList.ItemsSource = Rozgrywki;
             lista_druzyn.ItemsSource = Druzyny;
+            WynikiList.ItemsSource = Wyniki;
 
         }
 
@@ -79,6 +83,13 @@ namespace ProjektWPF
                 return (ListCollectionView)CollectionViewSource.GetDefaultView(Druzyny);
             }
         }
+        private ListCollectionView ViewWyn
+        {
+            get
+            {
+                return (ListCollectionView)CollectionViewSource.GetDefaultView(Wyniki);
+            }
+        }
 
 
 
@@ -93,13 +104,19 @@ namespace ProjektWPF
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             AddZawody add = new AddZawody();
+
             add.Show();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void AddWynik(object sender, RoutedEventArgs e)
         {
-            AddWyniki add = new AddWyniki();
-            add.Show();
+            AddWyniki add = new AddWyniki(context);
+            if (add.ShowDialog() == true)
+            {
+
+            }
+            GetWyniki();
+            GetRozgrywki();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -120,28 +137,44 @@ namespace ProjektWPF
             add.Show();
         }
 
-        private void Button_Click_6(object sender, RoutedEventArgs e)
+        private void FilterWyniki(object sender, RoutedEventArgs e)
         {
-            FiltrWyniki add = new FiltrWyniki();
-            add.Show();
+            FiltrWyniki filtr = new FiltrWyniki(ViewWyn, context);
+            if (filtr.ShowDialog() == true)
+            {
+
+            }
+            GetWyniki();
         }
 
-        private void Button_Click_7(object sender, RoutedEventArgs e)
+        private void DelWyniki(object sender, RoutedEventArgs e)
         {
-            DeleteWyniki add = new DeleteWyniki();
-            add.Show();
+            DeleteWyniki del = new DeleteWyniki(context);
+            del.Id = ((Wynik)WynikiList.SelectedItem).Id;
+
+            if (del.ShowDialog() == true)
+            {
+
+            }
+            GetWyniki();
+            GetRozgrywki();
         }
 
-        private void Button_Click_8(object sender, RoutedEventArgs e)
+        private void TeamWyniki(object sender, RoutedEventArgs e)
         {
-            TeamWyniki add = new TeamWyniki();
+            TeamWyniki add = new TeamWyniki(((Wynik)WynikiList.SelectedItem), context);
             add.Show();
+            GetWyniki();
         }
 
-        private void Button_Click_9(object sender, RoutedEventArgs e)
+        private void DetailsWyniki(object sender, RoutedEventArgs e)
         {
-            DetailsWyniki add = new DetailsWyniki();
-            add.Show();
+            DetailsWyniki add = new DetailsWyniki((Wynik)WynikiList.SelectedItem, context);
+            if (add.ShowDialog() == true)
+            {
+
+            }
+            GetWyniki();
         }
 
 
@@ -309,7 +342,8 @@ namespace ProjektWPF
             Rozgrywki.Clear();
             foreach (Rozgrywka x in Rozgrywkidb)
             {
-                Rozgrywki.Add(x);
+                if (x.WynikId==null)
+                    Rozgrywki.Add(x);
             }
             ManytoManyCantBindreset();
         }
@@ -419,6 +453,33 @@ namespace ProjektWPF
             };
 
         }
+        private void SzukajWynChange(object sender, RoutedEventArgs e)
+        {
+            ViewWyn.Filter = delegate (object item)
+            {
+                Wynik searchwyn = item as Wynik;
+                if (searchwyn == null)
+                {
+                    return false;
+                }
+                var pom = context.Rozgrywki.First(e => e.Id == searchwyn.RozgrywkaId);
+
+                if (pom.Place == null)
+                {
+                    return false;
+                }
+                //if(!pom.Place.Contains(Szukaj)
+                if (!(pom.Place.Contains(SzukajWynik.Text)) && !(pom.Date.ToString().Substring(0, pom.Date.ToString().Length - 13).Contains(SzukajWynik.Text)) && !((pom.Date.ToString().Substring(0, pom.Date.ToString().Length - 13) + " " + pom.Place).Contains(SzukajWynik.Text)) && !((pom.Place + " " + pom.Date.ToString().Substring(0, pom.Date.ToString().Length - 13)).Contains(SzukajWynik.Text)))
+                {
+
+                    return false;
+                }
+
+
+                return true;
+            };
+
+        }
 
         private void SzukajRoz(object sender, RoutedEventArgs e)
         {
@@ -426,12 +487,24 @@ namespace ProjektWPF
             SzukajRozgrywka.Text = "";
             ViewRoz.Filter = null;
         }
+        private void SzukajWyn(object sender, RoutedEventArgs e)
+        {
+            ViewWyn.Filter = null;
+            SzukajWynik.Text = "";
+            ViewWyn.Filter = null;
+        }
 
         private void SzukajRozReset(object sender, RoutedEventArgs e)
         {
             ViewRoz.Filter = null;
             SzukajRozgrywka.Text = "Szukaj...";
             ViewRoz.Filter = null;
+        }
+        private void SzukajWynReset(object sender, RoutedEventArgs e)
+        {
+            ViewWyn.Filter = null;
+            SzukajWynik.Text = "Szukaj...";
+            ViewWyn.Filter = null;
         }
 
 
@@ -450,6 +523,15 @@ namespace ProjektWPF
             foreach (Druzyna x in Druzynydb)
             {
                 Druzyny.Add(x);
+            }
+        }
+        public void GetWyniki()
+        {
+            var Wynikidb = context.Wyniki.ToList();
+            Wyniki.Clear();
+            foreach (Wynik x in Wynikidb)
+            {
+                Wyniki.Add(x);
             }
         }
 
@@ -581,9 +663,43 @@ namespace ProjektWPF
                 }
             }
         }
+        private void ManytoManyCantBind2(object sender, SelectionChangedEventArgs e)
+        {
+            if ((Wynik)WynikiList.SelectedItem != null)
+            {
+                Rozgrywka roz = context.Rozgrywki.First(e => e.Id == ((Wynik)WynikiList.SelectedItem).RozgrywkaId);
+                if (roz != null)
+                {
+                    var pom = context.Druzyna_Rozgrywka.Where(z => z.RozgrywkaId == roz.Id).ToList();
+                    if (pom.Count > 1)
+                    {
+                        Dru1.Content = pom[0].Druzyna.Nazwa;
+                        Dru2.Content = pom[1].Druzyna.Nazwa;
+                        Image11.Source = new BitmapImage(new Uri(pom[0].Druzyna.ImagePath));
+                        Image22.Source = new BitmapImage(new Uri(pom[1].Druzyna.ImagePath));
+                    }
+                    else if (pom.Count == 1)
+                    {
+                        Dru1.Content = pom[0].Druzyna.Nazwa;
+                        Dru2.Content = "";
+                        Image11.Source = new BitmapImage(new Uri(pom[0].Druzyna.ImagePath));
+                        Image22.Source = null;
+
+                    }
+                    else
+                    {
+                        Dru1.Content = "";
+                        Dru2.Content = "";
+                        Image11.Source = null;
+                        Image22.Source = null;
+                    }
+                    Miejscóweczka.Content = roz.Place;
+                }
+            }
+        }
         private void ManytoManyCantBindreset()
         {
-            Rozgrywka roz = (Rozgrywka)RozgrywkiList.SelectedItem;
+            
 
 
             Team1.Content = "";

@@ -49,6 +49,8 @@ namespace ProjektWPF.Data
 
 
 
+
+
         // połączenie z drużyną
 
 

@@ -10,6 +10,9 @@ namespace ProjektWPF.Data
         public int Id { get; set; }
         public string Place { get; set; }
 
+        public Wynik? Wynik;
+        public int? WynikId { get; set; }
+
         private DateTime date;
         public DateTime Date
         {
@@ -31,7 +34,7 @@ namespace ProjektWPF.Data
      public string Sedziapom2 { get; set; }
      public string Sedziatechniczny { get; set; }
 
-
+    public string Turniej { get; set; }
 
         //tu drużyny
 

@@ -6,7 +6,43 @@
         xmlns:local="clr-namespace:ProjektWPF.Wyniki"
         mc:Ignorable="d"
         Title="AddWyniki" Height="160" Width="600">
-    <Grid>
+    <Window.Resources>
+        <ControlTemplate x:Key="szablon" TargetType="{x:Type Button}">
+            <Border Name="Border" BorderBrush="DarkGreen" BorderThickness="3"
+                    CornerRadius="10 10 10 10" Background="YellowGreen"
+                    TextBlock.Foreground="Black">
+                <Grid >
+                    <Rectangle Name="FocusCue" Visibility =" Hidden"
+                               Stroke ="Black" StrokeThickness ="3"
+                               StrokeDashArray ="1 2" StrokeDashCap="Round"
+                               SnapsToDevicePixels ="True" />
+                    <ContentPresenter RecognizesAccessKey="True" HorizontalAlignment="Center"
+                                      Margin="{TemplateBinding Padding}" />
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="Yellow" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="DarkGreen" />
+                    <Setter TargetName="Border" Property="BorderBrush"
+                            Value="YellowGreen" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="Border"
+                         Property="TextBlock.Foreground"
+                         Value="LightGray" />
+                    <Setter TargetName="Border" Property="Background"
+                         Value="SlateGray" />
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid Name="AddGrid" Validation.Error="validationError">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
@@ -17,14 +53,17 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Label Margin="5" FontSize="18" Content="Mecz:"></Label>
-        <ComboBox Margin="5" FontSize="18" Grid.Column="1" SelectedIndex="0">
-            <ComboBoxItem Content="Infinity Białystok vs Regional Triangles"></ComboBoxItem>
+        <ComboBox Name="Mecz" Margin="5" FontSize="18" Grid.Column="1" SelectedIndex="0">
         </ComboBox>
         <Label Margin="5" FontSize="18" Content="Wynik" Grid.Row="1"></Label>
-        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="5"></TextBox>
+        <StackPanel HorizontalAlignment="Center" Grid.Row="1" Orientation="Horizontal" Grid.Column="1" Grid.ColumnSpan="1">
+            <TextBox Text="{Binding Path=Wynik1, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" PreviewMouseDown="WynikVali1"  Name="WynikTextBox1"   VerticalContentAlignment="Center" Margin="5"></TextBox>
+            <TextBox Text=":"   VerticalContentAlignment="Center" Margin="5"></TextBox>
+            <TextBox Text="{Binding Path=Wynik2, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" PreviewMouseDown="WynikVali2"  Name="WynikTextBox2"   VerticalContentAlignment="Center" Margin="5"></TextBox>
+       </StackPanel> 
         <StackPanel HorizontalAlignment="Center" Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="2">
-            <Button FontSize="18"  Margin="10,0,60,0" Padding="20,6">Dodaj</Button>
-            <Button FontSize="18"  Margin="0" Padding="20,6" >Anuluj</Button>
+            <Button Template="{StaticResource szablon}" FontSize="18"  Margin="10,0,60,0" Padding="20,6" Click="Add">Dodaj</Button>
+            <Button Template="{StaticResource szablon}" FontSize="18"  Margin="0" Padding="20,6" Click="Cancel" >Anuluj</Button>
         </StackPanel>
     </Grid>
 </Window>

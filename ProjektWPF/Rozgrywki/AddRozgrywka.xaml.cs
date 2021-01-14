@@ -165,5 +165,7 @@ namespace ProjektWPF.Rozgrywki
             Team1.ItemsSource = pom;
          
         }
+
+
     }
 }

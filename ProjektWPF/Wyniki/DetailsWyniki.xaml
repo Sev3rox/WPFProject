@@ -6,7 +6,43 @@
         xmlns:local="clr-namespace:ProjektWPF.Wyniki"
         mc:Ignorable="d"
         Title="DetailsWyniki" Height="750" Width="600" FontSize="16">
-    <Grid >
+    <Window.Resources>
+        <ControlTemplate x:Key="szablon" TargetType="{x:Type Button}">
+            <Border Name="Border" BorderBrush="DarkGreen" BorderThickness="3"
+                    CornerRadius="10 10 10 10" Background="YellowGreen"
+                    TextBlock.Foreground="Black">
+                <Grid >
+                    <Rectangle Name="FocusCue" Visibility =" Hidden"
+                               Stroke ="Black" StrokeThickness ="3"
+                               StrokeDashArray ="1 2" StrokeDashCap="Round"
+                               SnapsToDevicePixels ="True" />
+                    <ContentPresenter RecognizesAccessKey="True" HorizontalAlignment="Center"
+                                      Margin="{TemplateBinding Padding}" />
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="Yellow" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background"
+                            Value="DarkGreen" />
+                    <Setter TargetName="Border" Property="BorderBrush"
+                            Value="YellowGreen" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="Border"
+                         Property="TextBlock.Foreground"
+                         Value="LightGray" />
+                    <Setter TargetName="Border" Property="Background"
+                         Value="SlateGray" />
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid Name="DetailsGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
@@ -37,24 +73,28 @@
 
             <StackPanel VerticalAlignment="Center" Margin="5,5,50,5">
                 <Label HorizontalContentAlignment="Center" Margin="5" Content="Sędzia główny:"></Label>
-                <Label  HorizontalContentAlignment="Center" Margin="5" Content="Piotr Adamczyk"></Label>
+                <Label  HorizontalContentAlignment="Center" Margin="5" Name="SedziaGlow"></Label>
             </StackPanel>
             <StackPanel Margin="5,5,50,5">
                 <Label HorizontalContentAlignment="Center" Margin="5" Content="Sędziowie pomocniczy:"></Label>
-                <Label HorizontalContentAlignment="Center" Margin="5" Content="Tomasz Duda"></Label>
-                <Label  HorizontalContentAlignment="Center" Margin="5" Content="Michał Nowak"></Label>
+                <Label HorizontalContentAlignment="Center" Margin="5" Name="Sedziepom11"></Label>
+                <Label  HorizontalContentAlignment="Center" Margin="5" Name="Sedziepom22"></Label>
             </StackPanel>
             <StackPanel Margin="5,5,5,5" VerticalAlignment="Center">
                 <Label HorizontalContentAlignment="Center" Margin="5" Content="Sędzia techniczny:"></Label>
-                <Label HorizontalContentAlignment="Center" Margin="5" Content="Adam Kowal"></Label>
+                <Label HorizontalContentAlignment="Center" Margin="5" Name="Sedziatech"></Label>
             </StackPanel >
 
         </StackPanel>
         <Label Grid.Row="6" Content="Wynik:" Margin="5"></Label>
         <StackPanel Grid.Column="1" Grid.Row="6" Margin="5" Orientation="Horizontal">
-            <Label Content="Infinity Białystok"></Label>
-            <Label Content="1:0"></Label>
-            <Label Content="Regional Triangles"></Label>
+            <Label Name="Team11" Content="Infinity Białystok"></Label>
+            <StackPanel HorizontalAlignment="Center" Grid.Row="1" Orientation="Horizontal" Grid.Column="1" Grid.ColumnSpan="1">
+                <TextBox Text="{Binding Path=Wynik1, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Name="WynikTextBox1"   VerticalContentAlignment="Center" Margin="5"></TextBox>
+                <TextBox Text=":"   VerticalContentAlignment="Center" Margin="5"></TextBox>
+                <TextBox Text="{Binding Path=Wynik2, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Name="WynikTextBox2"   VerticalContentAlignment="Center" Margin="5"></TextBox>
+            </StackPanel>
+            <Label Name="Team22" Content="Regional Triangles"></Label>
         </StackPanel>
 
 
@@ -63,27 +103,27 @@
 
 
 
-        <Label  Grid.Column="1" Margin="5"  Content="Infinity Białystok" />
+        <Label  Grid.Column="1" Margin="5"  Name="Team1" />
         <StackPanel Grid.Column="1" Grid.Row="1">
-            <Label Margin="5" Content="Regional Triangles" />
-            <Label Margin="5" Content="22.12.2020 14:00" />
+            <Label Margin="5" Content="Regional Triangles" Name="Team2" />
+            <Label Margin="5" Name="Data" />
         </StackPanel>
-        <Label Grid.Column="1" Grid.Row="2" Margin="5" Content="Stadion miejski w Białymstoku"/>
-        <Label Grid.Column="1" Grid.Row="3" Margin="5" Content="Turniej Prezydenta Białegostoku"/>
-        <Label Grid.Column="1" Grid.Row="4" Margin="5" Content="Mecz organizowany przez sztab Prezydenta.&#10;Dochody zostaną przekaze na Caritas"/>
+        <Label Grid.Column="1" Grid.Row="2" Margin="5" Name="Miejsce"/>
+        <Label Grid.Column="1" Grid.Row="3" Margin="5" Name="Turniej"/>
+        <Label Grid.Column="1" Grid.Row="4" Margin="5" Name="Opis"/>
         <Grid Grid.Row="9" Grid.RowSpan="1" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0"  Margin="10,10,10,10"  Source="../Files/eeee.jpg"></Image>
+            <Image Name="Image1" Grid.Column="0"  Margin="10,10,10,10"  Source="../Files/eeee.jpg"></Image>
             <Image  Grid.Column="1"  Margin="10"  Source="../Files/eeee.jpg" ></Image>
-            <Image  Grid.Column="2"  Margin="10"   Source="../Files/eeee.jpg"></Image>
+            <Image  Name="Image2" Grid.Column="2"  Margin="10"   Source="../Files/eeee.jpg"></Image>
         </Grid>
 
 
 
-        <Button Margin="10" Padding="60,6" FontSize="18"  HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="10">Zamknij</Button>
+        <Button Template="{StaticResource szablon}" Margin="10" Padding="60,6" FontSize="18"  HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="10">Zamknij</Button>
     </Grid>
 </Window>
