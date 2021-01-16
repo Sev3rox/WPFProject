@@ -10,6 +10,12 @@
     <Compile Update="Druzyny\DeleteZawodnikZDruzyny.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Zawody\AddDruzynaDoZawody.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Zawody\EditZawody.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Druzyny\AddDruzyna.xaml">
@@ -81,6 +87,9 @@
     <Page Update="Zawodnicy\FilterZawodnik.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Zawody\AddDruzynaDoZawody.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Zawody\AddZawody.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -88,6 +97,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Zawody\Drabinka.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Zawody\EditZawody.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Zawody\FiltrZawody.xaml">

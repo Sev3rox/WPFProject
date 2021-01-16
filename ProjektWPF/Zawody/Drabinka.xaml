@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Drabinka" WindowState="Maximized"
     WindowStyle="None">
-    <Grid>
+    <Grid Name="GridDrabinka" KeyDown="Print" PreviewKeyDown="Print"  Focusable="True" IsEnabled="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -71,173 +71,173 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Grid.Column="0">Team1</TextBox>
-        <Image  Grid.Row="0" Grid.Column="1" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="1" Grid.Column="0">Team2</TextBox>
-        <Image  Grid.Row="1" Grid.Column="1" Source="../Files/eeee.jpg"></Image>
+        <Label Grid.Row="0" Grid.Column="0" Name="TeamA0">Team1</Label>
+        <Image  Grid.Row="0" Grid.Column="1" Source="../Files/eeee.jpg" Name="ImageA0"></Image>
+        <Label Grid.Row="1" Grid.Column="0" Name="TeamA1">Team2</Label>
+        <Image  Grid.Row="1" Grid.Column="1" Source="../Files/eeee.jpg" Name="ImageA1"></Image>
 
-        <TextBox Grid.Row="4">Team1</TextBox>
-        <Image  Grid.Row="4" Grid.Column="1" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="5" Grid.Column="0">Team2</TextBox>
-        <Image  Grid.Row="5" Grid.Column="1" Source="../Files/eeee.jpg"></Image>
+        <Label Grid.Row="4" Name="TeamA2">Team1</Label>
+        <Image  Grid.Row="4" Grid.Column="1" Source="../Files/eeee.jpg" Name="ImageA2"></Image>
+        <Label Grid.Row="5" Grid.Column="0" Name="TeamA3">Team2</Label>
+        <Image  Grid.Row="5" Grid.Column="1" Source="../Files/eeee.jpg" Name="ImageA3"></Image>
 
-        <TextBox Grid.Row="8" Grid.Column="0">Team1</TextBox>
-        <Image  Grid.Row="8" Grid.Column="1" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="9" Grid.Column="0">Team2</TextBox>
-        <Image  Grid.Row="9" Grid.Column="1" Source="../Files/eeee.jpg"></Image>
+        <Label Grid.Row="8" Grid.Column="0" Name="TeamA4">Team1</Label>
+        <Image  Grid.Row="8" Grid.Column="1" Source="../Files/eeee.jpg" Name="ImageA4"></Image>
+        <Label Grid.Row="9" Grid.Column="0" Name="TeamA5">Team2</Label>
+        <Image  Grid.Row="9" Grid.Column="1" Source="../Files/eeee.jpg" Name="ImageA5"></Image>
 
-        <TextBox Grid.Row="12">Team1</TextBox>
-        <Image  Grid.Row="12" Grid.Column="1" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="13" Grid.Column="0">Team2</TextBox>
-        <Image  Grid.Row="13" Grid.Column="1" Source="../Files/eeee.jpg"></Image>
+        <Label Grid.Row="12" Name="TeamA6">Team1</Label>
+        <Image  Grid.Row="12" Grid.Column="1" Source="../Files/eeee.jpg" Name="ImageA6"></Image>
+        <Label Grid.Row="13" Grid.Column="0" Name="TeamA7">Team2</Label>
+        <Image  Grid.Row="13" Grid.Column="1" Source="../Files/eeee.jpg" Name="ImageA7"></Image>
 
-        <TextBox Grid.Row="17" Grid.Column="0">Team1</TextBox>
-        <Image  Grid.Row="17" Grid.Column="1" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="18" Grid.Column="0">Team2</TextBox>
-        <Image  Grid.Row="18" Grid.Column="1" Source="../Files/eeee.jpg"></Image>
+        <Label Grid.Row="17" Grid.Column="0" Name="TeamA8">Team1</Label>
+        <Image  Grid.Row="17" Grid.Column="1" Source="../Files/eeee.jpg" Name="ImageA8"></Image>
+        <Label Grid.Row="18" Grid.Column="0" Name="TeamA9">Team2</Label>
+        <Image  Grid.Row="18" Grid.Column="1" Source="../Files/eeee.jpg" Name="ImageA9"></Image>
 
-        <TextBox Grid.Row="21">Team1</TextBox>
-        <Image  Grid.Row="21" Grid.Column="1" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="22" Grid.Column="0">Team2</TextBox>
-        <Image  Grid.Row="22" Grid.Column="1" Source="../Files/eeee.jpg"></Image>
+        <Label Grid.Row="21" Name="TeamA10">Team1</Label>
+        <Image  Grid.Row="21" Grid.Column="1" Source="../Files/eeee.jpg" Name="ImageA10"></Image>
+        <Label Grid.Row="22" Grid.Column="0" Name="TeamA11">Team2</Label>
+        <Image  Grid.Row="22" Grid.Column="1" Source="../Files/eeee.jpg" Name="ImageA11"></Image>
 
-        <TextBox Grid.Row="25" Grid.Column="0">Team1</TextBox>
-        <Image  Grid.Row="25" Grid.Column="1" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="26" Grid.Column="0">Team2</TextBox>
-        <Image  Grid.Row="26" Grid.Column="1" Source="../Files/eeee.jpg"></Image>
+        <Label Grid.Row="25" Grid.Column="0" Name="TeamA12">Team1</Label>
+        <Image  Grid.Row="25" Grid.Column="1" Source="../Files/eeee.jpg" Name="ImageA12"></Image>
+        <Label Grid.Row="26" Grid.Column="0" Name="TeamA13">Team2</Label>
+        <Image  Grid.Row="26" Grid.Column="1" Source="../Files/eeee.jpg" Name="ImageA13"></Image>
 
-        <TextBox Grid.Row="29">Team1</TextBox>
-        <Image  Grid.Row="29" Grid.Column="1" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="30" Grid.Column="0">Team2</TextBox>
-        <Image  Grid.Row="30" Grid.Column="1" Source="../Files/eeee.jpg"></Image>
-
-
-        
-        
-        
-        
-        
-        <TextBox Grid.Row="2" Grid.Column="3">Team1</TextBox>
-        <Image  Grid.Row="2" Grid.Column="4" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="3" Grid.Column="3">Team2</TextBox>
-        <Image  Grid.Row="3" Grid.Column="4" Source="../Files/eeee.jpg"></Image>
-
-        <TextBox Grid.Row="10" Grid.Column="3">Team1</TextBox>
-        <Image  Grid.Row="10" Grid.Column="4" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="11" Grid.Column="3">Team2</TextBox>
-        <Image  Grid.Row="11" Grid.Column="4" Source="../Files/eeee.jpg"></Image>
-
-        <TextBox Grid.Row="19" Grid.Column="3">Team1</TextBox>
-        <Image  Grid.Row="19" Grid.Column="4" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="20" Grid.Column="3">Team2</TextBox>
-        <Image  Grid.Row="20" Grid.Column="4" Source="../Files/eeee.jpg"></Image>
-
-        <TextBox Grid.Row="27" Grid.Column="3">Team1</TextBox>
-        <Image  Grid.Row="27" Grid.Column="4" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="28" Grid.Column="3">Team2</TextBox>
-        <Image  Grid.Row="28" Grid.Column="4" Source="../Files/eeee.jpg"></Image>
-        
+        <Label Grid.Row="29" Name="TeamA14">Team1</Label>
+        <Image  Grid.Row="29" Grid.Column="1" Source="../Files/eeee.jpg" Name="ImageA14"></Image>
+        <Label Grid.Row="30" Grid.Column="0" Name="TeamA15">Team2</Label>
+        <Image  Grid.Row="30" Grid.Column="1" Source="../Files/eeee.jpg" Name="ImageA15"></Image>
 
 
-        
-        
-        
-        <TextBox Grid.Row="6" Grid.Column="6">Team1</TextBox>
-        <Image  Grid.Row="6" Grid.Column="7" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="7" Grid.Column="6">Team2</TextBox>
-        <Image  Grid.Row="7" Grid.Column="7" Source="../Files/eeee.jpg"></Image>
-
-        <TextBox Grid.Row="23" Grid.Column="6">Team1</TextBox>
-        <Image  Grid.Row="23" Grid.Column="7" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="24" Grid.Column="6">Team2</TextBox>
-        <Image  Grid.Row="24" Grid.Column="7" Source="../Files/eeee.jpg"></Image>
-
-        
-        <TextBox Grid.Row="14" Grid.Column="9">Team1</TextBox>
-        <Image  Grid.Row="14" Grid.Column="10" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="16" Grid.Column="9">Team2</TextBox>
-        <Image  Grid.Row="16" Grid.Column="10" Source="../Files/eeee.jpg"></Image>
-
-        <TextBox Grid.Row="15" Grid.Column="13">Team1</TextBox>
-        <Image  Grid.Row="15" Grid.Column="12" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="15" Grid.Column="14">Team2</TextBox>
-        <Image  Grid.Row="15" Grid.Column="15" Source="../Files/eeee.jpg"></Image>
-
-        <TextBox Grid.Row="14" Grid.Column="17">Team1</TextBox>
-        <Image  Grid.Row="14" Grid.Column="18" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="16" Grid.Column="17">Team2</TextBox>
-        <Image  Grid.Row="16" Grid.Column="18" Source="../Files/eeee.jpg"></Image>
-        
-        
-        <TextBox Grid.Row="6" Grid.Column="20">Team1</TextBox>
-        <Image  Grid.Row="6" Grid.Column="21" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="7" Grid.Column="20">Team2</TextBox>
-        <Image  Grid.Row="7" Grid.Column="21" Source="../Files/eeee.jpg"></Image>
-
-        <TextBox Grid.Row="23" Grid.Column="20">Team1</TextBox>
-        <Image  Grid.Row="23" Grid.Column="21" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="24" Grid.Column="20">Team2</TextBox>
-        <Image  Grid.Row="24" Grid.Column="21" Source="../Files/eeee.jpg"></Image>
-
-        <TextBox Grid.Row="2" Grid.Column="23">Team1</TextBox>
-        <Image  Grid.Row="2" Grid.Column="24" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="3" Grid.Column="23">Team2</TextBox>
-        <Image  Grid.Row="3" Grid.Column="24" Source="../Files/eeee.jpg"></Image>
-
-        <TextBox Grid.Row="10" Grid.Column="23">Team1</TextBox>
-        <Image  Grid.Row="10" Grid.Column="24" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="11" Grid.Column="23">Team2</TextBox>
-        <Image  Grid.Row="11" Grid.Column="24" Source="../Files/eeee.jpg"></Image>
-
-        <TextBox Grid.Row="19" Grid.Column="23">Team1</TextBox>
-        <Image  Grid.Row="19" Grid.Column="24" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="20" Grid.Column="23">Team2</TextBox>
-        <Image  Grid.Row="20" Grid.Column="24" Source="../Files/eeee.jpg"></Image>
-
-        <TextBox Grid.Row="27" Grid.Column="23">Team1</TextBox>
-        <Image  Grid.Row="27" Grid.Column="24" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="28" Grid.Column="23">Team2</TextBox>
-        <Image  Grid.Row="28" Grid.Column="24" Source="../Files/eeee.jpg"></Image>
 
 
-        <TextBox Grid.Row="0" Grid.Column="26">Team1</TextBox>
-        <Image  Grid.Row="0" Grid.Column="27" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="1" Grid.Column="26">Team2</TextBox>
-        <Image  Grid.Row="1" Grid.Column="27" Source="../Files/eeee.jpg"></Image>
 
-        <TextBox Grid.Row="4" Grid.Column="26">Team1</TextBox>
-        <Image  Grid.Row="4" Grid.Column="27" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="5" Grid.Column="26">Team2</TextBox>
-        <Image  Grid.Row="5" Grid.Column="27" Source="../Files/eeee.jpg"></Image>
 
-        <TextBox Grid.Row="8" Grid.Column="26">Team1</TextBox>
-        <Image  Grid.Row="8" Grid.Column="27" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="9" Grid.Column="26">Team2</TextBox>
-        <Image  Grid.Row="9" Grid.Column="27" Source="../Files/eeee.jpg"></Image>
 
-        <TextBox Grid.Row="12" Grid.Column="26">Team1</TextBox>
-        <Image  Grid.Row="12" Grid.Column="27" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="13" Grid.Column="26">Team2</TextBox>
-        <Image  Grid.Row="13" Grid.Column="27" Source="../Files/eeee.jpg"></Image>
+        <Label Grid.Row="2" Grid.Column="3" Name="TeamB0">Team1</Label>
+        <Image  Grid.Row="2" Grid.Column="4" Source="../Files/eeee.jpg" Name="ImageB0"></Image>
+        <Label Grid.Row="3" Grid.Column="3" Name="TeamB1">Team2</Label>
+        <Image  Grid.Row="3" Grid.Column="4" Source="../Files/eeee.jpg" Name="ImageB1"></Image>
 
-        <TextBox Grid.Row="17" Grid.Column="26">Team1</TextBox>
-        <Image  Grid.Row="17" Grid.Column="27" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="18" Grid.Column="26">Team2</TextBox>
-        <Image  Grid.Row="18" Grid.Column="27" Source="../Files/eeee.jpg"></Image>
+        <Label Grid.Row="10" Grid.Column="3" Name="TeamB2">Team1</Label>
+        <Image  Grid.Row="10" Grid.Column="4" Source="../Files/eeee.jpg" Name="ImageB2"></Image>
+        <Label Grid.Row="11" Grid.Column="3" Name="TeamB3">Team2</Label>
+        <Image  Grid.Row="11" Grid.Column="4" Source="../Files/eeee.jpg" Name="ImageB3"></Image>
 
-        <TextBox Grid.Row="21" Grid.Column="26">Team1</TextBox>
-        <Image  Grid.Row="21" Grid.Column="27" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="22" Grid.Column="26">Team2</TextBox>
-        <Image  Grid.Row="22" Grid.Column="27" Source="../Files/eeee.jpg"></Image>
+        <Label Grid.Row="19" Grid.Column="3" Name="TeamB4">Team1</Label>
+        <Image  Grid.Row="19" Grid.Column="4" Source="../Files/eeee.jpg" Name="ImageB4"></Image>
+        <Label Grid.Row="20" Grid.Column="3" Name="TeamB5">Team2</Label>
+        <Image  Grid.Row="20" Grid.Column="4" Source="../Files/eeee.jpg" Name="ImageB5"></Image>
 
-        <TextBox Grid.Row="25" Grid.Column="26">Team1</TextBox>
-        <Image  Grid.Row="25" Grid.Column="27" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="26" Grid.Column="26">Team2</TextBox>
-        <Image  Grid.Row="26" Grid.Column="27" Source="../Files/eeee.jpg"></Image>
+        <Label Grid.Row="27" Grid.Column="3" Name="TeamB6">Team1</Label>
+        <Image  Grid.Row="27" Grid.Column="4" Source="../Files/eeee.jpg" Name="ImageB6"></Image>
+        <Label Grid.Row="28" Grid.Column="3" Name="TeamB7">Team2</Label>
+        <Image  Grid.Row="28" Grid.Column="4" Source="../Files/eeee.jpg" Name="ImageB7"></Image>
 
-        <TextBox Grid.Row="29" Grid.Column="26">Team1</TextBox>
-        <Image  Grid.Row="29" Grid.Column="27" Source="../Files/eeee.jpg"></Image>
-        <TextBox Grid.Row="30" Grid.Column="26">Team2</TextBox>
-        <Image  Grid.Row="30" Grid.Column="27" Source="../Files/eeee.jpg"></Image>
+
+
+
+
+
+        <Label Grid.Row="6" Grid.Column="6" Name="TeamC0">Team1</Label>
+        <Image  Grid.Row="6" Grid.Column="7" Source="../Files/eeee.jpg" Name="ImageC0"></Image>
+        <Label Grid.Row="7" Grid.Column="6" Name="TeamC1">Team2</Label>
+        <Image  Grid.Row="7" Grid.Column="7" Source="../Files/eeee.jpg" Name="ImageC1"></Image>
+
+        <Label Grid.Row="23" Grid.Column="6" Name="TeamC2">Team1</Label>
+        <Image  Grid.Row="23" Grid.Column="7" Source="../Files/eeee.jpg" Name="ImageC2"></Image>
+        <Label Grid.Row="24" Grid.Column="6" Name="TeamC3">Team2</Label>
+        <Image  Grid.Row="24" Grid.Column="7" Source="../Files/eeee.jpg" Name="ImageC3"></Image>
+
+
+        <Label Grid.Row="14" Grid.Column="9" Name="TeamD0">Team1</Label>
+        <Image  Grid.Row="14" Grid.Column="10" Source="../Files/eeee.jpg" Name="ImageD0"></Image>
+        <Label Grid.Row="16" Grid.Column="9" Name="TeamD1">Team2</Label>
+        <Image  Grid.Row="16" Grid.Column="10" Source="../Files/eeee.jpg" Name="ImageD1"></Image>
+
+        <Label Grid.Row="15" Grid.Column="13" Name="TeamE0">Team1</Label>
+        <Image  Grid.Row="15" Grid.Column="12" Source="../Files/eeee.jpg" Name="ImageE0"></Image>
+        <Label Grid.Row="15" Grid.Column="14" Name="TeamE1">Team2</Label>
+        <Image  Grid.Row="15" Grid.Column="15" Source="../Files/eeee.jpg" Name="ImageE1"></Image>
+
+        <Label Grid.Row="14" Grid.Column="17" Name="TeamD2">Team1</Label>
+        <Image  Grid.Row="14" Grid.Column="18" Source="../Files/eeee.jpg" Name="ImageD2"></Image>
+        <Label Grid.Row="16" Grid.Column="17" Name="TeamD3">Team2</Label>
+        <Image  Grid.Row="16" Grid.Column="18" Source="../Files/eeee.jpg" Name="ImageD3"></Image>
+
+
+        <Label Grid.Row="6" Grid.Column="20" Name="TeamC4">Team1</Label>
+        <Image  Grid.Row="6" Grid.Column="21" Source="../Files/eeee.jpg" Name="ImageC4"></Image>
+        <Label Grid.Row="7" Grid.Column="20" Name="TeamC5">Team2</Label>
+        <Image  Grid.Row="7" Grid.Column="21" Source="../Files/eeee.jpg" Name="ImageC5"></Image>
+
+        <Label Grid.Row="23" Grid.Column="20" Name="TeamC6">Team1</Label>
+        <Image  Grid.Row="23" Grid.Column="21" Source="../Files/eeee.jpg" Name="ImageC6"></Image>
+        <Label Grid.Row="24" Grid.Column="20" Name="TeamC7">Team2</Label>
+        <Image  Grid.Row="24" Grid.Column="21" Source="../Files/eeee.jpg" Name="ImageC7"></Image>
+
+        <Label Grid.Row="2" Grid.Column="23" Name="TeamB8">Team1</Label>
+        <Image  Grid.Row="2" Grid.Column="24" Source="../Files/eeee.jpg" Name="ImageB8"></Image>
+        <Label Grid.Row="3" Grid.Column="23" Name="TeamB9">Team2</Label>
+        <Image  Grid.Row="3" Grid.Column="24" Source="../Files/eeee.jpg" Name="ImageB9"></Image>
+
+        <Label Grid.Row="10" Grid.Column="23" Name="TeamB10">Team1</Label>
+        <Image  Grid.Row="10" Grid.Column="24" Source="../Files/eeee.jpg" Name="ImageB10"></Image>
+        <Label Grid.Row="11" Grid.Column="23" Name="TeamB11">Team2</Label>
+        <Image  Grid.Row="11" Grid.Column="24" Source="../Files/eeee.jpg" Name="ImageB11"></Image>
+
+        <Label Grid.Row="19" Grid.Column="23" Name="TeamB12">Team1</Label>
+        <Image  Grid.Row="19" Grid.Column="24" Source="../Files/eeee.jpg" Name="ImageB12"></Image>
+        <Label Grid.Row="20" Grid.Column="23" Name="TeamB13">Team2</Label>
+        <Image  Grid.Row="20" Grid.Column="24" Source="../Files/eeee.jpg" Name="ImageB13"></Image>
+
+        <Label Grid.Row="27" Grid.Column="23" Name="TeamB14">Team1</Label>
+        <Image  Grid.Row="27" Grid.Column="24" Source="../Files/eeee.jpg" Name="ImageB14"></Image>
+        <Label Grid.Row="28" Grid.Column="23" Name="TeamB15">Team2</Label>
+        <Image  Grid.Row="28" Grid.Column="24" Source="../Files/eeee.jpg" Name="ImageB15"></Image>
+
+
+        <Label Grid.Row="0" Grid.Column="26" Name="TeamA16">Team1</Label>
+        <Image  Grid.Row="0" Grid.Column="27" Source="../Files/eeee.jpg" Name="ImageA16"></Image>
+        <Label Grid.Row="1" Grid.Column="26" Name="TeamA17">Team2</Label>
+        <Image  Grid.Row="1" Grid.Column="27" Source="../Files/eeee.jpg" Name="ImageA17"></Image>
+
+        <Label Grid.Row="4" Grid.Column="26" Name="TeamA18">Team1</Label>
+        <Image  Grid.Row="4" Grid.Column="27" Source="../Files/eeee.jpg" Name="ImageA18"></Image>
+        <Label Grid.Row="5" Grid.Column="26" Name="TeamA19">Team2</Label>
+        <Image  Grid.Row="5" Grid.Column="27" Source="../Files/eeee.jpg" Name="ImageA19"></Image>
+
+        <Label Grid.Row="8" Grid.Column="26" Name="TeamA20">Team1</Label>
+        <Image  Grid.Row="8" Grid.Column="27" Source="../Files/eeee.jpg" Name="ImageA20"></Image>
+        <Label Grid.Row="9" Grid.Column="26" Name="TeamA21">Team2</Label>
+        <Image  Grid.Row="9" Grid.Column="27" Source="../Files/eeee.jpg" Name="ImageA21"></Image>
+
+        <Label Grid.Row="12" Grid.Column="26" Name="TeamA22">Team1</Label>
+        <Image  Grid.Row="12" Grid.Column="27" Source="../Files/eeee.jpg" Name="ImageA22"></Image>
+        <Label Grid.Row="13" Grid.Column="26" Name="TeamA23">Team2</Label>
+        <Image  Grid.Row="13" Grid.Column="27" Source="../Files/eeee.jpg" Name="ImageA23"></Image>
+
+        <Label Grid.Row="17" Grid.Column="26" Name="TeamA24">Team1</Label>
+        <Image  Grid.Row="17" Grid.Column="27" Source="../Files/eeee.jpg" Name="ImageA24"></Image>
+        <Label Grid.Row="18" Grid.Column="26" Name="TeamA25">Team2</Label>
+        <Image  Grid.Row="18" Grid.Column="27" Source="../Files/eeee.jpg" Name="ImageA25"></Image>
+
+        <Label Grid.Row="21" Grid.Column="26" Name="TeamA26">Team1</Label>
+        <Image  Grid.Row="21" Grid.Column="27" Source="../Files/eeee.jpg" Name="ImageA26"></Image>
+        <Label Grid.Row="22" Grid.Column="26" Name="TeamA27">Team2</Label>
+        <Image  Grid.Row="22" Grid.Column="27" Source="../Files/eeee.jpg" Name="ImageA27"></Image>
+
+        <Label Grid.Row="25" Grid.Column="26" Name="TeamA28">Team1</Label>
+        <Image  Grid.Row="25" Grid.Column="27" Source="../Files/eeee.jpg" Name="ImageA28"></Image>
+        <Label Grid.Row="26" Grid.Column="26" Name="TeamA29">Team2</Label>
+        <Image  Grid.Row="26" Grid.Column="27" Source="../Files/eeee.jpg" Name="ImageA29"></Image>
+
+        <Label Grid.Row="29" Grid.Column="26" Name="TeamA30">Team1</Label>
+        <Image  Grid.Row="29" Grid.Column="27" Source="../Files/eeee.jpg" Name="ImageA30"></Image>
+        <Label Grid.Row="30" Grid.Column="26" Name="TeamA31">Team2</Label>
+        <Image  Grid.Row="30" Grid.Column="27" Source="../Files/eeee.jpg" Name="ImageA31"></Image>
     </Grid>
 </Window>

@@ -295,14 +295,18 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="3">
-                            <Button  Grid.Row="0" Margin="5" Padding="128,3" Click="Button_Click_1" >Dodaj</Button>
-                            <Button Margin="30,5,5,5" Padding="10,3" Click="Button_Click_5">Filtruj</Button>
-                            <Button Margin="30,5,5,5"  Padding="10,3">Usuń Filtr</Button>
+                            <Button  Template="{StaticResource szablon}" Grid.Row="0" Margin="5" Padding="128,3" Click="AddZawodys" >Dodaj</Button>
+                            <Button Margin="30,5,5,5" Padding="10,3" Click="FiltrZawody">Filtruj</Button>
+                            <Button Margin="30,5,5,5"  Padding="10,3" Click="UnFilterZawody">Usuń Filtr</Button>
                             <ComboBox Margin="30,5,5,5" SelectedIndex="0">
-                                <ComboBoxItem >Bez sortowania</ComboBoxItem>
+                                <ComboBoxItem Selected="SortZawodNone">Bez sortowania</ComboBoxItem>
+                                <ComboBoxItem Selected="SortZawodNazwa">Po nazwie</ComboBoxItem>
+                                <ComboBoxItem Selected="SortZawodData">Po dacie rozpoczęcia</ComboBoxItem>
                             </ComboBox>
                             <ComboBox Margin="30,5,5,5" SelectedIndex="0">
-                                <ComboBoxItem >Bez grupowania</ComboBoxItem>
+                                <ComboBoxItem Selected="GroupZawodNone" >Bez grupowania</ComboBoxItem>
+                                <ComboBoxItem  Selected="GroupZawodData">Rok rozpoczęcia</ComboBoxItem>
+                                <ComboBoxItem Selected="GroupZawodRodzaj">Rodzaj</ComboBoxItem>
                             </ComboBox>
 
                         </StackPanel>
@@ -316,16 +320,20 @@
 
 
                             <TextBox Name="Szukaj1" Grid.Row="1" Margin="5" >Szukaj...</TextBox>
-                            <ListBox Grid.Row="2" Margin="5" Name="lista" DisplayMemberPath="NameAndPrice"  />
+                            <ListBox Grid.Row="2" Margin="5" Name="ZawodyList" DisplayMemberPath="Dane"  >
+                                <ListBox.GroupStyle>
+                                    <GroupStyle HeaderTemplate="{StaticResource GroupTemplate}"/>
+                                </ListBox.GroupStyle>
+                            </ListBox>
                             <StackPanel Grid.Row="3"  Orientation="Horizontal" HorizontalAlignment="Center">
 
-                                <Button Margin="5,5,50,5" Padding="20,6" Click="Button_Click_4" >Usuń</Button>
-                                <Button   Margin="5" Padding="20,6" Click="Button_Click_3">Edytuj</Button>
+                                <Button Template="{StaticResource szablon}" IsEnabled="{Binding ElementName=ZawodyList, Path=SelectedItems.Count}" Margin="5,5,50,5" Padding="20,6" Click="DeleteZawody" >Usuń</Button>
+                                <Button  Template="{StaticResource szablon}" IsEnabled="{Binding ElementName=ZawodyList, Path=SelectedItems.Count}" Margin="5" Padding="20,6" Click="EdytujZawody">Edytuj</Button>
                             </StackPanel>
                         </Grid>
 
                         <GridSplitter Grid.Column="1" Width="15" HorizontalAlignment="Center" IsEnabled="False" Grid.RowSpan="3" Grid.Row="1" />
-                        <Grid Grid.Row="1" Grid.Column="2" DataContext="{Binding ElementName=lista, Path=SelectedItem}">
+                        <Grid Grid.Row="1" Grid.Column="2" DataContext="{Binding ElementName=ZawodyList, Path=SelectedItem}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition/>
@@ -344,12 +352,12 @@
                             <Label Grid.Row="1" Margin="5">Data rozpoczęcia:</Label>
                             <Label Grid.Row="2" Margin="5">Data zakończenia:</Label>
                             <Label Grid.Row="3" Margin="5">Rodzaj:</Label>
-                            <Image  Grid.Row="6" Grid.RowSpan="1" Grid.ColumnSpan="2" Margin="20" Source="Files/eeee.jpg"></Image>
-                            <Label  Grid.Column="1" Margin="5"  Content="JakiśTurniej" />
-                            <Label Grid.Column="1" Grid.Row="1" Margin="5" Content="06.06.2012" />
-                            <Label Grid.Column="1" Grid.Row="2" Margin="5" Content="01.01.2013"/>
-                            <Label Grid.Column="1" Grid.Row="3" Margin="5" Content="Międzynarodowe"></Label>
-                            <Button Margin="10" Padding="20,6" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="7" Click="Button_Click">Drabinka</Button>
+                            <Label  Grid.Column="1" Margin="5"  Content="{Binding Path=nazwa}" />
+                            <Label Grid.Column="1" Grid.Row="1" Margin="5" Content="{Binding Path=DataStart}" />
+                            <Label Grid.Column="1" Grid.Row="2" Margin="5" Content="{Binding Path=DataStop}"/>
+                            <Label Grid.Column="1" Grid.Row="3" Margin="5" Content="{Binding Path=rodzaj}"></Label>
+                            <Button Template="{StaticResource szablon}" IsEnabled="{Binding ElementName=ZawodyList, Path=SelectedItems.Count}" Margin="10" Padding="20,6" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="7" Click="Button_Click">Drabinka</Button>
+                            <Button Template="{StaticResource szablon}" IsEnabled="{Binding ElementName=ZawodyList, Path=SelectedItems.Count}" Margin="10,10,10,10" Padding="20,6" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="7" Click="Button_Click2">Dodaj drużyny</Button>
                         </Grid>
                     </Grid>
                 </DockPanel>
@@ -373,7 +381,7 @@
                         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="3">
                             <Button Template="{StaticResource szablon}" Grid.Row="0" Margin="5" Padding="128,3" Click="AddWynik" >Dodaj</Button>
                             <Button Margin="75,5,5,5" Padding="10,3" Click="FilterWyniki">Filtruj</Button>
-                            <Button Margin="75,5,5,5"  Padding="10,3">Usuń Filtr</Button>
+                            <Button Margin="75,5,5,5"  Padding="10,3" Click="UnfilterWyniki">Usuń Filtr</Button>
 
                         </StackPanel>
                         <Grid Grid.Row="1">

@@ -539,6 +539,10 @@ C:\Users\Mloteks71\Desktop\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\Zaw
 C:\Users\Mloteks71\Desktop\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\ProjektWPF.g.resources
 C:\Users\Mloteks71\Desktop\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\ProjektWPF.AssemblyInfoInputs.cache
 C:\Users\Mloteks71\Desktop\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\ProjektWPF.AssemblyInfo.cs
-C:\Users\Mloteks71\Desktop\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\ProjektWPF.csproj.CoreCompileInputs.cache
 C:\Users\Mloteks71\Desktop\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\ProjektWPF.csproj.CopyComplete
 C:\Users\Mloteks71\Desktop\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\ProjektWPF.genruntimeconfig.cache
+C:\Users\Mloteks71\Desktop\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\Zawody\EditZawody.g.cs
+C:\Users\Mloteks71\Desktop\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\Zawody\EditZawody.baml
+C:\Users\Mloteks71\Desktop\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\Zawody\AddDruzynaDoZawody.g.cs
+C:\Users\Mloteks71\Desktop\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\Zawody\AddDruzynaDoZawody.baml
+C:\Users\Mloteks71\Desktop\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\ProjektWPF.csproj.CoreCompileInputs.cache

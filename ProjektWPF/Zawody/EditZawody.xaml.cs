@@ -12,34 +12,40 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
 namespace ProjektWPF.Zawody
 {
     /// <summary>
-    /// Logika interakcji dla klasy AddZawody.xaml
+    /// Logika interakcji dla klasy EditZawody.xaml
     /// </summary>
-    public partial class AddZawody : Window
+    public partial class EditZawody : Window
     {
         public Zawodys addzaw;
         ZawodnikDbContext context;
-        public AddZawody(ZawodnikDbContext context)
+        public DateTime DataStart { get; set; }
+        public DateTime DataStop { get; set; }
+        public string rodzaj { get; set; }
+        public string nazwa { get; set; }
+        public EditZawody(ZawodnikDbContext context,Zawodys zawodys)
         {
             this.context = context;
             InitializeComponent();
-            InitializeComponent();
-            addzaw = new Zawodys();
+            addzaw = zawodys;
             AddGrid.DataContext = addzaw;
+            DataStart = addzaw.DataStart;
+            DataStop = addzaw.DataStop;
+            nazwa = addzaw.nazwa;
+            rodzaj = addzaw.rodzaj;
         }
         private void Add(object sender, RoutedEventArgs e)
         {
-            var valhou = Validation.GetErrors(Nazwa);
-            var valdat = Validation.GetErrors(DataStart);
-            var valsed = Validation.GetErrors(DataStop);
-            var valpla = Validation.GetErrors(Rodzaj);
+            var valhou = Validation.GetErrors(NazwaB);
+            var valdat = Validation.GetErrors(DataStartB);
+            var valsed = Validation.GetErrors(DataStopB);
+            var valpla = Validation.GetErrors(RodzajB);
 
             if (valhou.Count == 0 && valdat.Count == 0 && valsed.Count == 0 && valpla.Count == 0)
             {
-                context.Zawodys.Add(addzaw);
+                context.Update(addzaw);
                 context.SaveChanges();
                 DialogResult = true;
                 this.Close();
@@ -48,19 +54,24 @@ namespace ProjektWPF.Zawody
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
+            addzaw.DataStop = DataStop;
+            addzaw.DataStart = DataStart;
+            addzaw.nazwa = nazwa;
+            addzaw.rodzaj = rodzaj;
+
             this.Close();
         }
         private void NazwaVali(object sender, RoutedEventArgs e)
         {
-            Nazwa.Foreground = new SolidColorBrush(Colors.Black); ;
+            NazwaB.Foreground = new SolidColorBrush(Colors.Black); ;
             addzaw.nazwa = null;
-            Nazwa.Text = null;
+            NazwaB.Text = null;
         }
         private void RodzajVali(object sender, RoutedEventArgs e)
         {
-            Rodzaj.Foreground = new SolidColorBrush(Colors.Black); ;
+            RodzajB.Foreground = new SolidColorBrush(Colors.Black); ;
             addzaw.rodzaj = null;
-            Rodzaj.Text = null;
+            RodzajB.Text = null;
         }
         private void validationError(object sender, ValidationErrorEventArgs e)
         {
@@ -69,26 +80,25 @@ namespace ProjektWPF.Zawody
             {
                 if (e.Error.ErrorContent.ToString() == "Nazwę trzeba podać")
                 {
-                    Nazwa.Foreground = new SolidColorBrush(Colors.Red);
-                    Nazwa.Text = e.Error.ErrorContent.ToString();
+                    NazwaB.Foreground = new SolidColorBrush(Colors.Red);
+                    NazwaB.Text = e.Error.ErrorContent.ToString();
                 }
 
                 if (e.Error.ErrorContent.ToString() == "Datę rozpoczęcia trzeba podać")
                 {
-                    DataStart.Foreground = new SolidColorBrush(Colors.Red);
+                    DataStartB.Foreground = new SolidColorBrush(Colors.Red);
                 }
 
                 if (e.Error.ErrorContent.ToString() == "Datę zakończenia trzeba podać")
                 {
-                    DataStop.Foreground = new SolidColorBrush(Colors.Red);
+                    DataStopB.Foreground = new SolidColorBrush(Colors.Red);
                 }
                 if (e.Error.ErrorContent.ToString() == "Rodzaj trzeba podać")
                 {
-                    Rodzaj.Foreground = new SolidColorBrush(Colors.Red);
+                    RodzajB.Foreground = new SolidColorBrush(Colors.Red);
 
                 }
             }
-
         }
     }
 }

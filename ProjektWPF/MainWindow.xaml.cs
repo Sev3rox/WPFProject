@@ -32,6 +32,7 @@ namespace ProjektWPF
         public Collection<Rozgrywka> Rozgrywki { get; } = new ObservableCollection<Rozgrywka>();
         public Collection<Druzyna> Druzyny { get; } = new ObservableCollection<Druzyna>();
         public Collection<Wynik> Wyniki { get; } = new ObservableCollection<Wynik>();
+        public Collection<Zawodys> Zawody { get; } = new ObservableCollection<Zawodys>();
         ZawodnikDbContext context;
 
         public MainWindow(ZawodnikDbContext context)
@@ -42,10 +43,12 @@ namespace ProjektWPF
             GetRozgrywki();
             GetDruzyny();
             GetWyniki();
+            GetZawody();
             ViewZaw.Filter = null;
             ViewRoz.Filter = null;
             ViewDruz.Filter = null;
             ViewWyn.Filter = null;
+            ViewZaw.Filter = null;
 
         }
 
@@ -57,6 +60,7 @@ namespace ProjektWPF
             RozgrywkiList.ItemsSource = Rozgrywki;
             lista_druzyn.ItemsSource = Druzyny;
             WynikiList.ItemsSource = Wyniki;
+            ZawodyList.ItemsSource = Zawody;
 
         }
 
@@ -65,6 +69,13 @@ namespace ProjektWPF
             get
             {
                 return (ListCollectionView)CollectionViewSource.GetDefaultView(Zawodnicy);
+            }
+        }
+        private ListCollectionView ViewZawod
+        {
+            get
+            {
+                return (ListCollectionView)CollectionViewSource.GetDefaultView(Zawody);
             }
         }
 
@@ -95,17 +106,30 @@ namespace ProjektWPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Drabinka d = new Drabinka();
-            d.ShowDialog();
+            Drabinka add = new Drabinka((Zawodys)ZawodyList.SelectedItem,context);
+            if (add.ShowDialog() == true)
+            {
+
+            }
+        }
+        private void Button_Click2(object sender, RoutedEventArgs e)
+        {
+            AddDruzynaDoZawody add = new AddDruzynaDoZawody(context, (Zawodys)ZawodyList.SelectedItem);
+            if (add.ShowDialog() == true)
+            {
+
+            }
         }
 
 
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void AddZawodys(object sender, RoutedEventArgs e)
         {
-            AddZawody add = new AddZawody();
+            AddZawody add = new AddZawody(context);
+            if (add.ShowDialog() == true)
+            {
 
-            add.Show();
+            }
+            GetZawody();
         }
 
         private void AddWynik(object sender, RoutedEventArgs e)
@@ -119,22 +143,34 @@ namespace ProjektWPF
             GetRozgrywki();
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void EdytujZawody(object sender, RoutedEventArgs e)//TODO
         {
-            AddZawody add = new AddZawody();
-            add.Show();
+            EditZawody add = new EditZawody(context,(Zawodys)ZawodyList.SelectedItem);
+            if (add.ShowDialog() == true)
+            {
+
+            }
+            GetZawody();
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+        private void DeleteZawody(object sender, RoutedEventArgs e)
         {
-            DeleteZawody add = new DeleteZawody();
-            add.Show();
+            DeleteZawody add = new DeleteZawody(context,((Zawodys)ZawodyList.SelectedItem).Id);
+            if (add.ShowDialog() == true)
+            {
+
+            }
+            GetZawody();
         }
 
-        private void Button_Click_5(object sender, RoutedEventArgs e)
+        private void FiltrZawody(object sender, RoutedEventArgs e)
         {
-            FiltrZawody add = new FiltrZawody();
-            add.Show();
+            FiltrZawody add = new FiltrZawody(ViewZawod,context);
+            if (add.ShowDialog() == true)
+            {
+
+            }
+            GetZawody();
         }
 
         private void FilterWyniki(object sender, RoutedEventArgs e)
@@ -190,6 +226,15 @@ namespace ProjektWPF
             }
 
 
+        }
+        private void GetZawody()
+        {
+            var Zawodnicydb = context.Zawodys.ToList();
+            Zawody.Clear();
+            foreach (Zawodys x in Zawodnicydb)
+            {
+                Zawody.Add(x);
+            }
         }
         private void AddZawodnik(object sender, RoutedEventArgs e)
         {
@@ -254,6 +299,14 @@ namespace ProjektWPF
         {
             ViewZaw.Filter = null;
         }
+        private void UnFilterZawody(object sender, RoutedEventArgs e)
+        {
+            ViewZawod.Filter = null;
+        }
+        private void UnfilterWyniki(object sender, RoutedEventArgs e)
+        {
+            ViewWyn.Filter = null;
+        }
 
 
 
@@ -278,7 +331,35 @@ namespace ProjektWPF
             ViewZaw.SortDescriptions.Clear();
             ViewZaw.SortDescriptions.Add(new SortDescription("Number", ListSortDirection.Ascending));
         }
+        private void SortZawodNone(object sender, RoutedEventArgs e)
+        {
+            ViewZawod.SortDescriptions.Clear();
+            ViewZawod.CustomSort = null;
+        }
+        private void SortZawodNazwa(object sender, RoutedEventArgs e)
+        {
+            ViewZawod.SortDescriptions.Clear();
+            ViewZawod.SortDescriptions.Add(new SortDescription("Nazwa", ListSortDirection.Ascending));
+        }
+        private void SortZawodData(object sender, RoutedEventArgs e)
+        {
+            ViewZawod.SortDescriptions.Clear();
+            ViewZawod.SortDescriptions.Add(new SortDescription("DataStart", ListSortDirection.Ascending));
+        }
 
+        private void GroupZawodNone(object sender, RoutedEventArgs e)
+        {
+            ViewZawod.GroupDescriptions.Clear();
+        }
+        private void GroupZawodData(object sender, RoutedEventArgs e)
+        {
+            ViewZawod.GroupDescriptions.Clear();
+            ViewZawod.GroupDescriptions.Add(new PropertyGroupDescription("DataStart.Year"));
+        }private void GroupZawodRodzaj(object sender, RoutedEventArgs e)
+        {
+            ViewZawod.GroupDescriptions.Clear();
+            ViewZawod.GroupDescriptions.Add(new PropertyGroupDescription("rodzaj"));
+        }
         private void GroupZawNone(object sender, RoutedEventArgs e)
         {
             ViewZaw.GroupDescriptions.Clear();
