@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 using Microsoft.Win32;
 
 namespace ProjektWPF.Druzyny
@@ -57,6 +58,10 @@ namespace ProjektWPF.Druzyny
             {
                 context.Update(editdruzyna);
                 context.SaveChanges();
+                NotifyIcon notifyIcon = new NotifyIcon();
+                notifyIcon.Icon = new System.Drawing.Icon(@"../../../Files/info.ico");
+                notifyIcon.Visible = true;
+                notifyIcon.ShowBalloonTip(1000, "Operacja zakończona sukcesem", "Drużyna została zedytowana", ToolTipIcon.Info);
                 this.Close();
             }
         }
@@ -133,7 +138,7 @@ namespace ProjektWPF.Druzyny
         private void ImageFromFile(object sender, RoutedEventArgs e)
         {
 
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
                 BitmapImage bt = new BitmapImage();

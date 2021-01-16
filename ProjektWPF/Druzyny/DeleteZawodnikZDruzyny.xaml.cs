@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 using ProjektWPF.Data;
 
 namespace ProjektWPF.Druzyny
@@ -24,7 +25,7 @@ namespace ProjektWPF.Druzyny
         ZawodnikDbContext context;
 
         public Collection<Zawodnik> zawodnicy { get; } = new ObservableCollection<Zawodnik>();
-        
+
         public DeleteZawodnikZDruzyny(ZawodnikDbContext context, Druzyna Druzyna, Collection<Zawodnik> Zawodnicy)
         {
             this.context = context;
@@ -52,6 +53,10 @@ namespace ProjektWPF.Druzyny
             druzyna.DeleteZawodnikZDruzyny(zawodnik);
             context.Update(druzyna);
             context.SaveChanges();
+            NotifyIcon notifyIcon = new NotifyIcon();
+            notifyIcon.Icon = new System.Drawing.Icon(@"../../../Files/info.ico");
+            notifyIcon.Visible = true;
+            notifyIcon.ShowBalloonTip(1000, "Operacja zakończona sukcesem", "Zawodnik " + zawodnik.ToString() + " został usunięty z drużyny " + druzyna.ToString(), ToolTipIcon.Info);
             this.Close();
         }
     }

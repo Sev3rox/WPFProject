@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace ProjektWPF.Rozgrywki
 {
@@ -77,7 +78,10 @@ namespace ProjektWPF.Rozgrywki
                 pom1.Rozgrywki1.Add(addroz);
                 pom2.Rozgrywki2.Add(addroz);
                 */
-
+                NotifyIcon notifyIcon = new NotifyIcon();
+                notifyIcon.Icon = new System.Drawing.Icon(@"../../../Files/info.ico");
+                notifyIcon.Visible = true;
+                notifyIcon.ShowBalloonTip(1000, "Operacja zakończona sukcesem","Rozgrywka została dodana", ToolTipIcon.Info);
                 DialogResult = true;
                 this.Close();
             }

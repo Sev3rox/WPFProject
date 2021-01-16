@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace ProjektWPF.Druzyny
 {
@@ -48,6 +49,10 @@ namespace ProjektWPF.Druzyny
                 context.Druzyny.Add(adddruzyna);
                 context.SaveChanges();
                 DialogResult = true;
+                NotifyIcon notifyIcon = new NotifyIcon();
+                notifyIcon.Icon = new System.Drawing.Icon(@"../../../Files/info.ico");
+                notifyIcon.Visible = true;
+                notifyIcon.ShowBalloonTip(1000, "Operacja zakończona sukcesem", "Drużyna została dodana", ToolTipIcon.Info);
                 this.Close();
             }
         }
@@ -122,7 +127,7 @@ namespace ProjektWPF.Druzyny
         private void ImageFromFile(object sender, RoutedEventArgs e)
         {
             
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
                 BitmapImage bt = new BitmapImage();

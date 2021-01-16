@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 using ProjektWPF.Data;
 namespace ProjektWPF.Zawody
 {
@@ -55,6 +56,10 @@ namespace ProjektWPF.Zawody
                     AddButton.IsEnabled = false;
                 else AddButton.IsEnabled = true;
                 context.SaveChanges();
+                NotifyIcon notifyIcon = new NotifyIcon();
+                notifyIcon.Icon = new System.Drawing.Icon(@"../../../Files/info.ico");
+                notifyIcon.Visible = true;
+                notifyIcon.ShowBalloonTip(1000, "Operacja zakończona sukcesem", "Drużyna" + druzyna.ToString() + "została dodana do zawodów", ToolTipIcon.Info);
                 this.Close();
             }
         }

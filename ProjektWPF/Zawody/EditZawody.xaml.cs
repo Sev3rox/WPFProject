@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 namespace ProjektWPF.Zawody
 {
     /// <summary>
@@ -48,6 +49,10 @@ namespace ProjektWPF.Zawody
                 context.Update(addzaw);
                 context.SaveChanges();
                 DialogResult = true;
+                NotifyIcon notifyIcon = new NotifyIcon();
+                notifyIcon.Icon = new System.Drawing.Icon(@"../../../Files/info.ico");
+                notifyIcon.Visible = true;
+                notifyIcon.ShowBalloonTip(1000, "Operacja zakończona sukcesem", "Zawody zostały zedytowane", ToolTipIcon.Info);
                 this.Close();
             }
         }

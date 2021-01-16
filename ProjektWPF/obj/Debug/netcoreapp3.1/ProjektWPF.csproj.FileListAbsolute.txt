@@ -546,3 +546,8 @@ C:\Users\Mloteks71\Desktop\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\Zaw
 C:\Users\Mloteks71\Desktop\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\Zawody\AddDruzynaDoZawody.g.cs
 C:\Users\Mloteks71\Desktop\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\Zawody\AddDruzynaDoZawody.baml
 C:\Users\Mloteks71\Desktop\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\ProjektWPF.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\Zawody\AddDruzynaDoZawody.g.cs
+C:\Users\User\source\repos\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\Zawody\EditZawody.g.cs
+C:\Users\User\source\repos\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\Zawody\AddDruzynaDoZawody.baml
+C:\Users\User\source\repos\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\Zawody\EditZawody.baml
+C:\Users\User\source\repos\WPF\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\ProjektWPF.csproj.ResolveComReference.cache

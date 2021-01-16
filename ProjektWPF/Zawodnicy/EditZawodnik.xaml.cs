@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace ProjektWPF.Zawodnicy
 {
@@ -73,10 +74,12 @@ namespace ProjektWPF.Zawodnicy
 
             if (valnum.Count == 0 && valage.Count == 0 && valnam.Count == 0 && valsur.Count == 0)
             {
-
-
                 context.Update(editzaw);
                 context.SaveChanges();
+                NotifyIcon notifyIcon = new NotifyIcon();
+                notifyIcon.Icon = new System.Drawing.Icon(@"../../../Files/info.ico");
+                notifyIcon.Visible = true;
+                notifyIcon.ShowBalloonTip(1000, "Operacja zakończona sukcesem", "Zawodnik został zedytowany", ToolTipIcon.Info);
                 this.Close();
             }
 

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace ProjektWPF.Zawody
 {
@@ -41,6 +42,10 @@ namespace ProjektWPF.Zawody
             }
             context.SaveChanges();
             DialogResult = true;
+            NotifyIcon notifyIcon = new NotifyIcon();
+            notifyIcon.Icon = new System.Drawing.Icon(@"../../../Files/info.ico");
+            notifyIcon.Visible = true;
+            notifyIcon.ShowBalloonTip(1000, "Operacja zakończona sukcesem", "Zawody zostały usunięte", ToolTipIcon.Info);
             this.Close();
 
         }
