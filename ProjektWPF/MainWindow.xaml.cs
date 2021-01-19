@@ -104,21 +104,35 @@ namespace ProjektWPF
 
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Drabinka(object sender, RoutedEventArgs e)
         {
-            Drabinka add = new Drabinka((Zawodys)ZawodyList.SelectedItem,context);
-            if (add.ShowDialog() == true)
+            Zawodys zawod = (Zawodys)ZawodyList.SelectedItem;
+            int i = context.Druzyna_Zawody.Where(e => e.ZawodyId == zawod.Id).Count();
+            if (i == 32)
             {
+                Drabinka add = new Drabinka((Zawodys)ZawodyList.SelectedItem, context);
+                if (add.ShowDialog() == true)
+                {
 
+                }
             }
+            else
+                MessageBox.Show("Zawody muszą zawierać równo 32 drużyny!");
         }
-        private void Button_Click2(object sender, RoutedEventArgs e)
+        private void DodajDruzyna(object sender, RoutedEventArgs e)
         {
-            AddDruzynaDoZawody add = new AddDruzynaDoZawody(context, (Zawodys)ZawodyList.SelectedItem);
-            if (add.ShowDialog() == true)
+            Zawodys zawod = (Zawodys)ZawodyList.SelectedItem;
+            int i = context.Druzyna_Zawody.Where(e => e.ZawodyId == zawod.Id).Count();
+            if (i < 32)
             {
+                AddDruzynaDoZawody add = new AddDruzynaDoZawody(context, (Zawodys)ZawodyList.SelectedItem);
+                if (add.ShowDialog() == true)
+                {
 
+                }
             }
+            else
+                MessageBox.Show("Limit drużyn został osiągnięty!");
         }
 
 

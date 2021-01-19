@@ -113,7 +113,7 @@
 
 
 
-
+        <Image Grid.Row="10" Grid.RowSpan="3" Grid.Column="11" Grid.ColumnSpan="6" Name="Winner"/>
 
 
 
