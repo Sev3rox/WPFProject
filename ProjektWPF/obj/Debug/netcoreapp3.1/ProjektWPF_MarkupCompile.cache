@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\wpf\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\
+C:\WPFProject\ProjektWPF\obj\Debug\netcoreapp3.1\
 ProjektWPF
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
-C:\wpf\WPFProject\ProjektWPF\App.xaml
+C:\WPFProject\ProjektWPF\App.xaml
 29-1173571875
 
 401090210526
-219-849147215
+219316248980
 Druzyny\AddDruzyna.xaml;Druzyny\AddZawodnikDoDruzyny.xaml;Druzyny\DeleteDruzyna.xaml;Druzyny\DeleteZawodnikZDruzyny.xaml;Druzyny\EditDruzyny.xaml;Druzyny\FilterDruzyna.xaml;MainWindow.xaml;Rozgrywki\AddRozgrywka.xaml;Rozgrywki\DeleteRozgrywka.xaml;Rozgrywki\DetailsRozgrywka.xaml;Rozgrywki\DrużynyRozgrywka.xaml;Rozgrywki\EditRozgrywka.xaml;Rozgrywki\FilterRozgrywka.xaml;Wyniki\AddWyniki.xaml;Wyniki\DeleteWyniki.xaml;Wyniki\DetailsWyniki.xaml;Wyniki\FiltrWyniki.xaml;Wyniki\TeamWyniki.xaml;Zawodnicy\AddZawodnik.xaml;Zawodnicy\DeleteZawodnik.xaml;Zawodnicy\DetailsZawodnik.xaml;Zawodnicy\EditZawodnik.xaml;Zawodnicy\FilterZawodnik.xaml;Zawody\AddDruzynaDoZawody.xaml;Zawody\AddZawody.xaml;Zawody\DeleteZawody.xaml;Zawody\Drabinka.xaml;Zawody\EditZawody.xaml;Zawody\FiltrZawody.xaml;
 
 False

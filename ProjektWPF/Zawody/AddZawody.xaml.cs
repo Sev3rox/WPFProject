@@ -36,9 +36,9 @@ namespace ProjektWPF.Zawody
             var valhou = Validation.GetErrors(Nazwa);
             var valdat = Validation.GetErrors(DataStart);
             var valsed = Validation.GetErrors(DataStop);
-            var valpla = Validation.GetErrors(Rodzaj);
 
-            if (valhou.Count == 0 && valdat.Count == 0 && valsed.Count == 0 && valpla.Count == 0)
+
+            if (valhou.Count == 0 && valdat.Count == 0 && valsed.Count == 0)
             {
                 context.Zawodys.Add(addzaw);
                 context.SaveChanges();
@@ -55,17 +55,14 @@ namespace ProjektWPF.Zawody
         {
             this.Close();
         }
-        private void NazwaVali(object sender, RoutedEventArgs e)
+
+
+
+        private void NameVali(object sender, RoutedEventArgs e)
         {
             Nazwa.Foreground = new SolidColorBrush(Colors.Black); ;
             addzaw.nazwa = null;
             Nazwa.Text = null;
-        }
-        private void RodzajVali(object sender, RoutedEventArgs e)
-        {
-            Rodzaj.Foreground = new SolidColorBrush(Colors.Black); ;
-            addzaw.rodzaj = null;
-            Rodzaj.Text = null;
         }
         private void validationError(object sender, ValidationErrorEventArgs e)
         {
@@ -80,18 +77,14 @@ namespace ProjektWPF.Zawody
 
                 if (e.Error.ErrorContent.ToString() == "Datę rozpoczęcia trzeba podać")
                 {
-                    DataStart.Foreground = new SolidColorBrush(Colors.Red);
+
                 }
 
                 if (e.Error.ErrorContent.ToString() == "Datę zakończenia trzeba podać")
                 {
-                    DataStop.Foreground = new SolidColorBrush(Colors.Red);
-                }
-                if (e.Error.ErrorContent.ToString() == "Rodzaj trzeba podać")
-                {
-                    Rodzaj.Foreground = new SolidColorBrush(Colors.Red);
 
                 }
+
             }
 
         }

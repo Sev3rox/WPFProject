@@ -125,6 +125,186 @@ namespace ProjektWPF
                 Grid.SetColumn(pom, Grid.GetColumn((Label)GridDrabinka.FindName("TeamE" + i)));
                 Grid.SetRow(pom, Grid.GetRow((Label)GridDrabinka.FindName("TeamE" + i))-2);
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            for (int i = 0; i < 16; i++)
+            {
+                ((Label)GridDrabinka.FindName("TeamB" + i)).Content = null;
+                ((Image)GridDrabinka.FindName("ImageB" + i)).Source = null;
+                if (((OptionalRadioButton)GridDrabinka.FindName("RadioA" + i * 2)).IsChecked == true)
+                {
+                    ((Label)GridDrabinka.FindName("TeamB" + i)).Content = ((Label)GridDrabinka.FindName("TeamA" + i * 2)).Content;
+                    ((Image)GridDrabinka.FindName("ImageB" + i)).Source = ((Image)GridDrabinka.FindName("ImageA" + i * 2)).Source;
+                }
+                else if (((OptionalRadioButton)GridDrabinka.FindName("RadioA" + ((i * 2) + 1))).IsChecked == true)
+                {
+                    ((Label)GridDrabinka.FindName("TeamB" + i)).Content = ((Label)GridDrabinka.FindName("TeamA" + (i * 2 + 1))).Content;
+                    ((Image)GridDrabinka.FindName("ImageB" + i)).Source = ((Image)GridDrabinka.FindName("ImageA" + (i * 2 + 1))).Source;
+                }
+                else
+                {
+                    ((Label)GridDrabinka.FindName("TeamB" + i)).Content = null;
+                    ((Image)GridDrabinka.FindName("ImageB" + i)).Source = null;
+                }
+                if (((Label)GridDrabinka.FindName("TeamB" + ((i / 2) * 2))).Content == null || ((Label)GridDrabinka.FindName("TeamB" + (((i / 2) * 2) + 1))).Content == null)
+                {
+                    ((OptionalRadioButton)GridDrabinka.FindName("RadioB" + i)).IsEnabled = false;
+                    ((OptionalRadioButton)GridDrabinka.FindName("RadioB" + i)).IsChecked = false;
+                }
+                else ((OptionalRadioButton)GridDrabinka.FindName("RadioB" + i)).IsEnabled = true;
+                if (i != 0)
+                {
+                    if (((Label)GridDrabinka.FindName("TeamB" + (((i - 1) / 2) * 2))).Content == null || ((Label)GridDrabinka.FindName("TeamB" + ((((i - 1) / 2) * 2) + 1))).Content == null)
+                    {
+                        ((OptionalRadioButton)GridDrabinka.FindName("RadioB" + (i - 1))).IsEnabled = false;
+                        ((OptionalRadioButton)GridDrabinka.FindName("RadioB" + (i - 1))).IsChecked = false;
+                    }
+                    else ((OptionalRadioButton)GridDrabinka.FindName("RadioB" + (i - 1))).IsEnabled = true;
+                }
+            }
+            for (int i = 0; i < 8; i++)
+            {
+                ((Label)GridDrabinka.FindName("TeamC" + i)).Content = null;
+                ((Image)GridDrabinka.FindName("ImageC" + i)).Source = null;
+                if (((OptionalRadioButton)GridDrabinka.FindName("RadioB" + i * 2)).IsChecked == true)
+                {
+                    ((Label)GridDrabinka.FindName("TeamC" + i)).Content = ((Label)GridDrabinka.FindName("TeamB" + i * 2)).Content;
+                    ((Image)GridDrabinka.FindName("ImageC" + i)).Source = ((Image)GridDrabinka.FindName("ImageB" + i * 2)).Source;
+                }
+                else if (((OptionalRadioButton)GridDrabinka.FindName("RadioB" + ((i * 2) + 1))).IsChecked == true)
+                {
+                    ((Label)GridDrabinka.FindName("TeamC" + i)).Content = ((Label)GridDrabinka.FindName("TeamB" + (i * 2 + 1))).Content;
+                    ((Image)GridDrabinka.FindName("ImageC" + i)).Source = ((Image)GridDrabinka.FindName("ImageB" + (i * 2 + 1))).Source;
+                }
+                else
+                {
+                    ((Label)GridDrabinka.FindName("TeamC" + i)).Content = null;
+                    ((Image)GridDrabinka.FindName("ImageC" + i)).Source = null;
+                }
+                if (((Label)GridDrabinka.FindName("TeamC" + ((i / 2) * 2))).Content == null || ((Label)GridDrabinka.FindName("TeamC" + (((i / 2) * 2) + 1))).Content == null)
+                {
+                    ((OptionalRadioButton)GridDrabinka.FindName("RadioC" + i)).IsEnabled = false;
+                }
+                else
+                    ((OptionalRadioButton)GridDrabinka.FindName("RadioC" + i)).IsEnabled = true;
+                if (i != 0)
+                {
+                    if (((Label)GridDrabinka.FindName("TeamC" + (((i - 1) / 2) * 2))).Content == null || ((Label)GridDrabinka.FindName("TeamC" + ((((i - 1) / 2) * 2) + 1))).Content == null)
+                    {
+                        ((OptionalRadioButton)GridDrabinka.FindName("RadioC" + (i - 1))).IsEnabled = false;
+                        ((OptionalRadioButton)GridDrabinka.FindName("RadioC" + (i - 1))).IsChecked = false;
+                    }
+                    else
+                        ((OptionalRadioButton)GridDrabinka.FindName("RadioC" + (i - 1))).IsEnabled = true;
+                }
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                ((Label)GridDrabinka.FindName("TeamD" + i)).Content = null;
+                ((Image)GridDrabinka.FindName("ImageD" + i)).Source = null;
+                if (((OptionalRadioButton)GridDrabinka.FindName("RadioC" + i * 2)).IsChecked == true)
+                {
+                    ((Label)GridDrabinka.FindName("TeamD" + i)).Content = ((Label)GridDrabinka.FindName("TeamC" + i * 2)).Content;
+                    ((Image)GridDrabinka.FindName("ImageD" + i)).Source = ((Image)GridDrabinka.FindName("ImageC" + i * 2)).Source;
+                }
+                else if (((OptionalRadioButton)GridDrabinka.FindName("RadioC" + ((i * 2) + 1))).IsChecked == true)
+                {
+                    ((Label)GridDrabinka.FindName("TeamD" + i)).Content = ((Label)GridDrabinka.FindName("TeamC" + (i * 2 + 1))).Content;
+                    ((Image)GridDrabinka.FindName("ImageD" + i)).Source = ((Image)GridDrabinka.FindName("ImageC" + (i * 2 + 1))).Source;
+                }
+                else
+                {
+                    ((Label)GridDrabinka.FindName("TeamD" + i)).Content = null;
+                    ((Image)GridDrabinka.FindName("ImageD" + i)).Source = null;
+                }
+                if (((Label)GridDrabinka.FindName("TeamD" + ((i / 2) * 2))).Content == null || ((Label)GridDrabinka.FindName("TeamD" + (((i / 2) * 2) + 1))).Content == null)
+                {
+                    ((OptionalRadioButton)GridDrabinka.FindName("RadioD" + i)).IsEnabled = false;
+                    ((OptionalRadioButton)GridDrabinka.FindName("RadioD" + i)).IsChecked = false;
+                }
+                else ((OptionalRadioButton)GridDrabinka.FindName("RadioD" + i)).IsEnabled = true;
+                if (i != 0)
+                {
+                    if (((Label)GridDrabinka.FindName("TeamD" + (((i - 1) / 2) * 2))).Content == null || ((Label)GridDrabinka.FindName("TeamD" + ((((i - 1) / 2) * 2) + 1))).Content == null)
+                    {
+                        ((OptionalRadioButton)GridDrabinka.FindName("RadioD" + (i - 1))).IsEnabled = false;
+                        ((OptionalRadioButton)GridDrabinka.FindName("RadioD" + (i - 1))).IsChecked = false;
+                    }
+                    else ((OptionalRadioButton)GridDrabinka.FindName("RadioD" + (i - 1))).IsEnabled = true;
+                }
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                ((Label)GridDrabinka.FindName("TeamE" + i)).Content = null;
+                ((Image)GridDrabinka.FindName("ImageE" + i)).Source = null;
+                if (((OptionalRadioButton)GridDrabinka.FindName("RadioD" + i * 2)).IsChecked == true)
+                {
+                    ((Label)GridDrabinka.FindName("TeamE" + i)).Content = ((Label)GridDrabinka.FindName("TeamD" + i * 2)).Content;
+                    ((Image)GridDrabinka.FindName("ImageE" + i)).Source = ((Image)GridDrabinka.FindName("ImageD" + i * 2)).Source;
+                }
+                else if (((OptionalRadioButton)GridDrabinka.FindName("RadioD" + ((i * 2) + 1))).IsChecked == true)
+                {
+                    ((Label)GridDrabinka.FindName("TeamE" + i)).Content = ((Label)GridDrabinka.FindName("TeamD" + (i * 2 + 1))).Content;
+                    ((Image)GridDrabinka.FindName("ImageE" + i)).Source = ((Image)GridDrabinka.FindName("ImageD" + (i * 2 + 1))).Source;
+                }
+                else
+                {
+                    ((Label)GridDrabinka.FindName("TeamE" + i)).Content = null;
+                    ((Image)GridDrabinka.FindName("ImageE" + i)).Source = null;
+                }
+                if (((Label)GridDrabinka.FindName("TeamE" + ((i / 2) * 2))).Content == null || ((Label)GridDrabinka.FindName("TeamE" + (((i / 2) * 2) + 1))).Content == null)
+                {
+                    ((OptionalRadioButton)GridDrabinka.FindName("RadioE" + i)).IsEnabled = false;
+                    ((OptionalRadioButton)GridDrabinka.FindName("RadioE" + i)).IsChecked = false;
+                    ((Image)GridDrabinka.FindName("Winner")).Source = null;
+                }
+                else ((OptionalRadioButton)GridDrabinka.FindName("RadioE" + i)).IsEnabled = true;
+                if (i != 0)
+                {
+                    if (((Label)GridDrabinka.FindName("TeamE" + (((i - 1) / 2) * 2))).Content == null || ((Label)GridDrabinka.FindName("TeamE" + ((((i - 1) / 2) * 2) + 1))).Content == null)
+                    {
+                        ((OptionalRadioButton)GridDrabinka.FindName("RadioE" + (i - 1))).IsEnabled = false;
+                        ((OptionalRadioButton)GridDrabinka.FindName("RadioE" + (i - 1))).IsChecked = false;
+                        ((Image)GridDrabinka.FindName("Winner")).Source = null;
+                    }
+                    else ((OptionalRadioButton)GridDrabinka.FindName("RadioE" + (i - 1))).IsEnabled = true;
+                }
+            }
+
+            if (((OptionalRadioButton)GridDrabinka.FindName("RadioE0")).IsChecked == true)
+            {
+                ((Image)GridDrabinka.FindName("Winner")).Source = ((Image)GridDrabinka.FindName("ImageE0")).Source;
+            }
+            if (((OptionalRadioButton)GridDrabinka.FindName("RadioE1")).IsChecked == true)
+            {
+                ((Image)GridDrabinka.FindName("Winner")).Source = ((Image)GridDrabinka.FindName("ImageE1")).Source;
+            }
+
         }
         void Onb2Click(object sender, RoutedEventArgs e)
         {
@@ -294,6 +474,12 @@ namespace ProjektWPF
                     Printdlg.PrintVisual(GridDrabinka, Title);
                 }
             }
+
+            if (e.Key == Key.Escape)
+            {
+                this.Close();
+            }
+
         }
     }
 }

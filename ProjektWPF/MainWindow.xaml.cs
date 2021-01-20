@@ -48,7 +48,7 @@ namespace ProjektWPF
             ViewRoz.Filter = null;
             ViewDruz.Filter = null;
             ViewWyn.Filter = null;
-            ViewZaw.Filter = null;
+            ViewZawody.Filter = null;
 
         }
 
@@ -71,7 +71,7 @@ namespace ProjektWPF
                 return (ListCollectionView)CollectionViewSource.GetDefaultView(Zawodnicy);
             }
         }
-        private ListCollectionView ViewZawod
+        private ListCollectionView ViewZawody
         {
             get
             {
@@ -159,7 +159,7 @@ namespace ProjektWPF
 
         private void EdytujZawody(object sender, RoutedEventArgs e)//TODO
         {
-            EditZawody add = new EditZawody(context,(Zawodys)ZawodyList.SelectedItem);
+            EditZawody add = new EditZawody(context, (Zawodys)ZawodyList.SelectedItem);
             if (add.ShowDialog() == true)
             {
 
@@ -169,7 +169,7 @@ namespace ProjektWPF
 
         private void DeleteZawody(object sender, RoutedEventArgs e)
         {
-            DeleteZawody add = new DeleteZawody(context,((Zawodys)ZawodyList.SelectedItem).Id);
+            DeleteZawody add = new DeleteZawody(context, ((Zawodys)ZawodyList.SelectedItem).Id);
             if (add.ShowDialog() == true)
             {
 
@@ -179,7 +179,7 @@ namespace ProjektWPF
 
         private void FiltrZawody(object sender, RoutedEventArgs e)
         {
-            FiltrZawody add = new FiltrZawody(ViewZawod,context);
+            FiltrZawody add = new FiltrZawody(ViewZawody, context);
             if (add.ShowDialog() == true)
             {
 
@@ -315,7 +315,7 @@ namespace ProjektWPF
         }
         private void UnFilterZawody(object sender, RoutedEventArgs e)
         {
-            ViewZawod.Filter = null;
+            ViewZawody.Filter = null;
         }
         private void UnfilterWyniki(object sender, RoutedEventArgs e)
         {
@@ -347,32 +347,33 @@ namespace ProjektWPF
         }
         private void SortZawodNone(object sender, RoutedEventArgs e)
         {
-            ViewZawod.SortDescriptions.Clear();
-            ViewZawod.CustomSort = null;
+            ViewZawody.SortDescriptions.Clear();
+            ViewZawody.CustomSort = null;
         }
         private void SortZawodNazwa(object sender, RoutedEventArgs e)
         {
-            ViewZawod.SortDescriptions.Clear();
-            ViewZawod.SortDescriptions.Add(new SortDescription("Nazwa", ListSortDirection.Ascending));
+            ViewZawody.SortDescriptions.Clear();
+            ViewZawody.SortDescriptions.Add(new SortDescription("Nazwa", ListSortDirection.Ascending));
         }
         private void SortZawodData(object sender, RoutedEventArgs e)
         {
-            ViewZawod.SortDescriptions.Clear();
-            ViewZawod.SortDescriptions.Add(new SortDescription("DataStart", ListSortDirection.Ascending));
+            ViewZawody.SortDescriptions.Clear();
+            ViewZawody.SortDescriptions.Add(new SortDescription("DataStart", ListSortDirection.Ascending));
         }
 
         private void GroupZawodNone(object sender, RoutedEventArgs e)
         {
-            ViewZawod.GroupDescriptions.Clear();
+            ViewZawody.GroupDescriptions.Clear();
         }
         private void GroupZawodData(object sender, RoutedEventArgs e)
         {
-            ViewZawod.GroupDescriptions.Clear();
-            ViewZawod.GroupDescriptions.Add(new PropertyGroupDescription("DataStart.Year"));
-        }private void GroupZawodRodzaj(object sender, RoutedEventArgs e)
+            ViewZawody.GroupDescriptions.Clear();
+            ViewZawody.GroupDescriptions.Add(new PropertyGroupDescription("DataStart.Year"));
+        }
+        private void GroupZawodRodzaj(object sender, RoutedEventArgs e)
         {
-            ViewZawod.GroupDescriptions.Clear();
-            ViewZawod.GroupDescriptions.Add(new PropertyGroupDescription("rodzaj"));
+            ViewZawody.GroupDescriptions.Clear();
+            ViewZawody.GroupDescriptions.Add(new PropertyGroupDescription("rodzaj"));
         }
         private void GroupZawNone(object sender, RoutedEventArgs e)
         {
@@ -437,7 +438,7 @@ namespace ProjektWPF
             Rozgrywki.Clear();
             foreach (Rozgrywka x in Rozgrywkidb)
             {
-                if (x.WynikId==null)
+                if (x.WynikId == null)
                     Rozgrywki.Add(x);
             }
             ManytoManyCantBindreset();
@@ -522,6 +523,60 @@ namespace ProjektWPF
             ViewRoz.SortDescriptions.Clear();
             ViewRoz.SortDescriptions.Add(new SortDescription("Place", ListSortDirection.Ascending));
         }
+
+
+
+
+
+
+
+
+
+
+        private void SzukajZawodyChange(object sender, RoutedEventArgs e)
+        {
+            ViewZawody.Filter = delegate (object item)
+            {
+                Zawodys searchzaw = item as Zawodys;
+                if (searchzaw == null || searchzaw.nazwa == null || searchzaw.DataStart.Year == null)
+                {
+                    return false;
+                }
+                if (!(searchzaw.nazwa.Contains(SzukajZawodyy.Text)) && !(searchzaw.DataStart.Year.ToString().Contains(SzukajZawodyy.Text)) && !((searchzaw.DataStart.Year.ToString() + " " + searchzaw.nazwa).Contains(SzukajZawodyy.Text)) & !((searchzaw.nazwa + " " + searchzaw.DataStart.Year.ToString()).Contains(SzukajZawodyy.Text)))
+                {
+                    return false;
+                }
+
+
+                return true;
+            };
+
+        }
+
+        private void SzukajZawody(object sender, RoutedEventArgs e)
+        {
+            ViewZawody.Filter = null;
+            SzukajZawodyy.Text = "";
+            ViewZawody.Filter = null;
+        }
+
+        private void SzukajZawodyReset(object sender, RoutedEventArgs e)
+        {
+            ViewZawody.Filter = null;
+            SzukajZawodyy.Text = "Szukaj...";
+            ViewZawody.Filter = null;
+        }
+
+
+
+
+
+
+
+
+
+
+
 
 
         private void SzukajRozChange(object sender, RoutedEventArgs e)
@@ -794,14 +849,14 @@ namespace ProjektWPF
         }
         private void ManytoManyCantBindreset()
         {
-            
+
 
 
             Team1.Content = "";
-                Team2.Content = "";
-                Image1.Source = null;
-                Image2.Source = null;
-            
+            Team2.Content = "";
+            Image1.Source = null;
+            Image2.Source = null;
+
         }
     }
 }

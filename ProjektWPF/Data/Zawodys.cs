@@ -27,25 +27,26 @@ namespace ProjektWPF.Data
         {
             get
             {
-                if (columnName == "Nazwa")
+                if (columnName == "nazwa")
                 {
-                    if(nazwa==null)
-                     return "Nazwę trzeba podać";
+                    if (nazwa == null)
+                        return "Nazwę trzeba podać";
                 }
                 if (columnName == "DataStart")
                 {
-                    if(DataStart==null)
-                    return "Datę rozpoczęcia trzeba podać";
+                    if (DataStart == null || DataStart < DateTime.UtcNow)
+                        return "Datę rozpoczęcia trzeba podać";
+                    if (DataStart >=DataStop)
+                        return "Data startu musi być wcześniejsza";
                 }
                 if (columnName == "DataStop")
                 {
-                    if(DataStop==null)
-                    return "Datę zakończenia trzeba podać";
+                    if (DataStop == null || DataStop < DateTime.UtcNow)
+                        return "Datę zakończenia trzeba podać";
+                    if (DataStart >= DataStop)
+                        return "Data startu musi być wcześniejsza";
                 }
-                if (columnName == "Rodzaj")
-                {if(rodzaj==null)
-                    return "Rodzaj trzeba podać";
-                }
+
 
                 return null;
             }
@@ -54,12 +55,12 @@ namespace ProjektWPF.Data
         {
             get
             {
-                return nazwa + DataStart.Year; //tu druzyny
+                return nazwa + " " + DataStart.Year; //tu druzyny
             }
         }
         public override string ToString()
         {
-            return nazwa+DataStart.Year; //tu druzyny
+            return nazwa + " " + DataStart.Year; //tu druzyny
         }
     }
 }

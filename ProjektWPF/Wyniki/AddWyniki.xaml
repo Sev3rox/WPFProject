@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektWPF.Wyniki"
         mc:Ignorable="d"
-        Title="AddWyniki" Height="160" Width="600">
+        Title="AddWyniki" Height="170" Width="600">
     <Window.Resources>
         <ControlTemplate x:Key="szablon" TargetType="{x:Type Button}">
             <Border Name="Border" BorderBrush="DarkGreen" BorderThickness="3"

@@ -26,7 +26,7 @@ namespace ProjektWPF.Zawody
         public DateTime DataStop { get; set; }
         public string rodzaj { get; set; }
         public string nazwa { get; set; }
-        public EditZawody(ZawodnikDbContext context,Zawodys zawodys)
+        public EditZawody(ZawodnikDbContext context, Zawodys zawodys)
         {
             this.context = context;
             InitializeComponent();
@@ -42,9 +42,9 @@ namespace ProjektWPF.Zawody
             var valhou = Validation.GetErrors(NazwaB);
             var valdat = Validation.GetErrors(DataStartB);
             var valsed = Validation.GetErrors(DataStopB);
-            var valpla = Validation.GetErrors(RodzajB);
 
-            if (valhou.Count == 0 && valdat.Count == 0 && valsed.Count == 0 && valpla.Count == 0)
+
+            if (valhou.Count == 0 && valdat.Count == 0 && valsed.Count == 0)
             {
                 context.Update(addzaw);
                 context.SaveChanges();
@@ -66,18 +66,13 @@ namespace ProjektWPF.Zawody
 
             this.Close();
         }
-        private void NazwaVali(object sender, RoutedEventArgs e)
+        private void NameVali(object sender, RoutedEventArgs e)
         {
             NazwaB.Foreground = new SolidColorBrush(Colors.Black); ;
             addzaw.nazwa = null;
             NazwaB.Text = null;
         }
-        private void RodzajVali(object sender, RoutedEventArgs e)
-        {
-            RodzajB.Foreground = new SolidColorBrush(Colors.Black); ;
-            addzaw.rodzaj = null;
-            RodzajB.Text = null;
-        }
+
         private void validationError(object sender, ValidationErrorEventArgs e)
         {
 
@@ -91,18 +86,14 @@ namespace ProjektWPF.Zawody
 
                 if (e.Error.ErrorContent.ToString() == "Datę rozpoczęcia trzeba podać")
                 {
-                    DataStartB.Foreground = new SolidColorBrush(Colors.Red);
+
                 }
 
                 if (e.Error.ErrorContent.ToString() == "Datę zakończenia trzeba podać")
                 {
-                    DataStopB.Foreground = new SolidColorBrush(Colors.Red);
-                }
-                if (e.Error.ErrorContent.ToString() == "Rodzaj trzeba podać")
-                {
-                    RodzajB.Foreground = new SolidColorBrush(Colors.Red);
 
                 }
+
             }
         }
     }

@@ -1009,19 +1009,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Mloteks71\\.nuget\\packages\\": {}
+    "C:\\Users\\mjsty\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\wpf\\WPFProject\\ProjektWPF\\ProjektWPF.csproj",
+      "projectUniqueName": "C:\\WPFProject\\ProjektWPF\\ProjektWPF.csproj",
       "projectName": "ProjektWPF",
-      "projectPath": "C:\\wpf\\WPFProject\\ProjektWPF\\ProjektWPF.csproj",
-      "packagesPath": "C:\\Users\\Mloteks71\\.nuget\\packages\\",
-      "outputPath": "C:\\wpf\\WPFProject\\ProjektWPF\\obj\\",
+      "projectPath": "C:\\WPFProject\\ProjektWPF\\ProjektWPF.csproj",
+      "packagesPath": "C:\\Users\\mjsty\\.nuget\\packages\\",
+      "outputPath": "C:\\WPFProject\\ProjektWPF\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Mloteks71\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mjsty\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1072,7 +1072,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

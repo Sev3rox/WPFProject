@@ -78,7 +78,7 @@
         <StackPanel HorizontalAlignment="Center" Margin="0" Orientation="Horizontal" Grid.Row="7" Grid.ColumnSpan="2"/>
 
 
-        <TextBox VerticalContentAlignment="Center"  Grid.Column="1" Margin="5"   Name="Nazwa" Text="{Binding Path=nazwa, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
+        <TextBox PreviewMouseLeftButtonDown="NameVali" VerticalContentAlignment="Center"  Grid.Column="1" Margin="5"   Name="Nazwa" Text="{Binding Path=nazwa, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
         <Calendar VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="5" SelectedDate="{Binding Path=DataStart, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Name="DataStart" />
         <Calendar VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="5" SelectedDate="{Binding Path=DataStop, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Name="DataStop"/>
         <ComboBox Grid.Column="1" Grid.Row="3" Margin="5" SelectedIndex="0" Name="Rodzaj" Text="{Binding Path=rodzaj, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
